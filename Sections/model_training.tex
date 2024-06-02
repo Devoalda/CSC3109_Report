@@ -2,14 +2,12 @@
 
 In this section, various data mining techniques are employed to extract meaningful insights from the preprocessed data.
 
-
-
 \subsection{Overview}\label{overview}
-% In our study, we opted for Convolutional Neural Network (\acrshort{cnn}) and Multilayer Perceptron (\acrshort{mlp}) models as our primary machine learning approaches, drawing upon their inherent capabilities in feature extraction and representation, as suggested by \cite{jiang_uwb_2020}. To ensure robust model evaluation, the dataset is partitioned into training and testing sets following an 80:20 ratio, facilitating comprehensive assessment while maintaining data representativeness.
-
-% Prior to model training, a crucial preprocessing step involves feature scaling using a StandardScaler object. This process normalizes the features, ensuring they exhibit zero mean and unit variance. By standardizing the feature values, the optimization algorithm's convergence is enhanced, enabling more effective training and optimization processes. This preprocessing step plays a vital role in preparing the data for model training, ultimately contributing to the models' performance and generalization capability.
 
 
-\import{models/}{unet.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Individual Model SUBSECTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\import{Sections/models/}{unet.tex}
 
-\import{models/}{vgg16.tex}
+\import{Sections/models/}{vgg16.tex}

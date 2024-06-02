@@ -22,7 +22,7 @@
 \documentclass[
 	article, % Paper size, specify a4paper (A4) or letterpaper (US letter)
 	11pt, % Default font size, specify 10pt, 11pt or 12pt
-	%draft, % Comment out before submission
+	draft, % Comment out before submission
 ]{CSUniSchoolLabReport}
 
 
@@ -84,6 +84,9 @@
 %\pagebreak
 \import{Sections/}{model_training.tex}
 
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Model Evaluation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -92,21 +95,6 @@
 
 \import{Sections/}{conclusion.tex}
 
-% Might have use? %
-
-% The training logs reveal the model's progression over 20 epochs. The initial accuracy of around 51.91\% in the first epoch steadily improves, reaching approximately 84.53\% by the final epoch. Similarly, the validation accuracy starts at 59.64\% and climbs to 83.93\%, indicating that the model generalizes well to unseen data. 
-
-% % Overall performance of mlp %
-% The MLP model demonstrates strong performance on the test dataset, achieving an accuracy of 83.9\%. This accuracy reflects the model's ability to make correct predictions on unseen data. The precision, recall, and F1-score metrics provide a detailed assessment of the model's performance for each class. For class 0, the precision is 0.80, indicating that 80\% of the samples predicted as class 0 were correct, while the recall is 0.91, indicating that 91\% of the actual class 0 samples were identified correctly. Similarly, for class 1, the precision is 0.89 and the recall is 0.77. These metrics suggest that the model performs slightly better in identifying class 1 compared to class 0. The F1-scores for both classes are around 0.84, indicating a good balance between precision and recall. The classification report also includes macro and weighted average values, which provide a summarized view of the model's performance across both classes. The macro average values are 0.84 for all metrics, while the weighted average values are slightly higher at 0.85, reflecting a slight bias towards the slightly larger class (class 1). Overall, the classification report suggests that the MLP model generalizes well to unseen data and avoids overfitting, making it effective for the NLOS/LOS classification task.
-
-% \begin{center}
-% 	\begin{tabular}{l r}
-% 		Date Performed: & February 13, 2022 \\ % Date the experiment was performed
-% 		Partners: & Cecilia \textsc{Smith} \\ % Partner names
-% 		& Tajel \textsc{Khumalo} \\
-% 		Instructor: & Professor \textsc{Rivera} % Instructor/supervisor
-% 	\end{tabular}
-% \end{center}
 
 % If you need to include an abstract, uncomment the lines below
 %\begin{abstract}
