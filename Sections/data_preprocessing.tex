@@ -4,7 +4,7 @@ Data preprocessing is a vital step in the data mining process, particularly in t
 
 \subsection{Dataset}\label{dataset_given}
 
-The dataset, referred to as dataset\_19, comprises a folder containing four subfolders, each representing a different class of brain tumors. Each subfolder includes 120 MRI images of 512x512 pixels. The dataset distribution is illustrated in Figure \ref{fig:data_distribution}.
+The dataset, referred to as dataset\_19, comprises a folder containing four subfolders, each representing a different class of brain tumors. Each subfolder includes 120 MRI images of varying sizes. The dataset distribution is illustrated in Figure \ref{fig:data_distribution}.
 
 \begin{figure}[H]
   \begin{center}
@@ -22,7 +22,17 @@ To prepare the dataset for the classification task, it is preprocessed and subse
   \caption{Splitting the dataset into training and validation sets.}\label{fig:data_split}
 \end{figure}
 
-Image augmentation is performed using the \texttt{ImageDataGenerator} class from the Keras library. This technique artificially increases the dataset size by applying various transformations to the images, thus improving model performance by providing more training data. The \texttt{ImageDataGenerator} class offers several parameters for image augmentation.
+Image preprocessing is essential to enable models to focus on the region of interest, namely the brain, while reducing background noise and irrelevant features. This process involves converting images to grayscale, applying Gaussian blur, and performing thresholding and morphological operations to refine image quality. By cropping around the largest contour, which is likely the brain, this step highlights critical anatomical features and enhances model generalization, ultimately leading to more accurate tumor classification.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.3\textwidth]{Exploration/Te-gl_0010.jpg}
+    \includegraphics[width=0.3\textwidth]{Exploration/Te-gl_0010_preprocessed.jpg}
+  \end{center}
+  \caption{Cropping the MRI image along its contour.}\label{fig:image_cropping}
+\end{figure}
+
+Image augmentation is then performed using the \texttt{ImageDataGenerator} class from the Keras library. This technique artificially increases the dataset size by applying various transformations to the images, thus improving model performance by providing more training data. The \texttt{ImageDataGenerator} class offers several parameters for image augmentation.
 
 The preprocessing pipeline involves initially performing horizontal flips on the images, followed by random rotations. Each image is then normalized by dividing pixel values by 255. After these transformations, the dataset is split into training and validation sets as previously described.
 
