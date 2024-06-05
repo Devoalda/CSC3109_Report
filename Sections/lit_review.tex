@@ -1,9 +1,27 @@
 \section{Literature Review}\label{s:lit_review}
 
+% sec ah %
+
 % joviana check plox %
+\subsection{Existing Approaches to Brain MRI Classification Using Deep Learning}
+
 Deep learning has emerged as a pivotal technology in the medical field, particularly in the classification of brain MRI images. Various deep learning methodologies have been explored to improve the accuracy and efficiency of diagnosing brain tumors from MRI scans. This literature review delves into the recent advancements and approaches in this domain, highlighting the significant contributions and methodologies that have been employed.
 
+\subsubsection{Data preprocessing techniques}
+
+Data preprocessing is a crucial step in enhancing the accuracy of brain MRI classification models. Techniques such as data augmentation \cite{10183465} and cropping along contours of brain MRIs play significant roles in improving model training and performance. Data augmentation involves creating modified versions of the original images through transformations such as rotation, scaling, and flipping. This process helps in increasing the diversity of the training dataset, which in turn aids in preventing overfitting and improves the generalization capabilities of the models \cite{Paul2017Deep}.
+
+Cropping along the contours of the brain in MRI images helps in focusing the model’s attention on the most relevant areas, thereby reducing noise and improving classification accuracy. By eliminating irrelevant parts of the image, this technique ensures that the model learns more effectively from the essential features of the brain structure \cite{Asif2022Improving}.
+
+In addition, advanced preprocessing methods like Generative Adversarial Networks (GANs) for data augmentation have shown to significantly improve the robustness and accuracy of brain MRI classification models by generating high-quality synthetic data to augment the training set \cite{Fahimi2020Generative}.
+
+These preprocessing techniques collectively enhance the quality and quantity of the training data, leading to more accurate and reliable brain MRI classification models.
+
+\subsubsection{Convolutional Neural Networks (CNNs) and Variants}
+
 Convolutional Neural Networks (CNNs) have been extensively used for brain MRI classification. A notable approach is the use of ResNet-18 architecture for differentiating MRI sequence types, achieving an impressive accuracy of 97.9\% on test sets. This model demonstrates the capability of CNNs in handling complex MRI data efficiently\cite{doi:10.1148/ryai.230095}.
+
+\subsubsection{Transfer Learning in Brain MRI Classification}
 
 Transfer learning has become a prominent technique in enhancing the performance of deep learning models, especially when dealing with limited labeled data. This approach involves leveraging pre-trained models on large datasets and fine-tuning them on specific tasks such as brain MRI classification.
 
@@ -12,5 +30,7 @@ For example, transfer learning architectures such as InceptionV3, VGG19, DenseNe
 In another study, transfer learning was utilized to address the challenges of small sample sizes and high dimensionality in whole-brain fMRI data. The approach showed improved performance compared to training models from scratch, demonstrating the benefits of transfer learning in enhancing model performance with limited data \cite{10.1007/978-3-030-32695-1_7}.
 
 Furthermore, a study on brain tumor detection employed transfer learning by fine-tuning a deep learning model trained on a large dataset of natural images. This method resulted in comparable performance even with a smaller dataset, showcasing the practicality and effectiveness of transfer learning in medical imaging \cite{10125766}.
+
+\subsubsection{Conclusion}
 
 In conclusion, deep learning has significantly advanced the field of brain MRI classification, offering robust, accurate, and efficient solutions for diagnosing and monitoring brain tumors. The continuous evolution of CNN architectures, transfer learning techniques, optimization strategies, and preprocessing methods promises further enhancements in the accuracy and reliability of these models, ultimately contributing to improved patient outcomes and reduced diagnostic times. These advancements not only highlight the transformative potential of deep learning in medical imaging but also underscore the importance of ongoing research and development. By continuing to refine and innovate upon these techniques, the medical community can look forward to even more effective and efficient diagnostic tools, paving the way for better patient care and outcomes.
