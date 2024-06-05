@@ -8,7 +8,7 @@ All models were trained on Google's Colab plaform, utilizing the GPU runtime for
 
 \subsection{Model Selection}\label{model_selection}
 
-Model selection is a critical step in developing an effective machine learning model, especially for complex tasks like brain tumor classification. The choice of model impacts the accuracy, efficiency, and overall performance of the solution. This section discusses the use of transfer learning with pretrained models such as VGG16 and EfficientNet, as well as deep learning approaches like U-Net, which have demonstrated high performance in related tasks such as the BraTS Competition.
+Model selection is a critical step in developing an effective machine learning model, especially for complex tasks like brain tumor classification. The choice of model impacts the accuracy, efficiency, and overall performance of the solution. This section discusses the use of transfer learning with pretrained models such as VGG16 and ResNet50, as well as deep learning approaches like U-Net, which have demonstrated high performance in related tasks such as the BraTS Competition.
 
 The BraTS (Brain Tumor Segmentation) Competition has established itself as a benchmark for brain tumor segmentation tasks over several years. The competition has highlighted various models and techniques that consistently achieve superior results. Among the most commonly used models by top teams in the competition are U-Net, VGG16, and EfficientNet. These models have been chosen due to their proven ability to effectively handle medical imaging tasks, making them ideal candidates for our project.
 
@@ -17,7 +17,7 @@ Transfer learning involves leveraging pretrained models, which have already been
 
 \textbf{VGG16:} VGG16 is a convolutional neural network (CNN) known for its simplicity and effectiveness. It has been pretrained on the ImageNet dataset, which contains millions of images across thousands of categories. For our brain tumor classification task, VGG16 can be fine-tuned to learn the specific features of MRI images, leveraging its deep architecture to capture intricate details.
 
-\textbf{EfficientNet:} EfficientNet is another pretrained model that has gained popularity for its performance and efficiency. It scales up in a balanced manner across depth, width, and resolution, providing an optimized architecture that achieves high accuracy with fewer parameters. EfficientNet's ability to maintain performance while being computationally efficient makes it a suitable choice for our dataset.
+\textbf{ResNet50:} ResNet50 is another pretrained model that has gained popularity for its performance and efficiency. It introduces a residual learning framework to ease the training of deep networks. ResNet50's architecture allows it to maintain performance while being computationally efficient, making it a suitable choice for our dataset.
 
 \paragraph{Deep Learning with U-Net:}
 U-Net is a deep learning model specifically designed for biomedical image segmentation. Its architecture consists of a contracting path to capture context and a symmetric expanding path for precise localization. U-Net has been widely used in medical imaging due to its ability to segment images accurately. In the context of brain tumor classification, U-Net can be adapted to highlight and classify different regions of MRI scans, making it a powerful tool for our project.
@@ -27,7 +27,7 @@ The model selection process involves evaluating the suitability of each model ba
 
 % \begin{enumerate}
 %   \item \textbf{VGG16} is selected for its deep architecture and proven performance in image classification tasks.
-%   \item \textbf{EfficientNet} is chosen for its balance of high accuracy and computational efficiency.
+%   \item \textbf{ResNet50} is chosen for its balance of high accuracy and computational efficiency.
 %   \item \textbf{U-Net} is included due to its specialized design for biomedical image segmentation, which can be adapted for classification purposes.
 % \end{enumerate}
 
@@ -40,3 +40,5 @@ By leveraging these models, we aim to achieve high accuracy in classifying brain
 \import{Sections/models/}{unet.tex}
 
 \import{Sections/models/}{vgg16.tex}
+
+\import{Sections/models/}{resnet50.tex}
