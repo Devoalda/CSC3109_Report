@@ -2,39 +2,21 @@
 
 Data preprocessing is a vital step in the data mining process, particularly in the context of deep learning for image classification. This step involves techniques such as image augmentation, affine transformations, and resizing, which are essential for enhancing model performance. For this project, preprocessing is applied to the provided dataset (dataset\_19) to ensure it is suitable for the brain tumor classification task. The specific steps involved in the preprocessing of this dataset are outlined below.
 
-\subsection{Data Splitting and Augmentation}\label{data_split_augmentation}
-To prepare the dataset for the classification task, it is preprocessed and subsequently divided into training and validation sets, with the training set comprising 80\% of the data and the validation set 20\%. This split is shown in Figure \ref{fig:data_split}. The training set is used to train the model, while the validation set is used to evaluate its performance.
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.95\textwidth]{Exploration/data_split.png}
-  \end{center}
-  \caption{Splitting the dataset into training and validation sets.}\label{fig:data_split}
-\end{figure}
-
-% Image preprocessing is essential to enable models to focus on the region of interest, namely the brain, while reducing background noise and irrelevant features. This process involves converting images to grayscale, applying Gaussian blur, and performing thresholding and morphological operations to refine image quality. By cropping around the largest contour, which is likely the brain, this step highlights critical anatomical features and enhances model generalization, ultimately leading to more accurate tumor classification.
-
-% \begin{figure}[H]
-%   \begin{center}
-%     \includegraphics[width=0.3\textwidth]{Exploration/Te-gl_0010.jpg}
-%     \includegraphics[width=0.3\textwidth]{Exploration/Te-gl_0010_preprocessed.jpg}
-%   \end{center}
-%   \caption{Cropping the MRI image along its contour.}\label{fig:image_cropping}
-% \end{figure}
-
-Subsequent to data splitting, image augmentation is then performed using the \texttt{ImageDataGenerator} class from the Keras library. This technique artificially increases the dataset size by applying various transformations to the images, thus improving model performance by providing more training data. The \texttt{ImageDataGenerator} class offers several parameters for image augmentation.
-
-The preprocessing pipeline involves initially performing horizontal flips on the images, followed by random rotations. Each image is then normalized by dividing pixel values by 255. After these transformations, the dataset is split into training and validation sets as previously described.
-
 \subsection{Image Cropping and Enhancement}\label{image_cropping_enhancement}
 
-A critical component of the preprocessing workflow is the cropping and enhancement of images to emphasize the region of interest—the brain—and minimize irrelevant background elements. This involves a series of steps outlined below:
+A fundamental step in our preprocessing workflow is the cropping and enhancement of images to focus exclusively on the brain, effectively eliminating irrelevant background elements. The following sequence outlines the improved procedures:
 
-Conversion and Blurring: Initially, images are converted to grayscale to reduce computational complexity and focus on structural features without color distraction. Gaussian blur is then applied to smooth out image noise and improve edge detection in subsequent steps.
+\textbf{Conversion and Blurring:} The images are first converted to grayscale to diminish computational complexity and concentrate on structural attributes without the influence of color. This is immediately followed by the application of a Gaussian blur with a $3 \times 3$
+ kernel to soften the image noise, which facilitates more reliable edge detection in the subsequent stages.
 
-Thresholding and Morphology: Adaptive thresholding is utilized to distinguish the brain tissue from the background by creating binary images. Morphological operations, such as erosion and dilation, are performed to refine the shapes and enhance the structural integrity of the brain in the images.
+\textbf{Thresholding and Morphology:} Using a threshold value of 45, adaptive thresholding converts the grayscale images into binary images to segregate the brain tissue from the background. The binary images then undergo a series of erosions and dilations—two iterations each—to eradicate small noise regions and clarify the brain's structural outline.
 
-Contour Detection and Cropping: The most substantial contour, presumed to be the outline of the brain, is detected. Images are then cropped around this contour to focus solely on the brain, as illustrated in Figure \ref{fig:image_cropping}. This step is crucial for reducing computational load and improving the focus on essential features for classification.
+\textbf{Contour Detection and Cropping:} Contours are extracted from the thresholded image using external retrieval mode, with the largest contour presumed to represent the brain's boundary. This contour's extreme points (left, right, top, bottom) are determined, and the image is cropped to this bounding rectangle, expanded by a configurable pixel margin, to ensure the brain is isolated without clipping.
+
+\textbf{Further Processing:} Each cropped image is then converted back to grayscale, enhanced using bilateral filtering to further reduce noise and sharpen edges, and mapped to a 'bone' color scheme to improve visual contrast and detail. Images are resized to $224 \times 224$
+ pixels for uniformity and computational efficiency.
+
+These steps, as shown in Figure \ref{fig:image_cropping}, not only decrease the computational load but also significantly enhance the clarity and focus on essential features for more effective classification.
 
 \begin{figure}[H]
   \begin{center}
@@ -43,6 +25,21 @@ Contour Detection and Cropping: The most substantial contour, presumed to be the
   \end{center}
   \caption{Cropping the MRI image along its contour.}\label{fig:image_cropping}
 \end{figure}
+
+\subsection{Data Augmentation}\label{data_augmentation}
+
+Following the initial preprocessing, image augmentation is applied using the \texttt{ImageDataGenerator} class from the Keras library. This step artificially increases the dataset size by applying transformations such as horizontal flips and random rotations to the images, thus enhancing model performance by providing a diverse range of training examples. Each image is also normalized by dividing pixel values by 255.
+
+\subsection{Data Splitting}\label{data_splitting}
+After preprocessing and augmentation, the dataset is divided into training and validation sets, with the training set comprising 80\% of the data and the validation set the remaining 20\%. This distribution allows the model to be trained extensively while also being evaluated on a separate set of data to assess its performance, as depicted in Figure \ref{fig:data_split}.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{Exploration/data_split.png}
+  \end{center}
+  \caption{Splitting the dataset into training and validation sets.}\label{fig:data_split}
+\end{figure}
+
 
 \subsection{Summary and Justifications}
 
