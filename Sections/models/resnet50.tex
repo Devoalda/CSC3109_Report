@@ -1,3 +1,24 @@
-\subsection{resnet50}\label{resnet50}
+\subsection{ResNet50 Implementation}\label{resnet50}
 
-This is a simple implementation of the resnet50 model
+ResNet50, a revolutionary architecture in the field of deep learning, employs residual connections which are its defining feature. These connections are crucial for training very deep networks by enabling the direct propagation of gradients from deeper to shallower layers in the network. This architectural choice reduces the problem of vanishing gradients, thus allowing the model to learn effectively even when many layers deep.
+
+For our brain tumor classification task, we utilize the ResNet50 model pre-trained on the ImageNet dataset. This pre-training provides a robust feature extraction base, which we then tailor to our specific task through further training and adaptation.
+
+\textbf{Model Architecture:} Our adaptation of ResNet50 begins with the standard base architecture loaded with ImageNet weights, but excludes the top layer to accommodate our specialized output needs. This modification allows the network to maintain the intricate feature extraction capabilities developed through ImageNet training while adapting to the nuances of brain tumor imagery.
+
+\begin{quote}
+Imagine ResNet50 like a skilled artisan skilled in restoration. This artisan (the model) is brought into a renovation project (our classification task) where the fundamental structure is sound but needs adaptation and specific enhancements. Just as an artisan would preserve valuable original elements while updating others, our model retains valuable pre-learned features while adapting to new data.
+\end{quote}
+
+Following the base layers, a Global Average Pooling 2D layer is introduced. This layer reduces the spatial dimensions of the feature maps to a single vector per map, thus summarizing the most critical features while significantly reducing the number of parameters and the computational burden. This pooling step is crucial for maintaining efficiency and avoiding overfitting.
+
+Next, we include a Dropout layer with a 40\% drop rate, which randomly disables a fraction of the neurons during training. This randomness helps to prevent overfitting by ensuring that the model does not rely too heavily on any specific set of neurons, encouraging the network to develop redundant pathways to maintain performance even if some neurons are inactive.
+
+The network culminates in a Dense layer with four units corresponding to the different classes of brain tumors, employing the softmax activation function. This layer outputs the probability distribution over the tumor classes, providing a clear, interpretable classification result.
+
+\textbf{Compilation and Callbacks:} The model is compiled using the Adam optimizer with a starting learning rate of 0.0001 and a loss function of categorical crossentropy, which is appropriate for this multi-class classification scenario. To optimize training, we employ several callbacks:
+
+    \textit{ModelCheckpoint} to save the best version of the model based on validation loss
+    \textit{EarlyStopping} to halt training if the validation loss does not improve for a specified number of epochs, preventing overtraining and resource wastage
+
+% to add graph
