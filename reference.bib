@@ -30,26 +30,6 @@
 	keywords = {Data augmentation, deep learning, Deep neural network, image segmentation, {MRI}},
 }
 
-  
-@article{abd-ellah_automatic_2024,
-	title = {Automatic brain-tumor diagnosis using cascaded deep convolutional neural networks with symmetric U-Net and asymmetric residual-blocks},
-	volume = {14},
-	rights = {2024 The Author(s)},
-	issn = {2045-2322},
-	url = {https://www.nature.com/articles/s41598-024-59566-7},
-	doi = {10.1038/s41598-024-59566-7},
-	abstract = {The use of various kinds of magnetic resonance imaging ({MRI}) techniques for examining brain tissue has increased significantly in recent years, and manual investigation of each of the resulting images can be a time-consuming task. This paper presents an automatic brain-tumor diagnosis system that uses a {CNN} for detection, classification, and segmentation of glioblastomas; the latter stage seeks to segment tumors inside glioma {MRI} images. The structure of the developed multi-unit system consists of two stages. The first stage is responsible for tumor detection and classification by categorizing brain {MRI} images into normal, high-grade glioma (glioblastoma), and low-grade glioma. The uniqueness of the proposed network lies in its use of different levels of features, including local and global paths. The second stage is responsible for tumor segmentation, and skip connections and residual units are used during this step. Using 1800 images extracted from the {BraTS} 2017 dataset, the detection and classification stage was found to achieve a maximum accuracy of 99\%. The segmentation stage was then evaluated using the Dice score, specificity, and sensitivity. The results showed that the suggested deep-learning-based system ranks highest among a variety of different strategies reported in the literature.},
-	pages = {9501},
-	number = {1},
-	journaltitle = {Scientific Reports},
-	shortjournal = {Sci Rep},
-	author = {Abd-Ellah, Mahmoud Khaled and Awad, Ali Ismail and Khalaf, Ashraf A. M. and Ibraheem, Amira Mofreh},
-	urldate = {2024-06-02},
-	date = {2024-04-25},
-	langid = {english},
-	keywords = {Computer science, Biomedical engineering, Design, Magnetic resonance imaging, Software, synthesis and processing},
-}
-
 @article{doi:10.1148/ryai.230095,
 author = {Mahmutoglu, Mustafa Ahmed and Preetha, Chandrakanth Jayachandran and Meredig, Hagen and Tonn, Joerg-Christian and Weller, Michael and Wick, Wolfgang and Bendszus, Martin and Brugnara, Gianluca and Vollmuth, Philipp},
 title = {Deep Learning–based Identification of Brain MRI Sequences Using a Model Trained on Large Multicentric Study Cohorts},
@@ -276,5 +256,40 @@ isbn="978-3-030-32695-1"
 	editor = {Sheng, Bin and Bi, Lei and Kim, Jinman and Magnenat-Thalmann, Nadia and Thalmann, Daniel},
 	date = {2024},
 	langid = {english},
+}
+
+  
+@misc{ronneberger_u-net_2015,
+	title = {U-Net: Convolutional Networks for Biomedical Image Segmentation},
+	url = {http://arxiv.org/abs/1505.04597},
+	doi = {10.48550/arXiv.1505.04597},
+	shorttitle = {U-Net},
+	abstract = {There is large consent that successful training of deep networks requires many thousand annotated training samples. In this paper, we present a network and training strategy that relies on the strong use of data augmentation to use the available annotated samples more efficiently. The architecture consists of a contracting path to capture context and a symmetric expanding path that enables precise localization. We show that such a network can be trained end-to-end from very few images and outperforms the prior best method (a sliding-window convolutional network) on the {ISBI} challenge for segmentation of neuronal structures in electron microscopic stacks. Using the same network trained on transmitted light microscopy images (phase contrast and {DIC}) we won the {ISBI} cell tracking challenge 2015 in these categories by a large margin. Moreover, the network is fast. Segmentation of a 512x512 image takes less than a second on a recent {GPU}. The full implementation (based on Caffe) and the trained networks are available at http://lmb.informatik.uni-freiburg.de/people/ronneber/u-net .},
+	number = {{arXiv}:1505.04597},
+	publisher = {{arXiv}},
+	author = {Ronneberger, Olaf and Fischer, Philipp and Brox, Thomas},
+	urldate = {2024-06-08},
+	date = {2015-05-18},
+	eprinttype = {arxiv},
+	eprint = {1505.04597 [cs]},
+	keywords = {Computer Science - Computer Vision and Pattern Recognition},
+	file = {arXiv Fulltext PDF:/home/junwei/Zotero/storage/7RSWFJ3K/Ronneberger et al. - 2015 - U-Net Convolutional Networks for Biomedical Image.pdf:application/pdf;arXiv.org Snapshot:/home/junwei/Zotero/storage/5FXJWYVP/1505.html:text/html},
+}
+
+@misc{zhou_unet_2018,
+	title = {{UNet}++: A Nested U-Net Architecture for Medical Image Segmentation},
+	url = {http://arxiv.org/abs/1807.10165},
+	doi = {10.48550/arXiv.1807.10165},
+	shorttitle = {{UNet}++},
+	abstract = {In this paper, we present {UNet}++, a new, more powerful architecture for medical image segmentation. Our architecture is essentially a deeply-supervised encoder-decoder network where the encoder and decoder sub-networks are connected through a series of nested, dense skip pathways. The re-designed skip pathways aim at reducing the semantic gap between the feature maps of the encoder and decoder sub-networks. We argue that the optimizer would deal with an easier learning task when the feature maps from the decoder and encoder networks are semantically similar. We have evaluated {UNet}++ in comparison with U-Net and wide U-Net architectures across multiple medical image segmentation tasks: nodule segmentation in the low-dose {CT} scans of chest, nuclei segmentation in the microscopy images, liver segmentation in abdominal {CT} scans, and polyp segmentation in colonoscopy videos. Our experiments demonstrate that {UNet}++ with deep supervision achieves an average {IoU} gain of 3.9 and 3.4 points over U-Net and wide U-Net, respectively.},
+	number = {{arXiv}:1807.10165},
+	publisher = {{arXiv}},
+	author = {Zhou, Zongwei and Siddiquee, Md Mahfuzur Rahman and Tajbakhsh, Nima and Liang, Jianming},
+	urldate = {2024-06-08},
+	date = {2018-07-18},
+	eprinttype = {arxiv},
+	eprint = {1807.10165 [cs, eess, stat]},
+	keywords = {Computer Science - Computer Vision and Pattern Recognition, Computer Science - Machine Learning, Electrical Engineering and Systems Science - Image and Video Processing, Statistics - Machine Learning},
+	file = {arXiv Fulltext PDF:/home/junwei/Zotero/storage/UM4UAIZN/Zhou et al. - 2018 - UNet++ A Nested U-Net Architecture for Medical Im.pdf:application/pdf;arXiv.org Snapshot:/home/junwei/Zotero/storage/CW3J9DGD/1807.html:text/html},
 }
 

@@ -39,6 +39,15 @@
 \usepackage[toc, acronym]{glossaries}
 \usepackage[automake]{glossaries-extra}
 
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+  {\parindent0pt\vspace*{5pt}%
+  \linespread{0.5}\medium\scshape#1%
+  \par\nobreak\vspace*{15pt}}
+  \@afterheading%
+}
+\makeatother
+
 %----------------------------------------------------------------------------------------
 %	REPORT INFORMATION
 %----------------------------------------------------------------------------------------

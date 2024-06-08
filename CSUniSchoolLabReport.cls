@@ -52,12 +52,21 @@
 %----------------------------------------------------------------------------------------
 
 \usepackage[
-	top=4.25cm, % Top margin
-	bottom=4cm, % Bottom margin
-	left=2.75cm, % Left margin
-	right=2.75cm, % Right margin
+	top=2.25cm, % Top margin
+	bottom=3cm, % Bottom margin
+	left=2.55cm, % Left margin
+	right=2.55cm, % Right margin
 	%showframe % Uncomment to show frames around the margins for debugging purposes
 ]{geometry}
+
+% Original margins
+% \usepackage[
+% 	top=4.25cm, % Top margin
+% 	bottom=4cm, % Bottom margin
+% 	left=2.75cm, % Left margin
+% 	right=2.75cm, % Right margin
+% 	%showframe % Uncomment to show frames around the margins for debugging purposes
+% ]{geometry}
 
 %----------------------------------------------------------------------------------------
 %	FONTS

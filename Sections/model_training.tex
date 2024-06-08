@@ -1,4 +1,4 @@
-\section{Data Mining}\label{data_mining}
+\section{Data Mining and Evaluation}\label{data_mining}
 
 In this section, various data mining techniques are employed to extract meaningful insights from the preprocessed data.
 
@@ -32,6 +32,32 @@ The model selection process involves evaluating the suitability of each model ba
 % \end{enumerate}
 
 By leveraging these models, we aim to achieve high accuracy in classifying brain MRI images, thereby supporting healthcare professionals in the efficient diagnosis of brain tumors and facilitating early intervention. The combination of transfer learning and deep learning techniques ensures that our approach is both robust and effective, despite the limited size of the dataset.
+
+\subsection{Metrics}\label{metrics}
+
+After training the models, their performance is evaluated using a variety of metrics, providing a comprehensive understanding of their effectiveness in classification tasks. Below are the commonly used metrics, along with their mathematical formulations based on True Positive (TP), False Positive (FP), True Negative (TN), and False Negative (FN) values.
+
+The confusion matrix offers a detailed breakdown of the model's predictions, illustrating the number of true positives (TP), true negatives (TN), false positives (FP), and false negatives (FN). This matrix is crucial for identifying the model's strengths and weaknesses in classifying different classes, allowing for a granular analysis of performance.
+
+Precision is a metric that measures the proportion of true positive predictions among all positive predictions made by the model. It is calculated using the formula \(\text{Precision} = \frac{TP}{TP + FP}\). A higher precision value is preferred as it indicates the model's ability to avoid false positives, making it a critical measure in scenarios where the cost of false positives is high.
+
+Recall, also known as sensitivity, measures the proportion of true positive predictions among all actual positive instances in the dataset. It is computed using the formula \(\text{Recall} = \frac{TP}{TP + FN}\). A higher recall value is desirable as it indicates the model's ability to capture all positive instances, which is particularly important in medical diagnoses where missing a positive case can have severe consequences.
+
+The F1 score, which is the harmonic mean of precision and recall, provides a balanced measure of the model's performance by considering both false positives and false negatives. The formula for the F1 score is \(\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}\). A higher F1 score signifies better performance, especially in cases where a balance between precision and recall is essential.
+
+Support refers to the number of instances in each class. It helps identify class imbalances and assess the model's performance across different classes, providing context to other metrics.
+
+The Dice Similarity Coefficient (DSC) is a metric commonly used in medical image segmentation tasks. It measures the overlap between the predicted and ground truth segmentation masks, with a higher DSC indicating better segmentation accuracy. The formula for DSC is \(\text{DSC} = \frac{2 \times TP}{2 \times TP + FP + FN}\).
+
+Specificity measures the proportion of true negative predictions among all actual negative instances in the dataset. It is calculated as \(\text{Specificity} = \frac{TN}{TN + FP}\). A higher specificity value is preferred as it indicates the model's ability to avoid false positives, which is crucial in ensuring that negative cases are accurately identified.
+
+Accuracy measures the proportion of correct predictions made by the model across all classes, providing an overall assessment of the model's performance. It is computed using the formula \(\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}\). A higher accuracy value signifies a better-performing model.
+
+Finally, the Receiver Operating Characteristic (ROC) curve is a graphical plot that illustrates the diagnostic ability of a binary classifier system as its discrimination threshold is varied. The Area Under the ROC Curve (AUC) measures the entire two-dimensional area underneath the ROC curve, providing an aggregate measure of performance across all classification thresholds. A higher AUC value is preferred as it indicates better model performance.
+
+These metrics, when analyzed together, offer a comprehensive evaluation framework. Precision, recall, and F1 score primarily assess the model's performance on individual classes, while the confusion matrix and support provide detailed insights into prediction distribution. DSC is particularly crucial for segmentation tasks, ensuring accurate overlap measurement between predicted and actual segmentation masks. Specificity and accuracy offer additional layers of performance evaluation, ensuring robust and reliable model assessment.
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
