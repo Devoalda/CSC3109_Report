@@ -1,16 +1,10 @@
 \section{Dataset Exploration}\label{dataset_exploration}
 
-The dataset, referred to as \texttt{dataset\_19}, consists of a collection of MRI images organized into four subfolders, each representing a distinct class of brain tumors. Each subfolder contains 120 images, resulting in a well-balanced dataset with a total of 480 images. This balance is essential for training deep learning models, as it mitigates the risk of bias towards any particular class, ensuring that the model learns to distinguish among all categories effectively.
+The dataset, referred to as \texttt{dataset\_19}, comprises a collection of MRI images organized into four subfolders, each representing a distinct class of brain tumors. Each subfolder contains 120 images, resulting in a well-balanced dataset with a total of 480 images. This balance is essential for training deep learning models, as it mitigates the risk of bias towards any particular class, ensuring that the model learns to distinguish among all categories effectively.
 
-The dataset is composed of images representing four types of brain tumors: glioma, meningioma, pituitary tumors, and cases with no tumors. Specifically, it includes:
-\begin{itemize}
-  \item \textbf{Glioma Tumor}: 120 images
-  \item \textbf{Meningioma Tumor}: 120 images
-  \item \textbf{Pituitary Tumor}: 120 images
-  \item \textbf{No Tumor}: 120 images
-\end{itemize}
+The dataset includes images representing four types of brain tumors: glioma, meningioma, pituitary tumors, and cases with no tumors. Specifically, it consists of 120 images of glioma tumors, 120 images of meningioma tumors, 120 images of pituitary tumors, and 120 images with no tumors.
 
-Each image in the dataset captures the brain from different perspectives, including axial, coronal, and sagittal views. These diverse views are crucial as they provide comprehensive information about the tumor's location, size, and relation to surrounding structures. For instance, axial views offer a horizontal slice of the brain, coronal views provide a frontal slice, and sagittal views give a side slice. Including these various perspectives ensures that the model can learn robust features and improve its ability to generalize across different cases.
+Each image in the dataset captures the brain from different perspectives, including axial, coronal, and sagittal views. These diverse views are crucial as they provide comprehensive information about the tumor's location, size, and relation to surrounding structures. Axial views offer a horizontal slice of the brain, coronal views provide a frontal slice, and sagittal views give a side slice. Including these various perspectives ensures that the model can learn robust features and improve its ability to generalize across different cases.
 
 The distribution of images across these classes is depicted in Figure \ref{fig:data_distribution}. This visual representation underscores the dataset's balance and uniformity, further highlighting its suitability for developing a deep learning model for brain tumor classification.
 
@@ -160,23 +154,11 @@ The overall average size of the images is approximately $[453.36, 450.83]$ pixel
 \hline
 \end{longtable}
 
-Class-specific statistics show variation in image sizes:
-\begin{itemize}
-    \item \textbf{Meningioma}: Sizes range from $(223, 200)$ to $(650, 591)$ pixels, with a mean size of approximately $[472.25, 466.41]$ pixels.
-    \item \textbf{Pituitary}: Sizes range from $(256, 256)$ to $(903, 721)$ pixels, with a mean size of approximately $[511.74, 510.54]$ pixels.
-    \item \textbf{Notumor}: Sizes range from $(198, 150)$ to $(1075, 890)$ pixels, with a mean size of approximately $[317.46, 314.38]$ pixels.
-    \item \textbf{Glioma}: All images are consistently sized at $[512, 512]$ pixels.
-\end{itemize}
+Class-specific statistics reveal a notable variation in image sizes. For the \textit{meningioma} class, image sizes range from $(223, 200)$ to $(650, 591)$ pixels, with a mean size of approximately $[472.25, 466.41]$ pixels. The \textit{pituitary} class exhibits sizes from $(256, 256)$ to $(903, 721)$ pixels, with a mean size of around $[511.74, 510.54]$ pixels. The \textit{notumor} class has sizes ranging from $(198, 150)$ to $(1075, 890)$ pixels, and a mean size of approximately $[317.46, 314.38]$ pixels. In contrast, all images in the \textit{glioma} class are consistently sized at $[512, 512]$ pixels.
 
-The variability in image sizes across different classes highlights the importance of size normalization during the preprocessing phase. For instance, while the `glioma` class images are uniformly sized, other classes exhibit significant variation, which could introduce biases or inconsistencies in the training process if not properly addressed.
+This variability in image sizes across different classes underscores the importance of size normalization during the preprocessing phase. While the \textit{glioma} class images are uniformly sized, other classes exhibit significant variation. If not properly addressed, this could introduce biases or inconsistencies in the training process.
 
-Proper preprocessing, including size normalization, is vital for several reasons:
-\begin{itemize}
-    \item \textbf{Uniform Input Size}: Neural networks require inputs of a fixed size. Without resizing, it would be impossible to batch process the images.
-    \item \textbf{Consistent Feature Representation}: Ensuring all images are of the same size ensures that features are represented consistently across the dataset, which aids in better model learning.
-    \item \textbf{Reduction of Computational Load}: Smaller, consistent image sizes can significantly reduce the computational load and memory requirements, making training more efficient.
-    \item \textbf{Enhanced Model Performance}: Properly preprocessed images can lead to improved model convergence and accuracy, as the network can learn from a standardized set of inputs.
-\end{itemize}
+Proper preprocessing, including size normalization, is vital for several reasons. Firstly, neural networks require inputs of a fixed size, and resizing is essential to facilitate batch processing of images. Secondly, ensuring all images are of the same size guarantees consistent feature representation across the dataset, aiding in better model learning. Additionally, smaller, consistent image sizes can significantly reduce computational load and memory requirements, thus making training more efficient. Lastly, properly preprocessed images can lead to improved model convergence and accuracy, as the network can learn from a standardized set of inputs.
 
-In conclusion, the preprocessing step of resizing images to a uniform dimension is an essential consideration in developing a robust and efficient deep learning model for brain tumor classification. It not only facilitates smooth training but also contributes to the overall performance and generalization capability of the model.
+It is important to note that the image size fed into each model will differ, as each pretrained model is trained on different image sizes. This will be further elaborated in subsequent sections. In conclusion, resizing images to a uniform dimension during the preprocessing step is a critical consideration in developing a robust and efficient deep learning model for brain tumor classification. This step not only facilitates smooth training but also contributes to the overall performance and generalization capability of the model.
 

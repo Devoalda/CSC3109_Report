@@ -11,7 +11,7 @@ Data preprocessing is a crucial step in enhancing the accuracy of brain MRI clas
 
 Cropping along the contours of the brain in MRI images helps in focusing the model’s attention on the most relevant areas, thereby reducing noise and improving classification accuracy. By eliminating irrelevant parts of the image, this technique ensures that the model learns more effectively from the essential features of the brain structure \cite{Asif2022Improving}.
 
-In addition, advanced preprocessing methods like Generative Adversarial Networks (GANs) for data augmentation have shown to significantly improve the robustness and accuracy of brain MRI classification models by generating high-quality synthetic data to augment the training set \cite{Fahimi2020Generative}.
+In addition, advanced preprocessing methods like Generative Adversarial Networks (GANs) for augmented data generation have shown to significantly improve the robustness and accuracy of brain MRI classification models by generating high-quality synthetic data to augment the small training set \cite{Fahimi2020Generative}.
 
 These preprocessing techniques collectively enhance the quality and quantity of the training data, leading to more accurate and reliable brain MRI classification models.
 
@@ -28,6 +28,19 @@ For example, transfer learning architectures such as InceptionV3, VGG19, DenseNe
 In another study, transfer learning was utilized to address the challenges of small sample sizes and high dimensionality in whole-brain fMRI data. The approach showed improved performance compared to training models from scratch, demonstrating the benefits of transfer learning in enhancing model performance with limited data \cite{10.1007/978-3-030-32695-1_7}.
 
 Furthermore, a study on brain tumor detection employed transfer learning by fine-tuning a deep learning model trained on a large dataset of natural images. This method resulted in comparable performance even with a smaller dataset, showcasing the practicality and effectiveness of transfer learning in medical imaging \cite{10125766}.
+
+\subsubsection{U-Net and Variants}
+
+U-Net and its variants have become the cornerstone in brain MRI segmentation tasks due to their proficiency in capturing spatial information effectively. The U-Net architecture has been extensively applied to brain tumor segmentation in MRI images, achieving notable accuracy and robustness in tumor detection \cite{imtiaz_brain_2023, abd-ellah_automatic_2024, ding_slf-unet_2024}.
+
+Various adaptations of U-Net have been proposed to enhance its performance in medical image analysis. Abd-Ellah et al. \cite{abd-ellah_automatic_2024} introduced Two Parallel Cascaded U‑Nets with an Asymmetric Residual (TPCUAR‑Net) architecture as part of a two-stage detection and segmentation model. This model demonstrated high accuracy in brain tumor detection and segmentation tasks, underscoring the potential of U-Net variants.
+
+Similarly, Imtiaz et al. \cite{imtiaz_brain_2023} presented a modified U-Net architecture designed for pixel-level segmentation using a small dataset of brain tumor MRI images (322 images). Their model achieved high accuracy and robustness, further validating the efficacy of U-Net in medical image analysis.
+
+Furthermore, Ding et al. \cite{ding_slf-unet_2024} introduced the SLF-UNet architecture, which integrates U-Net with a spatial attention mechanism to enhance segmentation accuracy. The SLF-UNet model achieved significant accuracy in tumor segmentation tasks, highlighting the benefits of incorporating attention mechanisms into the U-Net framework.
+
+These studies collectively demonstrate the versatility and effectiveness of U-Net and its variants in brain tumor segmentation, making them invaluable tools in medical image analysis.
+
 
 \subsubsection{Conclusion}
 

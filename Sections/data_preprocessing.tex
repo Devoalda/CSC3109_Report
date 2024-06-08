@@ -26,9 +26,15 @@ These steps, as shown in Figure \ref{fig:image_cropping}, not only decrease the 
   \caption{Cropping the MRI image along its contour.}\label{fig:image_cropping}
 \end{figure}
 
+
+
 \subsection{Data Augmentation}\label{data_augmentation}
 
-Following the initial preprocessing, image augmentation is applied using the \texttt{ImageDataGenerator} class from the Keras library. This step artificially increases the dataset size by applying transformations such as horizontal flips and random rotations to the images, thus enhancing model performance by providing a diverse range of training examples. Each image is also normalized by dividing pixel values by 255.
+Following the initial preprocessing steps, we apply image augmentation techniques using the \texttt{ImageDataGenerator} class from the Keras library. Each model is fine-tuned with a subset of these techniques, which include horizontal flips, random rotations, and normalization. As referenced in \cite{nalepa_data_2019}, certain affine augmentations can be advantageous for brain tumor classification tasks. However, it is crucial to note that some augmentations, such as vertical flips, may be detrimental due to the potential misrepresentation of tumor locations.
+
+Importantly, these augmentation techniques are applied exclusively to the training dataset, while the validation dataset remains unaltered. This strategy ensures that the model encounters a diverse array of augmented images during training, thereby enhancing its generalization capabilities without compromising the integrity of the evaluation process.
+
+For each model evaluation, we provide a detailed commentary on the preprocessing and augmentation techniques employed, along with the rationale behind their selection. This comprehensive analysis elucidates how these techniques contribute to the overall performance and generalization capabilities of the models.
 
 \subsection{Data Splitting}\label{data_splitting}
 After preprocessing and augmentation, the dataset is divided into training and validation sets, with the training set comprising 80\% of the data and the validation set the remaining 20\%. This distribution allows the model to be trained extensively while also being evaluated on a separate set of data to assess its performance, as depicted in Figure \ref{fig:data_split}.
