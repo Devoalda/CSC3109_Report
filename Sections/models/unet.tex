@@ -1,25 +1,84 @@
 \subsection{U-Net}\label{s:unet}
 \chapterauthor{Woon Jun Wei (2200624)}
 
-The U-Net architecture, introduced by Ronneberger et al. in 2015, is a pioneering model for biomedical image segmentation, widely adopted for various image segmentation tasks \cite{ronneberger_u-net_2015}. U-Net features a symmetric architecture with a contracting path to capture context and an expansive path for precise localization. The architecture includes skip connections that concatenate feature maps from the contracting path to the expanding path, enhancing the segmentation performance (see Figure \ref{f:unet}).
+The U-Net architecture, introduced by Ronneberger et al. in 2015, is a pioneering model for biomedical image segmentation, widely adopted for various image segmentation tasks \cite{ronneberger_u-net_2015}. U-Net features a symmetric architecture with a contracting path to capture context and an expansive path for precise localization. The architecture includes skip connections that concatenate feature maps from the contracting path to the expanding path, enhancing the segmentation performance (see Figure \ref{f:unet_vs_unetpp}).
 
 \begin{figure}[H] 
 	\centering
-	\includegraphics[width=0.5\textwidth]{unet/unet.png}
-	\caption{Simple U-Net architecture}\label{f:unet}
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{unet/unet.png}
+    \caption{(a) Traditional U-Net architecture \cite{Yakubovskiy_2019}}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.45\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{unet/unetpp.png}
+    \caption{(b) U-Net++ architecture \cite{zhou_unet_2018}}
+	\end{minipage}
+	\caption{Comparison of Simple U-Net and U-Net++ architectures}\label{f:unet_vs_unetpp}
 \end{figure}
+
 
 \subsubsection{Implementation}
 
-U-Net++, an extension introduced by Zhou et al. in 2018, improves the original architecture by incorporating dense skip connections. These connections concatenate feature maps from all previous layers in the contracting path to the expanding path, enhancing feature reuse and segmentation accuracy \cite{zhou_unet_2018}.
+U-Net++, an extension introduced by Zhou et al. in 2018, improves the original architecture by incorporating dense skip connections. These connections concatenate feature maps from all previous layers in the contracting path to the expanding path, enhancing feature reuse and segmentation accuracy \cite{zhou_unet_2018, zhou2019unetplusplus, zhou2018unetplusplus, zhou2021towards} (See Figure \ref{f:unet_vs_unetpp}). The U-Net++ architecture offers improved performance and efficiency compared to the original U-Net model, making it well-suited for medical image segmentation tasks.
 
-Due to the complexity and time constraints associated with training, evaluation, and tuning, a U-Net model was not architected from scratch. Instead, this study employed the U-Net++ architecture using the \texttt{segmentation\_models} library \cite{Yakubovskiy_2019}. This library offers implementations of various deep learning models for image segmentation, supporting pre-trained models such as VGG, ResNet, and EfficientNet as down-sampling backbones.
+Due to the complexity and time constraints associated with training, evaluation, and tuning, a traditional U-Net model was attempted to be architected from scratch, but was found to be infeasible within the scope of this project. Instead, this study employed the U-Net++ architecture using the \texttt{segmentation\_models} library \cite{Yakubovskiy_2019}. This library offers implementations of various deep learning models for image segmentation, supporting pre-trained models such as VGG, ResNet, and EfficientNet as down-sampling backbones.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=\textwidth]{unet/unet_training.png}
+  \end{center}
+  \caption{U-Net++ Training Process}\label{f:unet_training}
+\end{figure}
 
 Input images were preprocessed by cropping, enhancing, and resizing to $224 \times 224 \times 3$, as detailed in Section \ref{image_cropping_enhancement}. Further preprocessing included normalization, horizontal flipping, and random rotation by 20 degrees, managed by the \texttt{ImageDataGenerator} class, which also handled the 80:20 training-validation split.
 
 The implemented model architecture was U-Net++ with an EfficientNetB1 backbone, initialized with ImageNet weights. To obtain classification results for the full image instead of pixel-wise classification, a Global Average Pooling layer followed by a Dense layer with four units and a softmax activation function was added. The model was compiled using the categorical cross-entropy loss function and accuracy metric.
 
+EfficientNetB1 was chosen as the backbone due to its balance between model size and performance, offering a good trade-off for the brain tumor segmentation task. EfficientNet models are known for their efficiency in terms of accuracy and computational resources, making them suitable for medical image segmentation tasks \cite{hastomo_classification_2024}. The EfficientNetB1 backbone provides a strong feature extractor while maintaining a relatively compact size, enabling efficient training and inference.
+
+The U-Net++ Model's training process is illustrated in Figure \ref{f:unet_training}, the U-Net++ Model is referenced from \cite{zhou_unet_2018}.
+
 Training was conducted using the Adam optimizer with a learning rate of 0.0001 and a batch size of 10 for 100 epochs. The best model was saved based on validation loss, incorporating Checkpointing, Early Stopping, and Reduce Learning Rate on Plateau. Training halted at 33 epochs due to early stopping, achieving a validation loss of 0.1862 and a validation accuracy of 0.9444.
+
+\subsubsection{Fine-Tuning}
+
+To further optimize the performance of the U-Net++ model for brain tumor segmentation, fine-tuning was conducted using Optuna, a hyperparameter optimization framework. This process involved testing various backbone architectures to identify the most effective model configuration. The backbones evaluated included VGG16, MobileNetV2 and DenseNet121. 
+
+The primary objective of this fine-tuning effort was to minimize the validation loss, thus enhancing the model's accuracy and generalizability. The model configuration for each trial consisted of the U-Net++ architecture with a specified backbone, followed by a Global Average Pooling layer to reduce the spatial dimensions and a Dense layer with a softmax activation function for the final classification into four classes. The models were compiled using the Adam optimizer with an initial learning rate of $1 \times 10^{-4}$, employing categorical cross-entropy as the loss function and accuracy as the performance metric.
+
+Table \ref{tab:finetuning_results} summarizes the results of the fine-tuning trials, listing the validation loss for each tested backbone.
+
+\begin{longtable}{|c|c|}
+\caption{Fine-Tuning Results for Different Backbones}\label{tab:finetuning_results}
+\hline
+\textbf{Backbone} & \textbf{Validation Loss} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Backbone} & \textbf{Validation Loss} \\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+MobileNetV2 (Trial 1) & 0.4158 \\
+\hline
+DenseNet121 (Trial 2) & 0.3684 \\
+\hline
+MobileNetV2 (Trial 3) & 0.7039 \\
+\hline
+VGG16 (Trial 4) & 0.7004 \\
+\end{longtable}
+
+The Optuna optimization process involved creating a model with a backbone suggested by Optuna for each trial. Each model was then trained for 35 epochs using the Adam optimizer, with callbacks for learning rate reduction, early stopping, and model checkpointing based on validation loss. The best validation loss achieved during training was recorded as the objective metric for each trial.
+
+While DenseNet121 achieved the lowest validation loss of 0.3684 during the fine-tuning trials, it was observed that the EfficientNetB1 backbone, used during the initial training phase, demonstrated superior performance with a lower validation loss and higher accuracy. Specifically, the EfficientNetB1 model achieved a validation loss of 0.1862 and a validation accuracy of 0.9444, outperforming the DenseNet121 in terms of both loss and accuracy metrics. Consequently, despite the promising results from DenseNet121, EfficientNetB1 was retained as the preferred backbone for the final U-Net++ model due to its demonstrated efficacy and robust performance during the training phase.
+
+The fine-tuning process underscored the significance of backbone selection in enhancing the model's performance. Although DenseNet121 showed potential with the lowest validation loss among the tested backbones, EfficientNetB1 was ultimately chosen for its superior overall performance, contributing to the model's effectiveness in accurately segmenting brain tumors. The results are summarized in Table \ref{tab:finetuning_results}.
 
 \subsubsection{Results and Evaluation}
 
@@ -94,11 +153,35 @@ Additional evaluation metrics in Table \ref{tab:unet_additional_metrics} confirm
 
 Mentioned in \cite{abd-ellah_automatic_2024}, the varying nature and size of glioma tumors pose significant challenges for accurate segmentation. Despite these challenges, the U-Net model achieved an impressive F1-score of 0.96 for glioma, indicating a low incidence of false positives and false negatives. This performance suggests that the model is highly effective in segmenting glioma tumors, although there remains potential for further improvement. Fine-tuning the model or employing additional data augmentation techniques could enhance the segmentation accuracy for glioma tumors, thereby improving overall model performance.
 
-% In conclusion, the U-Net model exhibits strong performance in brain tumor segmentation, as evidenced by the high precision, recall, F1-scores, and additional metrics. The results indicate a high degree of accuracy and reliability, making the U-Net model a valuable tool for medical image analysis and diagnostic applications.
+\subsubsection{K-Folds Cross-Validation}
 
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=1\textwidth]{unet/evaluation/kfolds.png}
+  \end{center}
+  \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:unet_kfolds}
+\end{figure}
 
-% The metrics in Tables \ref{tab:unet_classification_report} and \ref{tab:unet_additional_metrics} demonstrate the U-Net model's strong performance in brain tumor segmentation. The model achieved high precision, recall, and F1-scores across all classes, with an overall accuracy of 0.9444. The confusion matrix in Figure \ref{f:unet_evaluation} (top-left) further illustrates the model's ability to accurately classify brain tumor images. The ROC Curve (Bottom Left) demonstrates the model's excellent performance in distinguishing between classes. Additionally, the high DSC, sensitivity, and specificity values in Table \ref{tab:unet_additional_metrics} confirm the model's robustness in segmenting brain tumors.
-% 
-% Mentioned in \cite{abd-ellah_automatic_2024}, the varying nature and size of the glioma tumor makes it difficult to segment accurately. However, the U-Net model achieved a high F1-score of 0.96 for glioma, where little false positives and false negatives were observed. This suggests that the model may benefit from further fine-tuning to improve segmentation accuracy for glioma tumors or additional data augmentation to enhance generalization.
+K-Folds cross-validation was conducted to rigorously assess the model's generalization performance on the brain tumor segmentation task. The dataset was partitioned into five folds, ensuring each fold served as the validation set exactly once while the remaining four folds were utilized for training. This procedure was repeated five times, allowing each fold to be used for validation, thus providing a robust estimate of the model's performance. The model was trained for 35 epochs for each fold, with the initial training stopping at 33 epochs due to early stopping. Model checkpoints were removed for efficiency during this process.
+
+The left plot in Figure \ref{f:unet_kfolds} illustrates the validation accuracy for each fold. The accuracy values per fold indicate high performance across all splits, with a slight variation. Specifically, the accuracy ranged from approximately 0.90 to 1.00, demonstrating the model's strong capability in accurately segmenting brain tumors. This high level of accuracy across different folds suggests that the model generalizes well to unseen data, maintaining its performance across various subsets of the dataset.
+
+The right plot in Figure \ref{f:unet_kfolds} presents the validation loss for each fold. The loss values show greater variability compared to the accuracy, with the highest loss observed in fold 1 and the lowest in fold 4. The variability in the loss values suggests that while the model generally performs well, there are certain instances where the model's performance can be further optimized. This indicates potential areas for improvement, particularly in achieving more consistent performance across different validation sets.
+
+It is noteworthy that during the K-Folds validation, there were instances where the validation loss was smaller than the training's validation loss, and the accuracy during K-Folds was also higher. This phenomenon underscores the model's robustness, indicating that it is capable of performing well on unseen data. However, this occurrence may also be attributed to the differences in data distribution between the training and validation sets in each fold. This disparity can sometimes lead to lower validation loss and higher accuracy, suggesting that while the model is strong, the evaluation metrics might slightly overestimate the model's performance. Therefore, it is important to consider these factors when interpreting the results.
+
+Overall, the K-Folds cross-validation results indicate that the model achieves a high average accuracy of 0.9533 with a standard deviation of 0.0267, reflecting robust performance with minimal variability. The average validation loss was 0.1599 with a standard deviation of 0.0601, suggesting that while the model's predictions are generally reliable, there is room for enhancement in terms of reducing the prediction error. These metrics collectively demonstrate that the model possesses strong generalization capabilities, although further refinement could help in achieving even greater consistency and reliability in its performance.
+
+\subsubsection{Conclusion}\label{s:conclusion}
+
+In this study, we implemented and fine-tuned the U-Net++ model for the challenging task of brain tumor segmentation, utilizing various backbone architectures. Our comprehensive approach involved initial training with the EfficientNetB1 backbone, followed by fine-tuning with alternative backbones such as VGG16, MobileNetV2, and DenseNet121. The EfficientNetB1 backbone demonstrated superior performance, achieving a validation loss of 0.1862 and a validation accuracy of 0.9444. This backbone was retained for the final model due to its robust performance metrics and efficacy in accurately segmenting brain tumors.
+
+The results of our fine-tuning process, supported by Optuna's hyperparameter optimization framework, underscored the importance of backbone selection in enhancing model performance. Despite DenseNet121 achieving the lowest validation loss during fine-tuning trials, the overall performance of EfficientNetB1 in terms of validation loss and accuracy solidified its selection as the preferred backbone.
+
+Our evaluation included rigorous testing through K-Folds cross-validation, which demonstrated the model's strong generalization capabilities with high accuracy and relatively low variability across different data folds. The average validation accuracy of 0.9533 and validation loss of 0.1599 (from K-Folds Evaluation) reaffirm the model's robustness and reliability in segmenting brain tumors.
+
+The study highlighted the U-Net++ model's ability to handle the complexity of medical image segmentation tasks effectively. The high precision, recall, and F1-scores achieved across various tumor classes indicate the model's capability to provide accurate and reliable segmentation results. The findings suggest that with further optimization and potential enhancements in data augmentation techniques, the model's performance can be further improved, making it a valuable tool in clinical applications for brain tumor diagnosis and treatment planning.
+
+Overall, this work demonstrates the effectiveness of leveraging advanced deep learning architectures and optimization techniques to address critical challenges in medical image segmentation, paving the way for more accurate and efficient diagnostic tools in healthcare.
 
 
