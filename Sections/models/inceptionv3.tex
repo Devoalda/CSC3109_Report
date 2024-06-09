@@ -1,0 +1,125 @@
+\subsection{InceptionV3}\label{inceptionv3}
+\chapterauthor{Woon Jun Wei (2200624)}
+
+The InceptionV3 model is a convolutional neural network (CNN) architecture that was developed by Google Research. It is a deep learning model that is widely used for image classification and object detection tasks. The InceptionV3 model is based on the Inception architecture, which was first introduced in the GoogLeNet model. The InceptionV3 model is an improved version of the original Inception architecture, with several modifications and enhancements that make it more efficient and accurate.
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=\textwidth]{inceptionv3/inceptionv3_arch.png}
+  \end{center}
+  \caption{InceptionV3 Architecture}\label{f:inceptionv3_arch}
+\end{figure}
+
+
+\subsubsection{Implementation}
+
+
+The proposed brain tumor segmentation model is based on the InceptionV3 architecture \cite{szegedy_rethinking_2015}, pretrained on the ImageNet dataset. The model excludes the top layers and modifies the remaining layers to adapt to the specific requirements of the classification task. The input shape is set to $224\times224$ with three channels instead of the original $299\times299$ input shape. This modification is necessary to achieve a higher accuracy in the classification task, as the input images are resized to $224\times224$ during the preprocessing stage.
+
+To customize the model, the last three layers of the InceptionV3 base model are excluded. The output of the last remaining layer undergoes a Global Average Pooling operation, followed by a Dropout layer with a rate of 0.055 to prevent overfitting. The final dense layer comprises four neurons corresponding to the four classes of brain tumors, with a softmax activation function to output the class probabilities. A kernel regularizer with an L2 penalty of 0.1 is applied to this dense layer to further mitigate overfitting.
+
+The model is compiled using the RectifiedAdam (RAdam) optimizer \cite{liu_variance_2019} with a learning rate of $0.0001$, $\beta_1$ of $0.9$, $\beta_$2 of $0.999$, and $\epsilon$ of $1e-08$. This optimizer is chosen over traditional optimizers such as SGD or Adam due to its capability to rectify the variance of the adaptive learning rate, thus stabilizing training, particularly in the initial stages. This choice is justified by the findings of Khaliki et al. \cite{khaliki_brain_2024}, who demonstrated superior performance using RAdam in the context of brain tumor classification.
+
+The model is compiled with the categorical cross-entropy loss function, suitable for multi-class classification tasks. Evaluation metrics include accuracy, precision, recall, and categorical accuracy, providing a comprehensive assessment of the model's performance.
+
+This approach aims to replicate the methods proposed by Khaliki et al. \cite{khaliki_brain_2024}, with a focus on leveraging advanced optimization techniques to enhance model performance in brain tumor segmentation tasks.
+
+%loss: 0.1377 - accuracy: 0.9920 - precision_1: 0.9946 - recall_1: 0.9866 - categorical_accuracy: 0.9920 - val_loss: 0.2965 - val_accuracy: 0.9333 - val_precision_1: 0.9419 - val_recall_1: 0.9000 - val_categorical_accuracy: 0.9333 - lr: 1.0000e-04
+%
+The model was trained for 100 epochs but early stopped at epoch 69, with a batch size of 10. The model was trained on the training set and validated on the validation set. The model with the best validation accuracy was saved as the final model. The model was then evaluated on the test set to obtain the final performance metrics. The model achieved an accuracy of 0.9920 and a validation accuracy of 0.9333, with a validation loss of 0.2965. The model's performance metrics are summarized in Table \ref{tab:inceptionv3_classification_report} and Table \ref{tab:inceptionv3_additional_metrics}.
+
+\subsubsection{Fine-Tuning}
+
+In the process of fine-tuning the model, the Optuna package was utilized to conduct a comparative analysis of different optimizers, namely RAdam, Adam, and SGD. This hyperparameter optimization process aimed to identify the most effective optimizer for the final model. After extensive experimentation, RAdam was selected due to its superior performance in achieving higher validation accuracy compared to the other optimizers. This choice aligns with the findings of Khaliki et al. \cite{khaliki_brain_2024}, which highlight the advantages of RAdam in stabilizing training and enhancing convergence rates.
+
+In addition to optimizer selection, the dropout rate was also a subject of optimization attempts using the Optuna package. Despite exploring various dropout rates, the optimal dropout rate was found to be 0.055, which provided a balance between mitigating overfitting and maintaining model performance. This specific dropout rate was thus adopted in the final model architecture.
+
+The overall approach demonstrates the rigorous method employed to fine-tune the model, ensuring optimal performance for brain tumor segmentation. By leveraging advanced optimization techniques and thoroughly validating the model, this work contributes to the development of more accurate and reliable medical imaging models.
+
+
+\subsubsection{Results and Evaluation}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.35\textwidth]{inceptionv3/evaluation/cm1.png}
+    \includegraphics[width=0.35\textwidth]{inceptionv3/evaluation/cm2.png}
+    \includegraphics[width=0.35\textwidth]{inceptionv3/evaluation/ROC.png}
+    \includegraphics[width=0.35\textwidth]{inceptionv3/evaluation/learning_curve.png}
+  \end{center}
+  \caption{Confusion Matrix, ROC Curve, and Learning Curve for Brain Tumor Segmentation}\label{f:inceptionv3_evaluation}
+\end{figure}
+
+\begin{longtable}{|l|c|c|c|c|}
+\caption{Classification Report for Brain Tumor Segmentation} \label{tab:inceptionv3_classification_report}
+\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline 
+\endfirsthead
+
+\multicolumn{5}{c}%
+{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
+\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline 
+\endhead
+
+\hline \multicolumn{5}{|r|}{{Continued on next page}} \\ \hline
+\endfoot
+
+\hline
+\endlastfoot
+
+meningioma & 0.96 & 0.96 & 0.96 & 24 \\ 
+\hline
+pituitary  & 0.84 & 0.88 & 0.86 & 24 \\ 
+\hline
+glioma     & 0.92 & 1.00 & 0.96 & 24 \\ 
+\hline
+notumor    & 1.00 & 0.88 & 0.93 & 24 \\ 
+\hline
+micro avg  & 0.93 & 0.93 & 0.93 & 96 \\ 
+\hline
+macro avg  & 0.93 & 0.93 & 0.93 & 96 \\ 
+\hline
+weighted avg & 0.93 & 0.93 & 0.93 & 96 \\ 
+\hline
+samples avg & 0.93 & 0.93 & 0.93 & 96 \\ 
+\end{longtable}
+
+\begin{longtable}{|c|c|c|c|}
+\caption{Additional Metrics for Brain Tumor Segmentation} \label{tab:inceptionv3_additional_metrics}
+\hline 
+\textbf{DSC} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Accuracy}
+\hline
+\endfirsthead
+
+\multicolumn{4}{c}%
+{{\bfseries \tablename\ \thetable{} -- continued from previous page}}
+\hline \textbf{DSC} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Accuracy} \hline
+\endhead
+
+\hline \multicolumn{4}{|r|}{{Continued on next page}} 
+\hline
+\endfoot
+
+\hline
+\endlastfoot
+
+%DSC: 0.9272023809523811, Sensitivity: 0.9270833333333334, Specificity: 0.9756944444444444, Accuracy: 0.9270833333333334
+0.9272 & 0.9271 & 0.9757 & 0.9271 \\
+\end{longtable}
+
+\subsubsection{K-Folds Cross-Validation}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=1\textwidth]{inceptionv3/evaluation/kfolds.png}
+  \end{center}
+  \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:inceptionv3_kfolds}
+\end{figure}
+
+% Validation Accuracy: 0.9711 ± 0.0218
+% Validation Loss: 0.2188 ± 0.0586
+% k = 5
+% epochs = 90 
+% batch_size = 10
+
+K-Folds cross-validation was performed to evaluate the model's performance across different subsets of the dataset. The model achieved an average validation accuracy of 0.9711 and an average validation loss of 0.2188 across five folds. The model was trained for 90 epochs with a batch size of 10 for each fold. The results demonstrate the model's consistency and robustness in classifying brain tumor images.
+
+\subsubsection{Conclusion}
