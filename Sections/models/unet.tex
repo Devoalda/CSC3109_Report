@@ -46,7 +46,7 @@ EfficientNetB1 was chosen as the backbone due to its balance between model size 
 
 The U-Net++ Model's training process is illustrated in Figure \ref{f:unet_training}, the U-Net++ Model is referenced from \cite{zhou_unet_2018}.
 
-Training was conducted using the Adam optimizer with a learning rate of 0.0001 and a batch size of 10 for 100 epochs. The best model was saved based on validation loss, incorporating Checkpointing, Early Stopping, and Reduce Learning Rate on Plateau. Training halted at 33 epochs due to early stopping, achieving a validation loss of 0.1862 and a validation accuracy of 0.9444.
+Training was conducted using the Adam optimizer with a learning rate of 0.0001 and a batch size of 10 for 100 epochs. The best model was saved based on validation loss, incorporating Checkpointing, Early Stopping, and Reduce Learning Rate on Plateau. Training halted at 33 epochs due to early stopping, achieving a validation loss of 0.2657 and a validation accuracy of 0.9375.
 
 \subsubsection{Fine-Tuning}
 
@@ -59,29 +59,29 @@ Table \ref{tab:finetuning_results} summarizes the results of the fine-tuning tri
 \begin{longtable}{|c|c|}
 \caption{Fine-Tuning Results for Different Backbones}\label{tab:finetuning_results}
 \hline
-\textbf{Backbone} & \textbf{Validation Loss} \\
+\textbf{Backbone} & \textbf{Validation Loss}
 \hline
 \endfirsthead
 \hline
-\textbf{Backbone} & \textbf{Validation Loss} \\
+\textbf{Backbone} & \textbf{Validation Loss}
 \hline
 \endhead
 \hline
 \endfoot
 \hline
 \endlastfoot
-MobileNetV2 (Trial 1) & 0.4158 \\
+MobileNetV2 (Trial 1) & 0.4158
 \hline
-DenseNet121 (Trial 2) & 0.3684 \\
+DenseNet121 (Trial 2) & 0.3684
 \hline
-MobileNetV2 (Trial 3) & 0.7039 \\
+MobileNetV2 (Trial 3) & 0.7039
 \hline
-VGG16 (Trial 4) & 0.7004 \\
+VGG16 (Trial 4) & 0.7004
 \end{longtable}
 
 The Optuna optimization process involved creating a model with a backbone suggested by Optuna for each trial. Each model was then trained for 35 epochs using the Adam optimizer, with callbacks for learning rate reduction, early stopping, and model checkpointing based on validation loss. The best validation loss achieved during training was recorded as the objective metric for each trial.
 
-While DenseNet121 achieved the lowest validation loss of 0.3684 during the fine-tuning trials, it was observed that the EfficientNetB1 backbone, used during the initial training phase, demonstrated superior performance with a lower validation loss and higher accuracy. Specifically, the EfficientNetB1 model achieved a validation loss of 0.1862 and a validation accuracy of 0.9444, outperforming the DenseNet121 in terms of both loss and accuracy metrics. Consequently, despite the promising results from DenseNet121, EfficientNetB1 was retained as the preferred backbone for the final U-Net++ model due to its demonstrated efficacy and robust performance during the training phase.
+While DenseNet121 achieved the lowest validation loss of 0.3684 during the fine-tuning trials, it was observed that the EfficientNetB1 backbone, used during the initial training phase, demonstrated superior performance with a lower validation loss and higher accuracy. Specifically, the EfficientNetB1 model achieved a validation loss of 0.2498 and a validation accuracy of 0.9444, outperforming the DenseNet121 in terms of both loss and accuracy metrics. Consequently, despite the promising results from DenseNet121, EfficientNetB1 was retained as the preferred backbone for the final U-Net++ model due to its demonstrated efficacy and robust performance during the training phase.
 
 The fine-tuning process underscored the significance of backbone selection in enhancing the model's performance. Although DenseNet121 showed potential with the lowest validation loss among the tested backbones, EfficientNetB1 was ultimately chosen for its superior overall performance, contributing to the model's effectiveness in accurately segmenting brain tumors. The results are summarized in Table \ref{tab:finetuning_results}.
 
@@ -122,25 +122,29 @@ The fine-tuning process underscored the significance of backbone selection in en
 
 \begin{longtable}{|l|c|c|c|c|}
 \caption{Classification Report for Brain Tumor Segmentation} \label{tab:unet_classification_report}
-\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline 
+\hline 
+\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} 
+\hline 
 \endfirsthead
 
 \multicolumn{5}{c}%
-{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
-\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ \hline 
+{{\bfseries \tablename\ \thetable{} -- continued from previous page}}
+\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} 
+\hline 
 \endhead
 
-\hline \multicolumn{5}{|r|}{{Continued on next page}} \\ \hline
+\hline \multicolumn{5}{|r|}{{Continued on next page}} 
+\hline
 \endfoot
 
 \hline
 \endlastfoot
 
-meningioma & 0.96 & 0.92 & 0.94 & 24 \\ 
+meningioma & 0.95 & 0.88 & 0.91 & 24 \\ 
 \hline
-pituitary  & 0.91 & 0.88 & 0.89 & 24 \\ 
+pituitary  & 0.88 & 0.92 & 0.90 & 24 \\ 
 \hline
-glioma     & 0.92 & 1.00 & 0.96 & 24 \\ 
+glioma     & 0.96 & 1.00 & 0.98 & 24 \\ 
 \hline
 notumor    & 0.96 & 0.96 & 0.96 & 24 \\ 
 \hline
@@ -169,8 +173,8 @@ samples avg & 0.94 & 0.94 & 0.94 & 96 \\
 
 \hline
 \endlastfoot
-
-0.9370 & 0.9375 & 0.9792 & 0.9375 \\ \hline
+% DSC: 0.9372319580005916, Sensitivity: 0.9375, Specificity: 0.9791666666666667, Accuracy: 0.9375
+0.9372 & 0.9375 & 0.9792 & 0.9375 \\ \hline
 \end{longtable}
 
 The performance metrics presented in Tables \ref{tab:unet_classification_report} and \ref{tab:unet_additional_metrics} demonstrate the robust capability of the U-Net model in brain tumor segmentation. The classification report (Table \ref{tab:unet_classification_report}) highlights the model's high precision, recall, and F1-scores across all classes, with an overall accuracy of 0.94. Specifically, the model achieved precision scores of 0.96, 0.91, 0.92, and 0.96 for the meningioma, pituitary, glioma, and notumor classes, respectively. Corresponding recall values were 0.92, 0.88, 1.00, and 0.96, indicating the model's effectiveness in identifying true positives for each class.
