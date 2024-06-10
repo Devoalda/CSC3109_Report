@@ -3,14 +3,6 @@
 
 The InceptionV3 model is a convolutional neural network (CNN) architecture that was developed by Google Research. It is a deep learning model that is widely used for image classification and object detection tasks. The InceptionV3 model is based on the Inception architecture, which was first introduced in the GoogLeNet model. The InceptionV3 model is an improved version of the original Inception architecture, with several modifications and enhancements that make it more efficient and accurate.
 
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.6\textwidth]{inceptionv3/inceptionv3_arch.png}
-  \end{center}
-  \caption{InceptionV3 Architecture}\label{f:inceptionv3_arch}
-\end{figure}
-
-
 \subsubsection{Implementation}
 
 
@@ -35,7 +27,6 @@ In the process of fine-tuning the model, the Optuna package was utilized to cond
 In addition to optimizer selection, the dropout rate was also a subject of optimization attempts using the Optuna package. Despite exploring various dropout rates, the optimal dropout rate was found to be 0.055, which provided a balance between mitigating overfitting and maintaining model performance. This specific dropout rate was thus adopted in the final model architecture.
 
 The overall approach demonstrates the rigorous method employed to fine-tune the model, ensuring optimal performance for brain tumor segmentation. By leveraging advanced optimization techniques and thoroughly validating the model, this work contributes to the development of more accurate and reliable medical imaging models.
-
 
 \subsubsection{Results and Evaluation}
 

@@ -46,7 +46,7 @@ EfficientNetB1 was chosen as the backbone due to its balance between model size 
 
 The U-Net++ Model's training process is illustrated in Figure \ref{f:unet_training}, the U-Net++ Model is referenced from \cite{zhou_unet_2018}.
 
-Training was conducted using the Adam optimizer with a learning rate of 0.0001 and a batch size of 10 for 100 epochs. The best model was saved based on validation loss, incorporating Checkpointing, Early Stopping, and Reduce Learning Rate on Plateau. Training halted at 33 epochs due to early stopping, achieving a validation loss of 0.2657 and a validation accuracy of 0.9375.
+Training was conducted using the Adam optimizer with a learning rate of 0.0001 and a batch size of 10 for 100 epochs. The best model was saved based on validation loss, incorporating Checkpointing, Early Stopping, and Reduce Learning Rate on Plateau. Training halted at 41 epochs due to early stopping, achieving a validation loss of 0.2498 and a validation accuracy of 0.9444.
 
 \subsubsection{Fine-Tuning}
 
@@ -203,6 +203,58 @@ The right plot in Figure \ref{f:unet_kfolds} presents the validation loss for ea
 It is noteworthy that during the K-Folds validation, there were instances where the validation loss was smaller than the training's validation loss, and the accuracy during K-Folds was also higher. This phenomenon underscores the model's robustness, indicating that it is capable of performing well on unseen data. However, this occurrence may also be attributed to the differences in data distribution between the training and validation sets in each fold. This disparity can sometimes lead to lower validation loss and higher accuracy, suggesting that while the model is strong, the evaluation metrics might slightly overestimate the model's performance. Therefore, it is important to consider these factors when interpreting the results.
 
 Overall, the K-Folds cross-validation results indicate that the model achieves a high average accuracy of 0.9533 with a standard deviation of 0.0267, reflecting robust performance with minimal variability. The average validation loss was 0.1599 with a standard deviation of 0.0601, suggesting that while the model's predictions are generally reliable, there is room for enhancement in terms of reducing the prediction error. These metrics collectively demonstrate that the model possesses strong generalization capabilities, although further refinement could help in achieving even greater consistency and reliability in its performance.
+
+\subsubsection{Segmentation Attempt}
+
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.23\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/segmentation1.png}
+    \caption{Glioma}
+    \label{fig:glio_seg}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.23\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/segmentation2.png}
+    \caption{Menigioma}
+    \label{fig:meng_seg}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.23\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/segmentation3.png}
+    \caption{No Tumor}
+    \label{fig:no_tumor_seg}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.23\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/segmentation4.png}
+    \caption{Pituitary}
+    \label{fig:pitu_seg}
+  \end{subfigure}
+  \caption{Segmentation Results for Brain Tumor Classes (Segmented Image in Green)}
+  \label{fig:segmentation_results}
+\end{figure}
+
+
+The segmentation results using the U-Net model for brain tumor classification reveal several insights into the model's learning and performance. The U-Net architecture, renowned for its efficacy in biomedical image segmentation, was expected to delineate brain tumor boundaries accurately. The segmentation is retrieved from the model's output before the average pooling and softmax layer, applying a threshold of 0.9 to determine tumor presence. This approach aims to capture high-confidence predictions for tumor regions.
+
+As illustrated in Figure \ref{fig:segmentation_results}, the model tends to segment regions that do not correspond to actual tumor locations. For instance, in the case of glioma, the model identifies brain regions that do not align with the actual tumor areas. Similarly, for images labeled as having no tumor, the model erroneously segments parts of the brain, suggesting it learns features unrelated to the presence of tumors.
+
+A critical observation is that the model has predominantly learned to segment brain regions rather than tumors themselves. This misalignment can be attributed to several factors. The dataset used for training may be inadequate in size, leading to poor generalization. A small dataset limits the model's exposure to diverse tumor appearances and variations, impairing its ability to learn robust tumor-specific features.
+
+Additionally, the model's output prior to average pooling and the softmax layer, combined with a high threshold setting of 0.9, contributes to segmentation inaccuracies. For instance, the segmentation mask for meningioma shows green across the entire image, indicating an excessively high confidence in identifying tumor regions and leading to over-segmentation. Similarly, the pituitary tumor segmentation mask covers four-fifths of the image, indicating an overestimation of the tumor area. This over-coverage stems from the model's inability to accurately differentiate between tumor and non-tumor regions when the threshold is too high, compromising segmentation specificity.
+
+In contrast, for images labeled as having no tumor, the model segments only small portions of the image. This suggests that while the model can sometimes correctly identify non-tumor regions, it struggles with precise localization and segmentation, resulting in scattered and incomplete outputs.
+
+Moreover, the absence of explicit tumor masks in the training data poses a significant challenge. Without precise annotations indicating tumor boundaries, the model struggles to differentiate between tumor and non-tumor regions, underscoring the need for a more comprehensive dataset with detailed tumor masks to enhance segmentation accuracy.
+
+While the U-Net model demonstrates some capability in learning from the given dataset, its performance in accurately segmenting brain tumors is suboptimal. The results highlight the need for a larger and more detailed dataset, specifically annotated with tumor masks, to improve the model's ability to identify and segment tumors accurately. Future work should focus on augmenting the dataset and incorporating advanced training techniques to address these limitations and achieve more reliable segmentation outcomes.
+
 
 \subsubsection{Conclusion}\label{s:conclusion}
 
