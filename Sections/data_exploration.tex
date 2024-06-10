@@ -10,7 +10,7 @@ The distribution of images across these classes is depicted in Figure \ref{fig:d
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[width=0.75\textwidth]{Exploration/data_distribution.png}
+    \includegraphics[width=0.45\textwidth]{Exploration/data_distribution.png}
   \end{center}
   \caption{Distribution of images in \texttt{dataset\_19}.}\label{fig:data_distribution}
 \end{figure}
@@ -22,46 +22,105 @@ Overall, \texttt{dataset\_19} provides a diverse and balanced set of images, ess
 The dataset encompasses four distinct classes of brain tumors, each representing a unique type of pathology. A thorough understanding of these tumor types is vital for developing a model capable of accurately classifying them.
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.2\textwidth]{Exploration/glioma/axial.jpg}
-    \includegraphics[width=0.2\textwidth]{Exploration/glioma/coronal.jpg}
-    \includegraphics[width=0.2\textwidth]{Exploration/glioma/sagittal.jpg}
-  \end{center}
-  \caption{Glioma Tumor: Axial, Coronal, and Sagittal Views.}\label{fig:glioma_views}
+  \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/glioma/axial.jpg}
+    \caption{Axial View}
+    \label{fig:glioma_axial}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/glioma/coronal.jpg}
+    \caption{Coronal View}
+    \label{fig:glioma_coronal}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/glioma/sagittal.jpg}
+    \caption{Sagittal View}
+    \label{fig:glioma_sagittal}
+  \end{subfigure}
+  \caption{Glioma Tumor: Axial, Coronal, and Sagittal Views}
+  \label{fig:glioma_views}
 \end{figure}
 
 Gliomas are the most prevalent primary brain tumors, originating in the glial cells of the brain. These tumors can be further classified into subtypes such as astrocytoma, oligodendroglioma, and glioblastoma. Gliomas are characterized by their infiltrative nature and high recurrence rates, often presenting with varying shapes and irregular borders. The complexity and variability in glioma morphology make them particularly challenging to classify, underscoring the importance of incorporating detailed MRI views to capture their diverse appearances \cite{abd-ellah_automatic_2024}.
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.2\textwidth]{Exploration/malignoma/axial.jpg}
-    \includegraphics[width=0.2\textwidth]{Exploration/malignoma/coronal.jpg}
-    \includegraphics[width=0.2\textwidth]{Exploration/malignoma/sagittal.jpg}
-  \end{center}
-  \caption{Malignoma Tumor: Axial, Coronal, and Sagittal Views.}\label{fig:malignoma_views}
+  \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/malignoma/axial.jpg}
+    \caption{Axial View}
+    \label{fig:malignoma_axial}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/malignoma/coronal.jpg}
+    \caption{Coronal View}
+    \label{fig:malignoma_coronal}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/malignoma/sagittal.jpg}
+    \caption{Sagittal View}
+    \label{fig:malignoma_sagittal}
+  \end{subfigure}
+  \caption{Malignoma Tumor: Axial, Coronal, and Sagittal Views}
+  \label{fig:malignoma_views}
 \end{figure}
-
 
 Meningiomas, on the other hand, are typically benign tumors arising from the meninges, the protective layers surrounding the brain and spinal cord. These tumors are usually slow-growing and well-defined, which often makes them easier to surgically remove compared to other types. The well-defined nature of meningiomas benefits from clear imaging perspectives, which assist in their precise identification and classification.
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.2\textwidth]{Exploration/pituitary/axial.jpg}
-    \includegraphics[width=0.2\textwidth]{Exploration/pituitary/coronal.jpg}
-    \includegraphics[width=0.2\textwidth]{Exploration/pituitary/sagittal.jpg}
-  \end{center}
-  \caption{Pituitary Tumor: Axial, Coronal, and Sagittal Views.}\label{fig:pituitary_views}
+  \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/pituitary/axial.jpg}
+    \caption{Axial View}
+    \label{fig:pituitary_axial}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/pituitary/coronal.jpg}
+    \caption{Coronal View}
+    \label{fig:pituitary_coronal}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/pituitary/sagittal.jpg}
+    \caption{Sagittal View}
+    \label{fig:pituitary_sagittal}
+  \end{subfigure}
+  \caption{Pituitary Tumor: Axial, Coronal, and Sagittal Views}
+  \label{fig:pituitary_views}
 \end{figure}
 
 Pituitary tumors develop in the pituitary gland, a small but crucial organ located at the base of the brain. These tumors can be either benign or malignant. Given the pituitary gland's critical role in hormone regulation, accurate identification of pituitary tumors is essential. Detailed MRI views help in assessing the tumor's impact on the surrounding brain structures and the gland itself.
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.2\textwidth]{Exploration/notumor/axial.jpg}
-    \includegraphics[width=0.2\textwidth]{Exploration/notumor/coronal.jpg}
-    \includegraphics[width=0.2\textwidth]{Exploration/notumor/sagittal.jpg}
-  \end{center}
-  \caption{No Tumor: Axial, Coronal, and Sagittal Views.}\label{fig:notumor_views}
+  \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/notumor/axial.jpg}
+    \caption{Axial View}
+    \label{fig:notumor_axial}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/notumor/coronal.jpg}
+    \caption{Coronal View}
+    \label{fig:notumor_coronal}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/notumor/sagittal.jpg}
+    \caption{Sagittal View}
+    \label{fig:notumor_sagittal}
+  \end{subfigure}
+  \caption{No Tumor: Axial, Coronal, and Sagittal Views}
+  \label{fig:notumor_views}
 \end{figure}
 
 Lastly, the class labeled `No Tumor' includes images of the brain without any detectable tumors. This class is crucial for training the model to accurately distinguish between pathological and non-pathological images, thereby reducing false positives in diagnoses.
@@ -74,40 +133,44 @@ The overall average size of the images is approximately $[453.36, 450.83]$ pixel
 
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.75\textwidth]{Exploration/data_sizes.png}
-  \end{center}
-  \caption{Distribution of brain image sizes in dataset\_19.}\label{fig:data_sizes}
+  \begin{minipage}{0.45\textwidth}
+    \begin{center}
+      \includegraphics[width=\textwidth]{Exploration/data_sizes.png}
+    \end{center}
+    \caption{Distribution of brain image sizes in dataset\_19.}\label{fig:data_sizes}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \begin{longtable}{|l|c|c|}
+      \hline
+      \textbf{Statistic} & \textbf{X} & \textbf{Y} \\
+      \hline
+      \endfirsthead
+      \hline
+      \textbf{Statistic} & \textbf{X} & \textbf{Y} \\
+      \hline
+      \endhead
+      \hline
+      \endfoot
+      \endlastfoot
+      \textbf{Mean Size} & 453.3625 & 450.83125 \\
+      \hline
+      \textbf{Median Size} & 512 & 512 \\
+      \hline
+      \textbf{Mode Size} & 512 & 512 \\
+      \hline
+      \textbf{Standard Deviation of Size} & 124.1067 & 131.5980 \\
+      \hline
+      \textbf{Variance of Size} & 15402.4644 & 17318.0236 \\
+      \hline
+      \textbf{Smallest Size} & 198 & 150 \\
+      \hline
+      \textbf{Largest Size} & 1075 & 890 \\
+      \hline
+      \caption{Overall Statistics of Brain Image Sizes}\label{tab:overall_sizes}
+    \end{longtable}
+  \end{minipage}
 \end{figure}
-
-\begin{longtable}{|l|c|c|}
-\caption{Overall Statistics of Brain Image Sizes}\\
-\hline
-\textbf{Statistic} & \textbf{X} & \textbf{Y} \\
-\hline
-\endfirsthead
-\hline
-\textbf{Statistic} & \textbf{X} & \textbf{Y} \\
-\hline
-\endhead
-\hline
-\endfoot
-\endlastfoot
-\textbf{Mean Size} & 453.3625 & 450.83125 \\
-\hline
-\textbf{Median Size} & 512 & 512 \\
-\hline
-\textbf{Mode Size} & 512 & 512 \\
-\hline
-\textbf{Standard Deviation of Size} & 124.1067 & 131.5980 \\
-\hline
-\textbf{Variance of Size} & 15402.4644 & 17318.0236 \\
-\hline
-\textbf{Smallest Size} & 198 & 150 \\
-\hline
-\textbf{Largest Size} & 1075 & 890 \\
-\hline
-\end{longtable}
 
 \vspace{1cm}
 
@@ -154,11 +217,9 @@ The overall average size of the images is approximately $[453.36, 450.83]$ pixel
 \hline
 \end{longtable}
 
-Class-specific statistics reveal a notable variation in image sizes. For the \textit{meningioma} class, image sizes range from $(223, 200)$ to $(650, 591)$ pixels, with a mean size of approximately $[472.25, 466.41]$ pixels. The \textit{pituitary} class exhibits sizes from $(256, 256)$ to $(903, 721)$ pixels, with a mean size of around $[511.74, 510.54]$ pixels. The \textit{notumor} class has sizes ranging from $(198, 150)$ to $(1075, 890)$ pixels, and a mean size of approximately $[317.46, 314.38]$ pixels. In contrast, all images in the \textit{glioma} class are consistently sized at $[512, 512]$ pixels.
+Class-specific statistics reveal notable variations in image sizes. The \textit{meningioma} class images range from $(223, 200)$ to $(650, 591)$ pixels, with a mean size of approximately $[472.25, 466.41]$ pixels. The \textit{pituitary} class exhibits sizes from $(256, 256)$ to $(903, 721)$ pixels, with a mean size of around $[511.74, 510.54]$ pixels. The \textit{notumor} class ranges from $(198, 150)$ to $(1075, 890)$ pixels, with a mean size of approximately $[317.46, 314.38]$ pixels. In contrast, all images in the \textit{glioma} class are consistently sized at $[512, 512]$ pixels.
 
-This variability in image sizes across different classes underscores the importance of size normalization during the preprocessing phase. While the \textit{glioma} class images are uniformly sized, other classes exhibit significant variation. If not properly addressed, this could introduce biases or inconsistencies in the training process.
+This variability underscores the importance of size normalization during preprocessing. While \textit{glioma} class images are uniform, other classes exhibit significant variation, which, if unaddressed, could introduce biases or inconsistencies during training. Proper preprocessing, including size normalization, is essential for several reasons. Neural networks require fixed-size inputs for batch processing, and resizing ensures consistent feature representation across the dataset, facilitating better model learning. Consistent image sizes also reduce computational load and memory requirements, enhancing training efficiency. Furthermore, standardized inputs contribute to improved model convergence and accuracy by providing a uniform set of images for the network to learn from.
 
-Proper preprocessing, including size normalization, is vital for several reasons. Firstly, neural networks require inputs of a fixed size, and resizing is essential to facilitate batch processing of images. Secondly, ensuring all images are of the same size guarantees consistent feature representation across the dataset, aiding in better model learning. Additionally, smaller, consistent image sizes can significantly reduce computational load and memory requirements, thus making training more efficient. Lastly, properly preprocessed images can lead to improved model convergence and accuracy, as the network can learn from a standardized set of inputs.
-
-It is important to note that the image size fed into each model will differ, as each pretrained model is trained on different image sizes. This will be further elaborated in subsequent sections. In conclusion, resizing images to a uniform dimension during the preprocessing step is a critical consideration in developing a robust and efficient deep learning model for brain tumor classification. This step not only facilitates smooth training but also contributes to the overall performance and generalization capability of the model.
+It is important to note that the image sizes fed into each model will differ, as each pretrained model is optimized for specific image dimensions. This aspect will be elaborated in subsequent sections. In conclusion, resizing images to a uniform dimension during preprocessing is a critical step in developing a robust and efficient deep learning model for brain tumor classification. This step ensures smooth training and significantly impacts the model's overall performance and generalization capability.
 

@@ -1,28 +1,33 @@
 \subsection{U-Net}\label{s:unet}
 \chapterauthor{Woon Jun Wei (2200624)}
 
-The U-Net architecture, introduced by Ronneberger et al. in 2015, is a pioneering model for biomedical image segmentation, widely adopted for various image segmentation tasks \cite{ronneberger_u-net_2015}. U-Net features a symmetric architecture with a contracting path to capture context and an expansive path for precise localization. The architecture includes skip connections that concatenate feature maps from the contracting path to the expanding path, enhancing the segmentation performance (see Figure \ref{f:unet_vs_unetpp}).
+The U-Net architecture, introduced by Ronneberger et al. in 2015, is a pioneering model for biomedical image segmentation, widely adopted for various image segmentation tasks \cite{ronneberger_u-net_2015}. U-Net features a symmetric architecture with a contracting path to capture context and an expansive path for precise localization. The architecture includes skip connections that concatenate feature maps from the contracting path to the expanding path, enhancing the segmentation performance (see Figure \ref{fig:traditional_unet}).
 
-\begin{figure}[H] 
-	\centering
-	\begin{minipage}{0.45\textwidth}
-		\centering
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
 		\includegraphics[width=\textwidth]{unet/unet.png}
-    \caption{(a) Traditional U-Net architecture \cite{Yakubovskiy_2019}}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.45\textwidth}
-		\centering
+    \caption{Traditional U-Net architecture \cite{Yakubovskiy_2019}}
+    \label{fig:traditional_unet}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
 		\includegraphics[width=\textwidth]{unet/unetpp.png}
-    \caption{(b) U-Net++ architecture \cite{zhou_unet_2018}}
-	\end{minipage}
-	\caption{Comparison of Simple U-Net and U-Net++ architectures}\label{f:unet_vs_unetpp}
+    \caption{U-Net++ architecture \cite{zhou_unet_2018}}
+    \label{fig:unetpp_architecture}
+  \end{subfigure}
+  
+  \caption{U-Net and U-Net++ Architectures}\label{f:unet_vs_unetpp}
 \end{figure}
+
+Essentially, U-Net is a convolutional neural network (CNN) designed to perform image segmentation tasks by extracting features from an input image and then reconstructing the image using these extracted features. This architecture is particularly advantageous for medical image segmentation tasks, including brain tumor segmentation, where precise localization and accurate delineation of structures are critical for diagnosis and treatment planning. U-Net's unique design, with its contracting and expansive paths, allows it to capture both context and fine details, making it an ideal choice for accurately segmenting complex medical images.
 
 
 \subsubsection{Implementation}
 
-U-Net++, an extension introduced by Zhou et al. in 2018, improves the original architecture by incorporating dense skip connections. These connections concatenate feature maps from all previous layers in the contracting path to the expanding path, enhancing feature reuse and segmentation accuracy \cite{zhou_unet_2018, zhou2019unetplusplus, zhou2018unetplusplus, zhou2021towards} (See Figure \ref{f:unet_vs_unetpp}). The U-Net++ architecture offers improved performance and efficiency compared to the original U-Net model, making it well-suited for medical image segmentation tasks.
+U-Net++, an extension introduced by Zhou et al. in 2018, improves the original architecture by incorporating dense skip connections (See Figure \ref{fig:unetpp_architecture}). These connections concatenate feature maps from all previous layers in the contracting path to the expanding path, enhancing feature reuse and segmentation accuracy \cite{zhou_unet_2018, zhou2019unetplusplus, zhou2018unetplusplus, zhou2021towards} (See Figure \ref{f:unet_vs_unetpp}). The U-Net++ architecture offers improved performance and efficiency compared to the original U-Net model, making it well-suited for medical image segmentation tasks.
 
 Due to the complexity and time constraints associated with training, evaluation, and tuning, a traditional U-Net model was attempted to be architected from scratch, but was found to be infeasible within the scope of this project. Instead, this study employed the U-Net++ architecture using the \texttt{segmentation\_models} library \cite{Yakubovskiy_2019}. This library offers implementations of various deep learning models for image segmentation, supporting pre-trained models such as VGG, ResNet, and EfficientNet as down-sampling backbones.
 
@@ -83,13 +88,36 @@ The fine-tuning process underscored the significance of backbone selection in en
 \subsubsection{Results and Evaluation}
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.35\textwidth]{unet/evaluation/cm1.png}
-    \includegraphics[width=0.35\textwidth]{unet/evaluation/cm2.png}
-    \includegraphics[width=0.35\textwidth]{unet/evaluation/ROC.png}
-    \includegraphics[width=0.35\textwidth]{unet/evaluation/learning_curve.png}
-  \end{center}
-  \caption{Confusion Matrix, ROC Curve, and Learning Curve for Brain Tumor Segmentation}\label{f:unet_evaluation}
+  \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/cm1.png}
+    \caption{Confusion Matrix}
+    \label{fig:unet_cm1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.2\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/cm2.png}
+    \caption{Normalized Confusion Matrix}
+    \label{fig:unet_cm2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.25\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/ROC.png}
+    \caption{ROC Curve}
+    \label{fig:unet_roc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.25\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/learning_curve.png}
+    \caption{Learning Curve}
+    \label{fig:unet_learning_curve}
+  \end{subfigure}
+  \caption{Confusion Matrix, Normalized Confusion Matrix, ROC Curve, and Learning Curve for Brain Tumor Segmentation}
+  \label{fig:unet_evaluation}
 \end{figure}
 
 \begin{longtable}{|l|c|c|c|c|}
@@ -147,7 +175,7 @@ samples avg & 0.94 & 0.94 & 0.94 & 96 \\
 
 The performance metrics presented in Tables \ref{tab:unet_classification_report} and \ref{tab:unet_additional_metrics} demonstrate the robust capability of the U-Net model in brain tumor segmentation. The classification report (Table \ref{tab:unet_classification_report}) highlights the model's high precision, recall, and F1-scores across all classes, with an overall accuracy of 0.94. Specifically, the model achieved precision scores of 0.96, 0.91, 0.92, and 0.96 for the meningioma, pituitary, glioma, and notumor classes, respectively. Corresponding recall values were 0.92, 0.88, 1.00, and 0.96, indicating the model's effectiveness in identifying true positives for each class.
 
-The confusion matrix in Figure \ref{f:unet_evaluation} (top-left) provides a visual representation of the model's classification accuracy, revealing a minimal number of misclassifications. The ROC Curve (bottom left) further substantiates the model's excellent performance, demonstrating a strong ability to distinguish between different classes.
+The confusion matrix in Figure \ref{fig:unet_cm1} provides a visual representation of the model's classification accuracy, revealing a minimal number of misclassifications. The ROC Curve in Figure \ref{fig:unet_roc} further substantiates the model's excellent performance, demonstrating a strong ability to distinguish between different classes. 
 
 Additional evaluation metrics in Table \ref{tab:unet_additional_metrics} confirm the model's robustness. The Dice Similarity Coefficient (DSC) of 0.9370 indicates a high overlap between the predicted and actual tumor regions, underscoring the model's precise segmentation capabilities. Sensitivity and specificity values of 0.9375 and 0.9792, respectively, further highlight the model's accuracy in detecting tumor presence while minimizing false positives.
 
@@ -157,7 +185,7 @@ Mentioned in \cite{abd-ellah_automatic_2024}, the varying nature and size of gli
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[width=1\textwidth]{unet/evaluation/kfolds.png}
+    \includegraphics[width=0.7\textwidth]{unet/evaluation/kfolds.png}
   \end{center}
   \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:unet_kfolds}
 \end{figure}

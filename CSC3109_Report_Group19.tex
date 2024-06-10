@@ -22,7 +22,7 @@
 \documentclass[
 	article, % Paper size, specify a4paper (A4) or letterpaper (US letter)
 	11pt, % Default font size, specify 10pt, 11pt or 12pt
-	draft, % Comment out before submission
+	%draft, % Comment out before submission
 ]{CSUniSchoolLabReport}
 
 
@@ -35,6 +35,8 @@
 \usepackage{authblk}
 \usepackage{longtable}
 \usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{setspace}
 
 \usepackage[toc, acronym]{glossaries}
 \usepackage[automake]{glossaries-extra}
@@ -75,7 +77,9 @@
 \maketitle % Insert the title, author and date using the information specified above
 
 \pagebreak
-\tableofcontents
+\begin{spacing}{0.8}
+\tableofcontents 
+\end{spacing}
 \pagebreak
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

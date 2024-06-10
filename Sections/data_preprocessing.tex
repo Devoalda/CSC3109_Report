@@ -19,13 +19,21 @@ A fundamental step in our preprocessing workflow is the cropping and enhancement
 These steps, as shown in Figure \ref{fig:image_cropping}, not only decrease the computational load but also significantly enhance the clarity and focus on essential features for more effective classification.
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.3\textwidth]{Exploration/Te-gl_0010.jpg}
-    \includegraphics[width=0.3\textwidth]{Exploration/Te-gl_0010_preprocessed.jpg}
-  \end{center}
+  \centering
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/Te-gl_0010.jpg}
+    \caption{Original Image}
+    \label{fig:original_image}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/Te-gl_0010_preprocessed.jpg}
+    \caption{Preprocessed Image}
+    \label{fig:preprocessed_image}
+  \end{subfigure}
   \caption{Cropping the MRI image along its contour.}\label{fig:image_cropping}
 \end{figure}
-
 
 
 \subsection{Data Augmentation}\label{data_augmentation}
