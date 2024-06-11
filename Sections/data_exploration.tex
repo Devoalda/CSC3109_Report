@@ -132,15 +132,15 @@ In summary, each tumor type in the dataset presents unique challenges and charac
 The overall average size of the images is approximately $[453.36, 450.83]$ pixels. The smallest image size is $(198, 150)$ pixels, and the largest image size is $(1075, 890)$ pixels. The mean, median, and mode sizes across the dataset are consistent at $[512, 512]$ pixels, suggesting a central tendency around these dimensions.
 
 
-\begin{figure}[H]
+\begin{figure}[ht]
+  \centering
   \begin{minipage}{0.45\textwidth}
-    \begin{center}
-      \includegraphics[width=\textwidth]{Exploration/data_sizes.png}
-    \end{center}
+    \centering
+    \includegraphics[width=\textwidth]{Exploration/data_sizes.png}
     \caption{Distribution of brain image sizes in dataset\_19.}\label{fig:data_sizes}
-  \end{minipage}
-  \hfill
+  \end{minipage}\hfill
   \begin{minipage}{0.5\textwidth}
+    \centering
     \begin{longtable}{|l|c|c|}
       \hline
       \textbf{Statistic} & \textbf{X} & \textbf{Y} \\
@@ -172,21 +172,12 @@ The overall average size of the images is approximately $[453.36, 450.83]$ pixel
   \end{minipage}
 \end{figure}
 
-\vspace{1cm}
-
-\begin{longtable}{|l|c|c|c|c|}
-\caption{Class-Specific Statistics of Brain Image Sizes}\\
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
 \hline
 \textbf{Statistic} & \textbf{Meningioma} & \textbf{Pituitary} & \textbf{Notumor} & \textbf{Glioma} \\
 \hline
-\endfirsthead
-\hline
-\textbf{Statistic} & \textbf{Meningioma} & \textbf{Pituitary} & \textbf{Notumor} & \textbf{Glioma} \\
-\hline
-\endhead
-\hline
-\endfoot
-\endlastfoot
 \textbf{Mean Size (X)} & 472.25 & 511.7417 & 317.4583 & 512 \\
 \hline
 \textbf{Mean Size (Y)} & 466.4083 & 510.5417 & 314.3750 & 512 \\
@@ -215,7 +206,9 @@ The overall average size of the images is approximately $[453.36, 450.83]$ pixel
 \hline
 \textbf{Largest Size (Y)} & 591 & 721 & 890 & 512 \\
 \hline
-\end{longtable}
+\end{tabular}
+\caption{Class-Specific Statistics of Brain Image Sizes}\label{tab:class_specific_sizes}
+\end{table}
 
 Class-specific statistics reveal notable variations in image sizes. The \textit{meningioma} class images range from $(223, 200)$ to $(650, 591)$ pixels, with a mean size of approximately $[472.25, 466.41]$ pixels. The \textit{pituitary} class exhibits sizes from $(256, 256)$ to $(903, 721)$ pixels, with a mean size of around $[511.74, 510.54]$ pixels. The \textit{notumor} class ranges from $(198, 150)$ to $(1075, 890)$ pixels, with a mean size of approximately $[317.46, 314.38]$ pixels. In contrast, all images in the \textit{glioma} class are consistently sized at $[512, 512]$ pixels.
 
