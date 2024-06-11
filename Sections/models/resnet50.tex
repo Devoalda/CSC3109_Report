@@ -1,25 +1,58 @@
 \subsection{ResNet50}\label{resnet50}
 \chapterauthor{Benjamin Loh Choon How (2201590)}
 
-The ResNet50 model is a convolutional neural network (CNN) architecture that represents a significant evolution in deep learning technologies. Developed by Microsoft Research, it introduced the novel concept of residual learning to address the challenges of training very deep neural networks. ResNet50 is particularly notable for its use of "skip connections," which help to prevent the vanishing gradient problem by allowing gradients to flow through an alternative shortcut path across layers.
+ResNet50 is a revolutionary convolutional neural network (CNN) architecture that marks a significant advancement in the field of deep learning. Developed by Microsoft Research, it introduces the innovative concept of residual learning to tackle the challenges associated with training very deep neural networks. A defining feature of ResNet50 is its use of residual connections, or "skip connections," which facilitate the direct propagation of gradients from deeper layers to shallower ones. This architectural choice effectively mitigates the problem of vanishing gradients, allowing the model to learn efficiently even with a substantial number of layers.
 
-At its core, ResNet50 builds upon the successes of earlier CNNs but with deeper architectures made feasible through these residual connections. This allows the network to learn from a significantly increased number of layers without a corresponding degradation in performance, leading to more accurate and efficient models. Widely adopted in various applications, ResNet50 excels in tasks such as image classification, object detection, and increasingly in areas requiring fine-grained visual understanding. The model's design is an improved iteration over its predecessors, making it a cornerstone in the field of deep learning for handling complex visual tasks with remarkable effectiveness.
+At its core, ResNet50 builds on the successes of earlier CNNs but extends the architecture to greater depths through the use of these residual connections. This enables the network to learn from a significantly increased number of layers without experiencing performance degradation, leading to more accurate and efficient models. ResNet50 has been widely adopted for various applications, excelling in image classification, object detection, and tasks requiring detailed visual understanding. Its design represents an enhanced iteration over its predecessors, establishing it as a cornerstone in deep learning for managing complex visual tasks with remarkable effectiveness.
 
 \subsubsection{Implementation}
 
-The proposed brain tumor classification model is built upon the ResNet50 architecture, pretrained on the ImageNet dataset. The top layers of the ResNet50 model are excluded to customize it for our specific classification task. The input shape is set to $224\times224$ with three channels, accommodating the resizing of input images during preprocessing to match these dimensions. This modification is essential to align the image dimensions with the network's input requirements, thereby enhancing the classification accuracy.
+For our brain tumor classification task, we utilized the ResNet50 model pretrained on the ImageNet dataset. This pre-training provides a robust feature extraction base, which we then tailored to our specific task through further training and adaptation. The ResNet50 architecture begins with the standard base model loaded with ImageNet weights but excludes the top layers to better suit our specialized classification needs. The input shape is set to $224\times224$ with three channels, ensuring the input images are resized to match these dimensions during preprocessing. This alignment enhances the classification accuracy by fitting the images into the network's expected input format.
 
-To adapt the model for brain tumor classification, the output of the ResNet50 base model undergoes a Global Average Pooling operation. This layer effectively reduces the spatial dimensions of the feature maps to a single value per map, preserving essential features while minimizing the model complexity. A Dropout layer with a rate of 0.4 is added subsequently to mitigate overfitting by randomly dropping a fraction of neurons during training, ensuring robust generalization. The final classification layer is a Dense layer with four neurons, each representing one of the brain tumor classes: meningioma, glioma, pituitary, and notumor. A softmax activation function is employed in this layer to output class probabilities, providing a clear probabilistic interpretation of the predictions.
+Following the base layers, we introduced a Global Average Pooling 2D layer. This layer reduces the spatial dimensions of the feature maps to a single vector per map, effectively summarizing the most critical features while significantly minimizing the number of parameters and the computational burden. This pooling step is crucial for maintaining efficiency and avoiding overfitting. Next, a Dropout layer with a 40\% drop rate is included, which randomly disables a fraction of the neurons during training. This randomness helps prevent overfitting by ensuring the model does not rely too heavily on any specific set of neurons, promoting the development of redundant pathways that sustain performance even if some neurons are inactive.
 
-The model is compiled with the Adam optimizer, set to a learning rate of $0.0001$, and the categorical cross-entropy loss function. This choice of optimizer and loss function is ideal for our multi-class classification task, offering a balance between rapid convergence and precise adjustments during training. The model's performance metrics include accuracy, ensuring a comprehensive evaluation of its effectiveness.
+The network culminates in a Dense layer with four units, each corresponding to one of the brain tumor classes: meningioma, glioma, pituitary, and notumor. This layer employs a softmax activation function to output the probability distribution over the tumor classes, providing a clear, interpretable classification result. The model was compiled using the Adam optimizer with a starting learning rate of $0.0001$ and a categorical cross-entropy loss function, which is appropriate for this multi-class classification scenario. This combination offers a balance between rapid convergence and precise adjustments during training, optimizing the model's performance metrics, including accuracy.
 
-Training is conducted with a series of callbacks to optimize performance and prevent overfitting. These include ModelCheckpoint to save the model with the lowest validation loss and EarlyStopping to halt training when no improvement in validation loss is observed for a specified number of epochs. Training was performed over 80 epochs but early stopped at epoch 50, with a batch size of 10, and was trained on the training set and validated on the validation set. The model with the best validation accuracy was saved as the final model. The model was then evaluated on the test set to obtain the final performance metrics. The model achieved an accuracy of 0.9973 and a validation accuracy of 0.9111, with a validation loss of 0.2656. The model's performance metrics are summarized in Table \ref{tab:resnet50_classification_report} and Table \ref{tab:resnet50_additional_metrics}.
+Training was conducted over 80 epochs with a series of callbacks to optimize performance and prevent overfitting. These included \textit{ModelCheckpoint} to save the best version of the model based on validation loss and \textit{EarlyStopping} to halt training when no improvement in validation loss was observed for a specified number of epochs, preventing unnecessary overtraining. The training process was halted early at epoch 50, with a batch size of 10. The model was trained on the training set and validated on the validation set, with the best validation accuracy model saved as the final model. Upon evaluation on the test set, the model achieved an accuracy of 0.9973 and a validation accuracy of 0.9111, with a validation loss of 0.2656. These performance metrics are detailed in Table \ref{tab:resnet50_classification_report} and Table \ref{tab:resnet50_additional_metrics}, reflecting the model's robust and reliable performance.
 
 \subsubsection{Fine-Tuning}
 
-In the fine-tuning phase of the ResNet50 model, the Optuna package was employed to systematically explore and optimize the hyperparameters, particularly focusing on the dropout rate. The goal of this process was to identify the most effective dropout rate that balances model performance and overfitting. Through multiple trials, each testing a different dropout rate within the range of 0.1 to 0.5, the optimal dropout rate was found to be 0.4, which provided a balance between mitigating overfitting and maintaining model performance. This specific dropout rate was thus adopted in the final model architecture.
+In the fine-tuning phase of the ResNet50 model, the Optuna package was employed to systematically explore and optimize the hyperparameters, particularly focusing on the dropout rate. The goal of this process was to identify the most effective dropout rate that balances model performance and overfitting with the least validation loss. Through multiple trials, each testing a different dropout rate within the range of 0.1 to 0.5, the optimal dropout rate was found to be the original at 0.4, which provided a balance between mitigating overfitting and maintaining model performance. This specific dropout rate was thus adopted in the final model architecture.
 
 The overall approach demonstrates the rigorous method employed to fine-tune the model, ensuring optimal performance for brain tumor segmentation. By leveraging advanced optimization techniques and thoroughly validating the model, this work contributes to the development of more accurate and reliable medical imaging models.
+
+Table \ref{tab:finetuning_results} summarizes the results of the fine-tuning trials, listing the validation loss for each tested dropout rate.
+
+\begin{longtable}{|c|c|}
+\caption{Fine-Tuning Results for Different dropout rates}\label{tab:finetuning_results}
+\hline
+\textbf{Dropout Rate} & \textbf{Validation Loss}
+\hline
+\endfirsthead
+\hline
+\textbf{Dropout Rate} & \textbf{Validation Loss}
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+0.3480 (Trial 1) & 0.3926
+\hline
+0.1964 (Trial 2) & 0.4379
+\hline
+0.3836 (Trial 3) & 0.4648
+\hline
+0.2228 (Trial 4) & 0.2663
+\hline
+0.3506 (Trial 5) & 0.4114
+\end{longtable}
+
+The Optuna optimization process involved defining a model creation function that took a dropout rate as a parameter, suggested by Optuna for each trial. For each trial, a ResNet50-based model was constructed with varying dropout rates and trained for 35 epochs using the Adam optimizer. The training process included callbacks for early stopping based on validation loss. The minimum validation loss achieved during each trial served as the objective metric for evaluating the performance of the model.
+
+During the fine-tuning trials, different dropout rates were tested to optimize the model's performance. Among the configurations, a dropout rate of 0.2228 achieved the lowest validation loss of 0.2663, significantly outperforming other rates. Although a dropout rate of 0.3480 showed promising results with a validation loss of 0.3926 in Trial 1, the dropout rate of 0.2228 was observed to provide a better balance, yielding the lowest validation loss across the trials. Despite these, the original dropout rate of 0.4 seems to have the best performance with a validation loss of 0.2656 therefore it will be used as the final model for evaluation.
+
+The fine-tuning process underscored the significance of dropout rate selection in enhancing the model's performance and contributing to the model's effectiveness in accurately segmenting brain tumors. The results are summarized in Table \ref{tab:finetuning_results}.
 
 \subsubsection{Results and Evaluation}
 
@@ -128,31 +161,36 @@ Table \ref{tab:resnet50_additional_metrics} highlights the Dice Similarity Coeff
   \begin{center}
     \includegraphics[width=0.7\textwidth]{resnet50/evaluation/kfolds.png}
   \end{center}
-  \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:resnet50_kfolds}
+  \caption{Stratified K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:resnet50_kfolds}
 \end{figure}
 
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{resnet50/evaluation/kfolds_5.jpg}
+  \end{center}
+  \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:resnet50_kfolds_5}
+\end{figure}
 
+Stratified K-Folds cross-validation was meticulously conducted to evaluate the generalization performance of the ResNet50 model on the brain tumor classification task. The dataset was divided into ten folds, with each fold serving as a validation set once, while the remaining nine folds were used for training. This approach ensures that each class is well represented in both the training and validation sets across all folds, providing a robust estimate of the model's performance on unseen data. The model was trained for up to 80 epochs for each fold, with early stopping applied to halt training if the validation loss did not improve, thus preventing overfitting.
 
+The left plot in Figure \ref{f:resnet50_kfolds} illustrates the validation accuracy for each fold. show significant variability in model performance across the ten folds. The validation accuracy achieved a mean of 0.8675 with a standard deviation of 0.1789, reflecting strong but variable performance. This variation in accuracy values, which ranged from approximately 0.50 to 1.00, highlights that while the model generally achieves high performance, there are instances where it performs less consistently, likely due to the specific characteristics of the validation set.
 
-% ResNet50, a revolutionary architecture in the field of deep learning, employs residual connections which are its defining feature. These connections are crucial for training very deep networks by enabling the direct propagation of gradients from deeper to shallower layers in the network. This architectural choice reduces the problem of vanishing gradients, thus allowing the model to learn effectively even when many layers deep.
+The right plot in Figure \ref{f:resnet50_kfolds} presents the validation loss for each fold. The validation loss averaged at 0.4642 with a standard deviation of 0.5849, as shown in the right plot. This significant variability in loss values suggests that while the model performs well overall, there are some folds where the performance is notably poorer. The large spikes in loss for some folds indicate areas where the model struggles to generalize, underscoring the need for further optimization to achieve more consistent results across different data subsets.
 
-% For our brain tumor classification task, we utilize the ResNet50 model pre-trained on the ImageNet dataset. This pre-training provides a robust feature extraction base, which we then tailor to our specific task through further training and adaptation.
+It is noteworthy that during some folds of the Stratified K-Folds cross-validation, the validation loss was lower than the training loss, and the validation accuracy was higher. This suggests that the model is robust and generalizes well to unseen data. However, this counterintuitive phenomenon can be attributed to the balanced distribution of classes in each fold, which is characteristic of stratification. While stratified sampling ensures each validation set is representative of the overall dataset, differences in data distribution between the training and validation sets can still occur, leading to higher accuracy and lower loss on the validation set for some folds. This might result in slightly overestimated performance metrics. Therefore, it is crucial to interpret these results with caution and consider the variability across all folds for a realistic assessment of the model's performance.
 
-% \textbf{Model Architecture:} Our adaptation of ResNet50 begins with the standard base architecture loaded with ImageNet weights, but excludes the top layer to accommodate our specialized output needs. This modification allows the network to maintain the intricate feature extraction capabilities developed through ImageNet training while adapting to the nuances of brain tumor imagery.
+The comparison between the number of folds using normal K-Folds and Stratified K-Folds cross-validation, as illustrated in Figure \ref{f:resnet50_kfolds} and Figure \ref{f:resnet50_kfolds_5} demonstrates clear benefits of stratification. The normal K-Folds cross-validation shows significant variability in validation accuracy and loss across folds, suggesting inconsistent model performance. In contrast, the Stratified K-Folds results present a more stable and balanced performance, reflecting a more accurate representation of the model's capabilities.
 
-% \begin{quote}
-% Imagine ResNet50 like a skilled artisan skilled in restoration. This artisan (the model) is brought into a renovation project (our classification task) where the fundamental structure is sound but needs adaptation and specific enhancements. Just as an artisan would preserve valuable original elements while updating others, our model retains valuable pre-learned features while adapting to new data.
-% \end{quote}
+Overall, the Stratified K-Folds cross-validation results demonstrate that the model achieved an average validation accuracy of 0.8675 with a standard deviation of 0.1789, indicating robust performance with some variability across folds. The average validation loss of 0.4642, with a standard deviation of 0.5849, suggests that while the model's predictions are generally reliable, there is room for improvement in reducing prediction errors. These metrics collectively indicate that the model has strong generalization capabilities, though further refinements could enhance the consistency and reliability of its performance across diverse data subsets. The results reinforce the value of Stratified K-Folds cross-validation in producing more reliable performance metrics, providing a clearer insight into the model's true potential on complex and varied datasets.
 
-% Following the base layers, a Global Average Pooling 2D layer is introduced. This layer reduces the spatial dimensions of the feature maps to a single vector per map, thus summarizing the most critical features while significantly reducing the number of parameters and the computational burden. This pooling step is crucial for maintaining efficiency and avoiding overfitting.
+\subsubsection{Conclusion}\label{s:conclusion}
 
-% Next, we include a Dropout layer with a 40\% drop rate, which randomly disables a fraction of the neurons during training. This randomness helps to prevent overfitting by ensuring that the model does not rely too heavily on any specific set of neurons, encouraging the network to develop redundant pathways to maintain performance even if some neurons are inactive.
+In this study, we developed and fine-tuned the ResNet50 model to address the challenging task of brain tumor classification. ResNet50's architecture, which utilizes residual connections to prevent vanishing gradients, was pivotal in building a robust and deep neural network capable of high performance. By leveraging these connections, we were able to train the model effectively across multiple layers, leading to accurate and reliable predictions for brain tumor classification. The model was specifically tailored to this task by excluding the top layers of the pre-trained ResNet50 and integrating layers that align with our classification objectives.
 
-% The network culminates in a Dense layer with four units corresponding to the different classes of brain tumors, employing the softmax activation function. This layer outputs the probability distribution over the tumor classes, providing a clear, interpretable classification result.
+We employed a methodical approach to fine-tune the model, utilizing the Optuna framework to optimize hyperparameters, particularly focusing on the dropout rate to mitigate overfitting. The optimal dropout rate was determined through multiple trials, ensuring the model achieved the lowest possible validation loss while maintaining robust performance. This fine-tuning process demonstrated the importance of careful hyperparameter selection in enhancing the model's accuracy and reliability. The final model was configured with a dropout rate that balanced model complexity and performance, resulting in effective classification of brain tumor images.
 
-% \textbf{Compilation and Callbacks:} The model is compiled using the Adam optimizer with a starting learning rate of 0.0001 and a loss function of categorical crossentropy, which is appropriate for this multi-class classification scenario. To optimize training, we employ several callbacks:
+To evaluate the model's performance, we implemented Stratified K-Folds cross-validation, which ensured each class was equally represented in each fold. This approach was crucial in providing a more accurate measure of the model's performance on unseen data, particularly in the context of a potentially imbalanced dataset. The results from this cross-validation method highlighted the model's ability to generalize well, achieving an average validation accuracy of 0.8675 and a validation loss of 0.4642 across ten folds. These metrics indicate the model's robustness and reliability in handling diverse data subsets.
 
-%     \textit{ModelCheckpoint} to save the best version of the model based on validation loss
-%     \textit{EarlyStopping} to halt training if the validation loss does not improve for a specified number of epochs, preventing overtraining and resource wastage
+The comparative analysis between normal K-Folds and Stratified K-Folds cross-validation underscored the advantages of stratification. Stratified K-Folds provided a more consistent and balanced evaluation of the model's performance, reducing the variability in accuracy and loss across folds observed in normal K-Folds cross-validation. This consistency underscores the importance of stratification in achieving more reliable performance metrics, particularly for datasets with imbalanced classes, and highlights the robustness of the ResNet50 model in various validation scenarios.
 
-% % to add graph
+Overall, the study demonstrates the effectiveness of the ResNet50 model, combined with advanced optimization techniques and stratified cross-validation, in achieving accurate and reliable brain tumor classification. The high precision and recall achieved across different tumor classes indicate the model's potential for clinical applications. With further refinements and potential enhancements, such as improved data augmentation techniques or increasing the dataset used for training and evaluation, the model's performance can be further elevated, making it a valuable tool for brain tumor diagnosis and treatment planning. This work sets the stage for future research aimed at enhancing deep learning models for complex medical imaging tasks.
