@@ -1,11 +1,11 @@
-\section{Literature Review}\label{s:lit_review}
+\section{Existing Approaches to Brain MRI Classification Using Deep Learning}\label{s:lit_review}
 
 % joviana check plox %
-\subsection{Existing Approaches to Brain MRI Classification Using Deep Learning}
+% \subsection{Existing Approaches to Brain MRI Classification Using Deep Learning}
 
 The integration of deep learning into the medical field has revolutionized diagnostic methodologies, particularly in the classification of brain MRI images. As brain tumors present diverse morphological characteristics that are detectable through MRI, the precision of image analysis can significantly influence diagnostic and treatment outcomes. This literature review examines current deep learning approaches that enhance the accuracy and efficiency of brain tumor diagnoses from MRI scans, focusing on the evolution of model architectures, data preprocessing innovations, and the strategic application of transfer learning.
 
-\subsubsection{Data preprocessing techniques}
+\subsection{Data preprocessing techniques}
 
 Data preprocessing is a crucial step in enhancing the accuracy of brain MRI classification models. Techniques such as data augmentation \cite{10183465} and cropping along contours of brain MRIs play significant roles in improving model training and performance. Data augmentation involves creating modified versions of the original images through transformations such as rotation, scaling, and flipping. This process helps in increasing the diversity of the training dataset, which in turn aids in preventing overfitting and improves the generalization capabilities of the models \cite{Paul2017Deep}.
 
@@ -15,21 +15,11 @@ In addition, advanced preprocessing methods like Generative Adversarial Networks
 
 These preprocessing techniques collectively enhance the quality and quantity of the training data, leading to more accurate and reliable brain MRI classification models.
 
-\subsubsection{Convolutional Neural Networks (CNNs) and Variants}
+\subsection{Convolutional Neural Networks (CNNs) and Variants}
 
 Convolutional Neural Networks (CNNs) have been extensively used for brain MRI classification. A notable approach is the use of ResNet-18 architecture for differentiating MRI sequence types, achieving an impressive accuracy of 97.9\% on test sets. This model demonstrates the capability of CNNs in handling complex MRI data efficiently\cite{doi:10.1148/ryai.230095}.
 
-\subsubsection{Transfer Learning in Brain MRI Classification}
-
-Transfer learning has become a prominent technique in enhancing the performance of deep learning models, especially when dealing with limited labeled data. This approach involves leveraging pre-trained models on large datasets and fine-tuning them on specific tasks such as brain MRI classification.
-
-For example, transfer learning architectures such as InceptionV3, VGG19, DenseNet121, and MobileNet have been applied in brain MRI classification for brain tumor diagnosis, with MobileNet demonstrating the highest accuracy of 99.60\% \cite{Islam_Barua_Rahman_Ahammed_Akter_Uddin_2023}. This highlights the effectiveness of using pre-trained models in achieving high accuracy with relatively small datasets.
-
-In another study, transfer learning was utilized to address the challenges of small sample sizes and high dimensionality in whole-brain fMRI data. The approach showed improved performance compared to training models from scratch, demonstrating the benefits of transfer learning in enhancing model performance with limited data \cite{10.1007/978-3-030-32695-1_7}.
-
-Furthermore, a study on brain tumor detection employed transfer learning by fine-tuning a deep learning model trained on a large dataset of natural images. This method resulted in comparable performance even with a smaller dataset, showcasing the practicality and effectiveness of transfer learning in medical imaging \cite{10125766}.
-
-\subsubsection{U-Net and Variants}
+\subsection{U-Net and Variants}
 
 U-Net and its variants have become the cornerstone in brain MRI segmentation tasks due to their proficiency in capturing spatial information effectively. The U-Net architecture has been extensively applied to brain tumor segmentation in MRI images, achieving notable accuracy and robustness in tumor detection \cite{imtiaz_brain_2023, abd-ellah_automatic_2024, ding_slf-unet_2024}.
 
@@ -43,7 +33,24 @@ Zhou et al. \cite{zhou2018unetplusplus} proposed a novel U-Net architecture (U-N
 
 These studies collectively demonstrate the versatility and effectiveness of U-Net and its variants in brain tumor segmentation, making them invaluable tools in medical image analysis.
 
+\subsection{Transfer Learning in Brain MRI Classification}
 
-\subsubsection{Conclusion}
+Transfer learning has become a prominent technique in enhancing the performance of deep learning models, especially when dealing with limited labeled data. This approach involves leveraging pre-trained models on large datasets and fine-tuning them on specific tasks such as brain MRI classification.
+
+For example, transfer learning architectures such as InceptionV3, VGG19, DenseNet121, and MobileNet have been applied in brain MRI classification for brain tumor diagnosis, with MobileNet demonstrating the highest accuracy of 99.60\% \cite{Islam_Barua_Rahman_Ahammed_Akter_Uddin_2023}. This highlights the effectiveness of using pre-trained models in achieving high accuracy with relatively small datasets.
+
+In another study, transfer learning was utilized to address the challenges of small sample sizes and high dimensionality in whole-brain functional MRI (fMRI) data. The approach showed improved performance compared to training models from scratch, demonstrating the benefits of transfer learning in enhancing model performance with limited data \cite{10.1007/978-3-030-32695-1_7}.
+
+Furthermore, a study on brain tumor detection employed transfer learning by fine-tuning a deep learning model trained on a large dataset of natural images. This method resulted in comparable performance even with a smaller dataset, showcasing the practicality and effectiveness of transfer learning in medical imaging \cite{10125766}.
+
+
+\subsubsection{Visual Transformers (ViT) in Brain MRI Tumor Classification}
+
+ViT are a class of deep learning models that have been successfully applied to various image recognition tasks, including the classification of brain MRI images for tumor detection. This model archiecture, adapted from transformers widely used in natural language processing, employs self-attention mechanisms that enable it to focus on different parts of an image as it processes the data, making it particularly effective for medical imaging tasks where the identification of subtle and complex features is crucial.
+
+
+
+
+\subsection{Conclusion}
 
 In conclusion, deep learning has significantly advanced the field of brain MRI classification, offering robust, accurate, and efficient solutions for diagnosing and monitoring brain tumors. The continuous evolution of CNN architectures, transfer learning techniques, optimization strategies, and preprocessing methods promises further enhancements in the accuracy and reliability of these models, ultimately contributing to improved patient outcomes and reduced diagnostic times. These advancements not only highlight the transformative potential of deep learning in medical imaging but also underscore the importance of ongoing research and development. By continuing to refine and innovate upon these techniques, the medical community can look forward to even more effective and efficient diagnostic tools, paving the way for better patient care and outcomes.
