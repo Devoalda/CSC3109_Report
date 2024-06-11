@@ -3,15 +3,17 @@
 
 Vision Transformers (ViT) mark a crucial adaptation of transformer architectures from textual to image analysis \cite{Khan2021Transformers}. Initially designed for natural language processing, transformers employ self-attention mechanisms which are adeptly applied to visual data in ViTs. This adaptation enables the model to dynamically prioritize different image segments according to their relevance for tasks like tumor detection in brain MRI scans.
 
-ViTs work by breaking down an image into fixed-size patches, embedding them linearly, and treating each as a token, similar to words in text processing. Positional embeddings are added to maintain spatial relationships. These embeddings are processed through multiple transformer layers, utilizing self-attention to analyze the image holistically, enhancing the detection of complex patterns and subtle nuances indicative of tumors.
+ViTs work by breaking down an image into fixed-size patches, embedding them linearly, and treating each as a token, similar to words in text processing \cite{Wu2020Visual}. Positional embeddings are added to maintain spatial relationships. These embeddings are processed through multiple transformer layers, utilizing self-attention to analyze the image holistically, enhancing the detection of complex patterns and subtle nuances indicative of tumors.
 
-This method allows ViTs to excel in scenarios requiring deep contextual understanding and detailed image analysis. Particularly in medical imaging, ViTs are highly effective, often surpassing conventional CNNs by identifying less obvious features crucial for accurate diagnostics.
+This method allows ViTs to excel in scenarios requiring deep contextual understanding and detailed image analysis. Particularly in medical imaging, ViTs are highly effective, often surpassing conventional CNNs by identifying less obvious features crucial for accurate diagnostics \cite{Matsoukas2021Is}.
 
-Additionally, ViTs benefit from transfer learning, where models pre-trained on extensive general datasets are fine-tuned for specific medical tasks. This not only reduces the need for large medical datasets but also speeds up the training process. Their adaptability and prowess in handling intricate image data make Vision Transformers a promising advancement in medical diagnostics, especially for improving the accuracy and reliability of brain tumor classifications.
+Additionally, ViTs benefit from transfer learning, where models pre-trained on extensive general datasets are fine-tuned for specific medical tasks \cite{Simon2022Vision}. This not only reduces the need for large medical datasets but also speeds up the training process. Their adaptability and prowess in handling intricate image data make Vision Transformers a promising advancement in medical diagnostics, especially for improving the accuracy and reliability of brain tumor classifications.
 
 
 \subsubsection{Implementation}
 
+
+% TO MODIFY ALL THESE
 The proposed brain tumor segmentation model is based on the InceptionV3 architecture \cite{szegedy_rethinking_2015}, pretrained on the ImageNet dataset. The model excludes the top layers and modifies the remaining layers to adapt to the specific requirements of the classification task. The input shape is set to $224\times224$ with three channels instead of the original $299\times299$ input shape. This modification is necessary to achieve a higher accuracy in the classification task, as the input images are resized to $224\times224$ during the preprocessing stage.
 
 To customize the model, the last three layers of the InceptionV3 base model are excluded. The output of the last remaining layer undergoes a Global Average Pooling operation, followed by a Dropout layer with a rate of 0.055 to prevent overfitting. The final dense layer comprises four neurons corresponding to the four classes of brain tumors, with a softmax activation function to output the class probabilities. A kernel regularizer with an L2 penalty of 0.1 is applied to this dense layer to further mitigate overfitting.
