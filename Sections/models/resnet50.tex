@@ -165,17 +165,19 @@ Table \ref{tab:resnet50_additional_metrics} highlights the Dice Similarity Coeff
 \subsubsection{K-Folds Cross-Validation}
 
 \begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.7\textwidth]{resnet50/evaluation/kfolds.png}
-  \end{center}
-  \caption{Stratified K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:resnet50_kfolds}
-\end{figure}
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.7\textwidth]{resnet50/evaluation/kfolds_5.jpg}
-  \end{center}
-  \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:resnet50_kfolds_5}
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{resnet50/evaluation/kfolds.png}
+    \caption{Stratified K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:resnet50_kfolds}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{resnet50/evaluation/kfolds_5.jpg}
+    \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:resnet50_kfolds_5}
+  \end{subfigure}
+  \caption{Comparison of Stratified K-Folds and K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:resnet50_kfolds_comparison}
 \end{figure}
 
 Stratified K-Folds cross-validation was meticulously conducted to evaluate the generalization performance of the ResNet50 model on the brain tumor classification task. The dataset was divided into ten folds, with each fold serving as a validation set once, while the remaining nine folds were used for training. This approach ensures that each class is well represented in both the training and validation sets across all folds, providing a robust estimate of the model's performance on unseen data. The model was trained for up to 80 epochs for each fold, with early stopping applied to halt training if the validation loss did not improve, thus preventing overfitting.
