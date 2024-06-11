@@ -1,9 +1,16 @@
 \subsection{ResNet50}\label{resnet50}
 \chapterauthor{Benjamin Loh Choon How (2201590)}
 
-ResNet50 is a revolutionary convolutional neural network (CNN) architecture that marks a significant advancement in the field of deep learning. Developed by Microsoft Research, it introduces the innovative concept of residual learning to tackle the challenges associated with training very deep neural networks. A defining feature of ResNet50 is its use of residual connections, or "skip connections," which facilitate the direct propagation of gradients from deeper layers to shallower ones. This architectural choice effectively mitigates the problem of vanishing gradients, allowing the model to learn efficiently even with a substantial number of layers.
+ResNet50 is a transformative convolutional neural network (CNN) architecture developed by Microsoft Research that introduces residual learning to address the challenges of training deep networks. By using residual connections, or "skip connections," the model facilitates the direct propagation of gradients across layers, effectively mitigating the vanishing gradient problem. This allows ResNet50 to maintain performance and stability even as the network depth increases, enabling the extraction of complex features from input data. The architecture consists of multiple stages, starting with initial pre-processing layers like zero-padding, convolution, batch normalization, ReLU activation, and max pooling, which prepare the data for deeper processing. These are followed by several residual blocks across different stages, each comprising a sequence of convolutional layers interspersed with identity blocks that implement the skip connections, preserving the flow of information and enhancing learning efficiency.
 
-At its core, ResNet50 builds on the successes of earlier CNNs but extends the architecture to greater depths through the use of these residual connections. This enables the network to learn from a significantly increased number of layers without experiencing performance degradation, leading to more accurate and efficient models. ResNet50 has been widely adopted for various applications, excelling in image classification, object detection, and tasks requiring detailed visual understanding. Its design represents an enhanced iteration over its predecessors, establishing it as a cornerstone in deep learning for managing complex visual tasks with remarkable effectiveness.
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{resnet50/resnet50_architecture.png}
+  \end{center}
+  \caption{Resnet50 Architecture}\label{f:resnet50_architecture}
+\end{figure}
+
+The final stages of ResNet50 involve a global average pooling layer that reduces feature maps to a single vector per map, significantly lowering the number of parameters and computational complexity. This is followed by a fully connected layer that outputs class probabilities, making the model suitable for classification tasks. The design of ResNet50, as seen in Figure \ref{f:resnet50_architecture}, showcases its capability to transform high-dimensional data into compact, meaningful representations. This robust architecture has been widely adopted for various applications, excelling in tasks such as image classification and object detection, making it a cornerstone in deep learning for handling complex visual analysis with high accuracy and efficiency.
 
 \subsubsection{Implementation}
 
