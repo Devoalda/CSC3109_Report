@@ -19,7 +19,7 @@ These preprocessing techniques collectively enhance the quality and quantity of 
 
 Convolutional Neural Networks (CNNs) have been extensively used for brain MRI classification. A notable approach is the use of ResNet-18 architecture for differentiating MRI sequence types, achieving an impressive accuracy of 97.9\% on test sets. This model demonstrates the capability of CNNs in handling complex MRI data efficiently\cite{doi:10.1148/ryai.230095}.
 
-\subsection{U-Net and Variants}
+\subsubsection{U-Net and Variants}
 
 U-Net and its variants have become the cornerstone in brain MRI segmentation tasks due to their proficiency in capturing spatial information effectively. The U-Net architecture has been extensively applied to brain tumor segmentation in MRI images, achieving notable accuracy and robustness in tumor detection \cite{imtiaz_brain_2023, abd-ellah_automatic_2024, ding_slf-unet_2024}.
 
@@ -43,8 +43,14 @@ In the context of whole-brain functional MRI (fMRI) data, transfer learning has 
 
 Moreover, transfer learning has proven beneficial in brain tumor detection. For example, a study applied a pre-trained deep learning model, initially trained on a large dataset of natural images, to the task of brain MRI classification. The fine-tuned model achieved comparable performance with smaller, domain-specific datasets, demonstrating that transfer learning can effectively bridge the gap between different domains and reduce the dependency on large medical imaging datasets \cite{10125766}.
 
-% can combine w above
-\subsubsection{Vision Transformers in Brain MRI Tumor Classification}
+\subsubsection{ResNet-50}
+Among these architectures, ResNet-50 has gained significant attention due to its unique ability to mitigate the vanishing gradient problem through the use of residual learning. ResNet-50, a 50-layer deep convolutional neural network, utilizes shortcut connections that allow the network to learn residual functions with reference to the layer inputs, which substantially improves the convergence rate of the network \cite{He_Zhang_Ren_Sun_2015}.
+
+In the domain of brain MRI classification, ResNet-50 has been extensively employed for its robustness and ability to handle complex image data. Its deep architecture is particularly effective in extracting intricate features from MRI scans, which is crucial for distinguishing between different types of brain pathologies. For example, in brain tumor classification tasks, ResNet-50 has been adapted to differentiate between gliomas, meningiomas, and pituitary tumors with high accuracy \cite{Cheng_Huang_Cao_Yang_Yang_Yun_Wang_Feng_2015}. The model's depth and residual connections enable it to capture subtle differences in brain tissue characteristics that are critical for accurate diagnosis.
+
+Research has demonstrated that ResNet-50, when fine-tuned on brain MRI datasets, can significantly outperform traditional machine learning techniques. For instance, in a study focusing on brain tumor classification, ResNet-50 coupled with the convolutional block attention module (CBAM) achieved an accuracy rate of 99.43\%, highlighting its effectiveness in medical image classification \cite{Oladimeji_Ibitoye_2023}. The pre-trained nature of ResNet-50 allows it to leverage feature representations from extensive datasets like ImageNet, which can be adapted to the specific features found in brain MRI images, thereby enhancing the model's generalization ability and diagnostic accuracy.
+
+\subsubsection{Vision Transformers}
 
 Vision Transformers (ViT) have emerged as a powerful tool in the field of medical imaging, particularly in the classification of brain MRI images for tumor detection. Originally developed for tasks in natural language processing, ViTs have been adapted to handle complex image-based challenges. Their unique architecture utilizes self-attention mechanisms that analyze different segments of an image simultaneously, allowing for a comprehensive evaluation of spatial relationships and features within the brain scans. This method proves especially beneficial in identifying subtle variances and complex patterns indicative of tumors, offering a significant advantage over traditional methods in both accuracy and efficiency. By focusing on critical image areas, ViTs enhance the precision of tumor detection and classification, making them a valuable asset in diagnostic radiology.
 
