@@ -57,27 +57,33 @@ The primary objective of this fine-tuning effort was to minimize the validation 
 Table \ref{tab:finetuning_results} summarizes the results of the fine-tuning trials, listing the validation loss for each tested backbone.
 
 \begin{longtable}{|c|c|}
-\caption{Fine-Tuning Results for Different Backbones}\label{tab:finetuning_results}
+\caption{Fine-Tuning Results for Different Backbones}\label{tab:finetuning_results} \\
 \hline
-\textbf{Backbone} & \textbf{Validation Loss}
+\textbf{Backbone} & \textbf{Validation Loss} \\
 \hline
 \endfirsthead
+
+\multicolumn{2}{c}{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
 \hline
-\textbf{Backbone} & \textbf{Validation Loss}
+\textbf{Backbone} & \textbf{Validation Loss} \\
 \hline
 \endhead
-\hline
+
+\hline \multicolumn{2}{|r|}{{Continued on next page}} \\ \hline
 \endfoot
+
 \hline
 \endlastfoot
-MobileNetV2 (Trial 1) & 0.4158
+
+MobileNetV2 (Trial 1) & 0.4158 \\
 \hline
-DenseNet121 (Trial 2) & 0.3684
+DenseNet121 (Trial 2) & 0.3684 \\
 \hline
-MobileNetV2 (Trial 3) & 0.7039
+MobileNetV2 (Trial 3) & 0.7039 \\
 \hline
-VGG16 (Trial 4) & 0.7004
+VGG16 (Trial 4) & 0.7004 \\
 \end{longtable}
+
 
 The Optuna optimization process involved creating a model with a backbone suggested by Optuna for each trial. Each model was then trained for 35 epochs using the Adam optimizer, with callbacks for learning rate reduction, early stopping, and model checkpointing based on validation loss. The best validation loss achieved during training was recorded as the objective metric for each trial.
 
@@ -120,62 +126,64 @@ The fine-tuning process underscored the significance of backbone selection in en
   \label{fig:unet_evaluation}
 \end{figure}
 
-\begin{longtable}{|l|c|c|c|c|}
-\caption{Classification Report for Brain Tumor Segmentation} \label{tab:unet_classification_report}
-\hline 
-\textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} 
-\hline 
-\endfirsthead
+\begin{table}[ht]
+\centering
+\begin{tabular}{cc}
+    \begin{minipage}{.6\linewidth}
+        \centering
+        \begin{subtable}[t]{\linewidth}
+            \centering
+            \begin{tabular}{|l|c|c|c|c|}
+                \hline 
+                \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ 
+                \hline 
+                meningioma & 0.95 & 0.88 & 0.91 & 24 \\ 
+                \hline
+                pituitary  & 0.88 & 0.92 & 0.90 & 24 \\ 
+                \hline
+                glioma     & 0.96 & 1.00 & 0.98 & 24 \\ 
+                \hline
+                notumor    & 0.96 & 0.96 & 0.96 & 24 \\ 
+                \hline
+                micro avg  & 0.94 & 0.94 & 0.94 & 96 \\ 
+                \hline
+                macro avg  & 0.94 & 0.94 & 0.94 & 96 \\ 
+                \hline
+                weighted avg & 0.94 & 0.94 & 0.94 & 96 \\ 
+                \hline
+                samples avg & 0.94 & 0.94 & 0.94 & 96 \\ 
+                \hline
+            \end{tabular}
+            \caption{Classification Report for Brain Tumor Segmentation} 
+            \label{tab:unet_classification_report}
+        \end{subtable}
+    \end{minipage} &
+    \begin{minipage}{.35\linewidth}
+        \centering
+        \begin{subtable}[t]{\linewidth}
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline 
+                \textbf{Metric} & \textbf{Value} \\ 
+                \hline
+                DSC & 0.9372 \\ 
+                \hline
+                Sensitivity & 0.9375 \\ 
+                \hline
+                Specificity & 0.9792 \\ 
+                \hline
+                Accuracy & 0.9375 \\ 
+                \hline
+            \end{tabular}
+            \caption{Additional Metrics for Brain Tumor Segmentation} 
+            \label{tab:unet_additional_metrics}
+        \end{subtable}
+    \end{minipage}
+\end{tabular}
+\caption{Classification Report and Additional Metrics for Brain Tumor Segmentation}
+\label{tab:combined_metrics}
+\end{table}
 
-\multicolumn{5}{c}%
-{{\bfseries \tablename\ \thetable{} -- continued from previous page}}
-\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} 
-\hline 
-\endhead
-
-\hline \multicolumn{5}{|r|}{{Continued on next page}} 
-\hline
-\endfoot
-
-\hline
-\endlastfoot
-
-meningioma & 0.95 & 0.88 & 0.91 & 24 \\ 
-\hline
-pituitary  & 0.88 & 0.92 & 0.90 & 24 \\ 
-\hline
-glioma     & 0.96 & 1.00 & 0.98 & 24 \\ 
-\hline
-notumor    & 0.96 & 0.96 & 0.96 & 24 \\ 
-\hline
-micro avg  & 0.94 & 0.94 & 0.94 & 96 \\ 
-\hline
-macro avg  & 0.94 & 0.94 & 0.94 & 96 \\ 
-\hline
-weighted avg & 0.94 & 0.94 & 0.94 & 96 \\ 
-\hline
-samples avg & 0.94 & 0.94 & 0.94 & 96 \\ 
-\end{longtable}
-
-\begin{longtable}{|c|c|c|c|}
-\caption{Additional Metrics for Brain Tumor Segmentation} \label{tab:unet_additional_metrics}
-\hline \textbf{DSC} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Accuracy} \\ 
-\hline
-\endfirsthead
-
-\multicolumn{4}{c}%
-{{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\
-\hline \textbf{DSC} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Accuracy} \\ \hline
-\endhead
-
-\hline \multicolumn{4}{|r|}{{Continued on next page}} \\ \hline
-\endfoot
-
-\hline
-\endlastfoot
-% DSC: 0.9372319580005916, Sensitivity: 0.9375, Specificity: 0.9791666666666667, Accuracy: 0.9375
-0.9372 & 0.9375 & 0.9792 & 0.9375 \\ \hline
-\end{longtable}
 
 The performance metrics presented in Tables \ref{tab:unet_classification_report} and \ref{tab:unet_additional_metrics} demonstrate the robust capability of the U-Net model in brain tumor segmentation. The classification report (Table \ref{tab:unet_classification_report}) highlights the model's high precision, recall, and F1-scores across all classes, with an overall accuracy of 0.94. Specifically, the model achieved precision scores of 0.96, 0.91, 0.92, and 0.96 for the meningioma, pituitary, glioma, and notumor classes, respectively. Corresponding recall values were 0.92, 0.88, 1.00, and 0.96, indicating the model's effectiveness in identifying true positives for each class.
 
@@ -202,10 +210,54 @@ The right plot in Figure \ref{f:unet_kfolds} presents the validation loss for ea
 
 It is noteworthy that during the K-Folds validation, there were instances where the validation loss was smaller than the training's validation loss, and the accuracy during K-Folds was also higher. This phenomenon underscores the model's robustness, indicating that it is capable of performing well on unseen data. However, this occurrence may also be attributed to the differences in data distribution between the training and validation sets in each fold. This disparity can sometimes lead to lower validation loss and higher accuracy, suggesting that while the model is strong, the evaluation metrics might slightly overestimate the model's performance. Therefore, it is important to consider these factors when interpreting the results.
 
-Overall, the K-Folds cross-validation results indicate that the model achieves a high average accuracy of 0.9533 with a standard deviation of 0.0267, reflecting robust performance with minimal variability. The average validation loss was 0.1599 with a standard deviation of 0.0601, suggesting that while the model's predictions are generally reliable, there is room for enhancement in terms of reducing the prediction error. These metrics collectively demonstrate that the model possesses strong generalization capabilities, although further refinement could help in achieving even greater consistency and reliability in its performance.
+Overall, the K-Folds cross-validation results indicate that the model achieves a high average accuracy of 0.9533 with a standard deviation of 0.0267, reflecting robust performance with minimal variability. The average validation loss was 0.1599 with a standard deviation of 0.0601, suggesting that while the model's predictions are generally reliable, there is room for enhancement in terms of reducing the prediction error. These metrics collectively demonstrate that the model possesses strong generalization capabilities, although further refinement could help in achieving even greater consistency and reliability in its performance. The metrics and conditions for K-Folds cross-validation are summarized in Table \ref{tab:unet_kfolds_combined}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{cc}
+    \begin{minipage}{.45\linewidth}
+        \centering
+        \begin{subtable}[t]{\linewidth}
+            \centering
+            \begin{tabular}{|l|c|}
+                \hline
+                \textbf{Metric} & \textbf{Value} \\
+                \hline
+                Average Validation Accuracy & 0.9533 \\
+                \hline
+                Accuracy Std. Dev. & 0.0267 \\
+                \hline
+                Average Validation Loss & 0.1599 \\
+                \hline
+                Loss Std. Dev. & 0.0601 \\
+                \hline
+            \end{tabular}
+            \caption{Evaluation Metrics}
+        \end{subtable}
+    \end{minipage} &
+    \begin{minipage}{.45\linewidth}
+        \centering
+        \begin{subtable}[t]{\linewidth}
+            \centering
+            \begin{tabular}{|l|c|}
+                \hline
+                \textbf{Parameter} & \textbf{Value} \\
+                \hline
+                Number of Folds & 5 \\
+                \hline
+                Epochs per Fold & 35 \\
+                \hline
+                Batch Size & 10 \\
+                \hline
+            \end{tabular}
+            \caption{Testing Conditions}
+        \end{subtable}
+    \end{minipage}
+\end{tabular}
+\caption{K-Folds Cross-Validation Metrics and Conditions for Brain Tumor Segmentation}\label{tab:unet_kfolds_combined}
+\end{table}
 
 \subsubsection{Segmentation Attempt}
-
 
 \begin{figure}[H]
   \centering

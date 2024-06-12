@@ -35,97 +35,6 @@ Training extends over 50 epochs with an early stopping mechanism that ceases tra
 
 \subsubsection{Results and Evaluation}
 
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}[b]{0.2\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{inceptionv3/evaluation/cm1.png}
-    \caption{Confusion Matrix}
-    \label{fig:inceptionv3_cm1}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.2\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{inceptionv3/evaluation/cm2.png}
-    \caption{Normalized Confusion Matrix}
-    \label{fig:inceptionv3_cm2}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.25\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{inceptionv3/evaluation/ROC.png}
-    \caption{ROC Curve}
-    \label{fig:inceptionv3_roc}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.25\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{inceptionv3/evaluation/learning_curve.png}
-    \caption{Learning Curve}
-    \label{fig:inceptionv3_learning_curve}
-  \end{subfigure}
-  \caption{Confusion Matrix, Normalized Confusion Matrix, ROC Curve, and Learning Curve for Brain Tumor Segmentation}
-  \label{fig:inceptionv3_evaluation}
-\end{figure}
-
-\begin{longtable}{|l|c|c|c|c|}
-\caption{Classification Report for Brain Tumor Segmentation} \label{tab:inceptionv3_classification_report}
-\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support}
-\hline 
-\endfirsthead
-
-\multicolumn{5}{c}%
-{{\bfseries \tablename\ \thetable{} -- continued from previous page}}
-\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} 
-\hline 
-\endhead
-
-\hline \multicolumn{5}{|r|}{{Continued on next page}} 
-\hline
-\endfoot
-
-\hline
-\endlastfoot
-
-meningioma & 0.96 & 0.96 & 0.96 & 24 \\ 
-\hline
-pituitary  & 0.84 & 0.88 & 0.86 & 24 \\ 
-\hline
-glioma     & 0.92 & 1.00 & 0.96 & 24 \\ 
-\hline
-notumor    & 1.00 & 0.88 & 0.93 & 24 \\ 
-\hline
-micro avg  & 0.93 & 0.93 & 0.93 & 96 \\ 
-\hline
-macro avg  & 0.93 & 0.93 & 0.93 & 96 \\ 
-\hline
-weighted avg & 0.93 & 0.93 & 0.93 & 96 \\ 
-\hline
-samples avg & 0.93 & 0.93 & 0.93 & 96 \\ 
-\end{longtable}
-
-\begin{longtable}{|c|c|c|c|}
-\caption{Additional Metrics for Brain Tumor Segmentation} \label{tab:inceptionv3_additional_metrics}
-\hline 
-\textbf{DSC} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Accuracy}
-\hline
-\endfirsthead
-
-\multicolumn{4}{c}%
-{{\bfseries \tablename\ \thetable{} -- continued from previous page}}
-\hline \textbf{DSC} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Accuracy} \hline
-\endhead
-
-\hline \multicolumn{4}{|r|}{{Continued on next page}} 
-\hline
-\endfoot
-
-\hline
-\endlastfoot
-
-%DSC: 0.9272023809523811, Sensitivity: 0.9270833333333334, Specificity: 0.9756944444444444, Accuracy: 0.9270833333333334
-0.9272 & 0.9271 & 0.9757 & 0.9271 \\
-\end{longtable}
 
 The confusion matrices in Figures \ref{fig:inceptionv3_cm1} and \ref{fig:inceptionv3_cm2}, provide a detailed view of the model's performance across the four brain tumor classes: meningioma, pituitary, glioma, and no tumor. The pituitary and no tumor classes exhibit slightly lower but still commendable true positive rates of 0.88, indicating strong performance across all categories. The classification report in Table \ref{tab:inceptionv3_classification_report} summarizes the precision, recall, and F1-score for each class. The model demonstrates high precision and recall across all classes, with a notable F1-score of 0.96 for the meningioma class. The overall micro, macro, and weighted averages for precision, recall, and F1-score all stand at 0.93, reflecting consistent and reliable performance.
 
@@ -136,13 +45,6 @@ The learning curve in Figure \ref{fig:inceptionv3_learning_curve} illustrates th
 Table \ref{tab:inceptionv3_additional_metrics} highlights the Dice Similarity Coefficient (DSC), sensitivity, specificity, and accuracy of the model. The DSC of 0.9272 indicates a high overlap between the predicted and actual tumor regions. Sensitivity and accuracy, both at 0.9271, demonstrate the model's ability to correctly identify true positives, while the specificity of 0.9757 shows its effectiveness in correctly identifying true negatives.
 
 \subsubsection{K-Folds Cross-Validation}
-
-\begin{figure}[H]
-  \begin{center}
-    \includegraphics[width=0.7\textwidth]{inceptionv3/evaluation/kfolds.png}
-  \end{center}
-  \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:inceptionv3_kfolds}
-\end{figure}
 
 K-Folds cross-validation was performed to evaluate the model's performance across different subsets of the dataset. The model achieved an average validation accuracy of 0.9711 and an average validation loss of 0.2188 across five folds. The model was trained for 90 epochs with a batch size of 10 for each fold. The results demonstrate the model's consistency and robustness in classifying brain tumor images.
 

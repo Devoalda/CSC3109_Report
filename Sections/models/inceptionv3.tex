@@ -63,64 +63,64 @@ The overall approach demonstrates the rigorous method employed to fine-tune the 
   \label{fig:inceptionv3_evaluation}
 \end{figure}
 
-\begin{longtable}{|l|c|c|c|c|}
-\caption{Classification Report for Brain Tumor Segmentation} \label{tab:inceptionv3_classification_report}
-\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support}
-\hline 
-\endfirsthead
-
-\multicolumn{5}{c}%
-{{\bfseries \tablename\ \thetable{} -- continued from previous page}}
-\hline \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} 
-\hline 
-\endhead
-
-\hline \multicolumn{5}{|r|}{{Continued on next page}} 
-\hline
-\endfoot
-
-\hline
-\endlastfoot
-
-meningioma & 0.96 & 0.96 & 0.96 & 24 \\ 
-\hline
-pituitary  & 0.84 & 0.88 & 0.86 & 24 \\ 
-\hline
-glioma     & 0.92 & 1.00 & 0.96 & 24 \\ 
-\hline
-notumor    & 1.00 & 0.88 & 0.93 & 24 \\ 
-\hline
-micro avg  & 0.93 & 0.93 & 0.93 & 96 \\ 
-\hline
-macro avg  & 0.93 & 0.93 & 0.93 & 96 \\ 
-\hline
-weighted avg & 0.93 & 0.93 & 0.93 & 96 \\ 
-\hline
-samples avg & 0.93 & 0.93 & 0.93 & 96 \\ 
-\end{longtable}
-
-\begin{longtable}{|c|c|c|c|}
-\caption{Additional Metrics for Brain Tumor Segmentation} \label{tab:inceptionv3_additional_metrics}
-\hline 
-\textbf{DSC} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Accuracy}
-\hline
-\endfirsthead
-
-\multicolumn{4}{c}%
-{{\bfseries \tablename\ \thetable{} -- continued from previous page}}
-\hline \textbf{DSC} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Accuracy} \hline
-\endhead
-
-\hline \multicolumn{4}{|r|}{{Continued on next page}} 
-\hline
-\endfoot
-
-\hline
-\endlastfoot
-
-%DSC: 0.9272023809523811, Sensitivity: 0.9270833333333334, Specificity: 0.9756944444444444, Accuracy: 0.9270833333333334
-0.9272 & 0.9271 & 0.9757 & 0.9271 \\
-\end{longtable}
+\begin{table}[ht]
+\centering
+\begin{tabular}{cc}
+    \begin{minipage}{.6\linewidth}
+        \centering
+        \begin{subtable}[t]{\linewidth}
+            \centering
+            \begin{tabular}{|l|c|c|c|c|}
+                \hline 
+                \textbf{Class} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Support} \\ 
+                \hline 
+                meningioma & 0.96 & 0.96 & 0.96 & 24 \\ 
+                \hline
+                pituitary  & 0.84 & 0.88 & 0.86 & 24 \\ 
+                \hline
+                glioma     & 0.92 & 1.00 & 0.96 & 24 \\ 
+                \hline
+                notumor    & 1.00 & 0.88 & 0.93 & 24 \\ 
+                \hline
+                micro avg  & 0.93 & 0.93 & 0.93 & 96 \\ 
+                \hline
+                macro avg  & 0.93 & 0.93 & 0.93 & 96 \\ 
+                \hline
+                weighted avg & 0.93 & 0.93 & 0.93 & 96 \\ 
+                \hline
+                samples avg & 0.93 & 0.93 & 0.93 & 96 \\ 
+                \hline
+            \end{tabular}
+            \caption{Classification Report for Brain Tumor Segmentation} 
+            \label{tab:inceptionv3_classification_report}
+        \end{subtable}
+    \end{minipage} &
+    \begin{minipage}{.35\linewidth}
+        \centering
+        \begin{subtable}[t]{\linewidth}
+            \centering
+            \begin{tabular}{|c|c|}
+                %DSC: 0.9272023809523811, Sensitivity: 0.9270833333333334, Specificity: 0.9756944444444444, Accuracy: 0.9270833333333334
+                \hline 
+                \textbf{Metric} & \textbf{Value} \\ 
+                \hline
+                DSC & 0.9272 \\ 
+                \hline
+                Sensitivity & 0.9271 \\ 
+                \hline
+                Specificity & 0.9757 \\ 
+                \hline
+                Accuracy & 0.9271 \\ 
+                \hline
+            \end{tabular}
+            \caption{Additional Metrics for Brain Tumor Segmentation} 
+            \label{tab:inceptionv3_additional_metrics}
+        \end{subtable}
+    \end{minipage}
+\end{tabular}
+\caption{Classification Report and Additional Metrics for Brain Tumor Segmentation using InceptionV3}
+\label{tab:combined_inceptionv3_metrics}
+\end{table}
 
 The confusion matrices in Figures \ref{fig:inceptionv3_cm1} and \ref{fig:inceptionv3_cm2}, provide a detailed view of the model's performance across the four brain tumor classes: meningioma, pituitary, glioma, and no tumor. The pituitary and no tumor classes exhibit slightly lower but still commendable true positive rates of 0.88, indicating strong performance across all categories. The classification report in Table \ref{tab:inceptionv3_classification_report} summarizes the precision, recall, and F1-score for each class. The model demonstrates high precision and recall across all classes, with a notable F1-score of 0.96 for the meningioma class. The overall micro, macro, and weighted averages for precision, recall, and F1-score all stand at 0.93, reflecting consistent and reliable performance.
 
@@ -139,9 +139,60 @@ Table \ref{tab:inceptionv3_additional_metrics} highlights the Dice Similarity Co
   \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:inceptionv3_kfolds}
 \end{figure}
 
-K-Folds cross-validation was performed to evaluate the model's performance across different subsets of the dataset. The model achieved an average validation accuracy of 0.9711 and an average validation loss of 0.2188 across five folds. The model was trained for 90 epochs with a batch size of 10 for each fold. The results demonstrate the model's consistency and robustness in classifying brain tumor images.
+K-Folds cross-validation was performed to evaluate the model's performance across different subsets of the dataset. This technique divides the dataset into $k$ equal subsets, or folds. The model is trained on $k-1$ folds and validated on the remaining fold. This process is repeated $k$ times, with each fold serving as the validation set once. The average validation accuracy and loss across all folds provide a comprehensive measure of the model's performance and generalizability.
 
-Results from K-Folds cross-validation are summarized in Figure \ref{f:inceptionv3_kfolds}, illustrating the validation accuracy and loss for each fold. The consistent performance across all folds, with minimal variance in accuracy and loss values, further validates the model's reliability and effectiveness in brain tumor segmentation tasks.
+The results from the K-Folds cross-validation are summarized in Table \ref{tab:inceptionv3_kfolds_metrics}, showing their average values and standard deviations. The consistent performance across all folds, with minimal variance in accuracy and loss values, further validates the model's reliability and effectiveness in brain tumor segmentation tasks.
+
+The K-Folds cross-validation setup was configured with the following parameters, as detailed in Table \ref{tab:inceptionv3_kfolds_conditions}. These settings were chosen to ensure that the model was trained thoroughly and that the results were robust and reliable.
+
+\begin{table}[H]
+\centering
+\caption{K-Folds Cross-Validation Testing Conditions}\label{tab:inceptionv3_kfolds_conditions}
+\begin{tabular}{cc}
+    \begin{minipage}{.45\linewidth}
+        \centering
+        \begin{subtable}[t]{\linewidth}
+            \centering
+            \begin{tabular}{|l|c|}
+                \hline
+                \textbf{Parameter} & \textbf{Value} \\
+                \hline
+                Number of Folds ($k$) & 5 \\
+                \hline
+                Epochs & 90 \\
+                \hline
+                Batch Size & 10 \\
+                \hline
+            \end{tabular}
+            \caption{Training Parameters}
+            \label{tab:inceptionv3_kfolds_parameters}
+        \end{subtable}
+    \end{minipage} &
+    \begin{minipage}{.45\linewidth}
+        \centering
+        \begin{subtable}[t]{\linewidth}
+            \centering
+            \begin{tabular}{|l|c|}
+                \hline
+                \textbf{Metric} & \textbf{Value} \\
+                \hline
+                Average Validation Accuracy & 0.9711 \\
+                \hline
+                Average Validation Loss & 0.2188 \\
+                \hline
+                Validation Accuracy Std. Dev. & 0.0218 \\
+                \hline
+                Validation Loss Std. Dev. & 0.0586 \\
+                \hline
+            \end{tabular}
+            \caption{Evaluation Metrics}
+            \label{tab:inceptionv3_kfolds_metrics}
+        \end{subtable}
+    \end{minipage}
+\end{tabular}
+\end{table}
+
+The consistent results obtained from the K-Folds cross-validation demonstrate the model's robustness and reliability in classifying brain tumor images. The minimal variance in accuracy and loss metrics indicates that the model generalizes well across different subsets of the data, reducing the risk of overfitting and ensuring dependable performance in practical applications.
 
 % Validation Accuracy: 0.9711 ± 0.0218
 % Validation Loss: 0.2188 ± 0.0586
