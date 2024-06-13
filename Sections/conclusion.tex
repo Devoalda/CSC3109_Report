@@ -42,3 +42,36 @@
 
 
 \section{Future Work}\label{Future Work}
+
+\subsection{Addressing Current Limitations}
+
+The current project faced several limitations that hindered the performance and generalizability of the models. The most significant limitation was the relatively small dataset size, consisting of only 120 images per class across four classes. This limited number of images restricts the model's ability to generalize effectively to new data. Future work should focus on acquiring larger, more diverse datasets to enhance the model's robustness and accuracy.
+
+Additionally, the varying image sizes posed a challenge during preprocessing and model training. Standardizing the image sizes or developing more sophisticated preprocessing techniques to handle varying dimensions can improve the consistency of the training data. Moreover, the lack of tumor masks prevented the models from learning the precise location and shape of tumors, which is crucial for accurate diagnosis. Future research should incorporate tumor masks to facilitate better model training and improve the accuracy of tumor detection.
+
+Another limitation was the initial lack of experience and background knowledge in medical imaging and deep learning techniques. Continuous learning and collaboration with medical professionals can bridge this gap and provide valuable insights for future improvements.
+
+\subsection{Expanding Model Capabilities}
+
+To enhance the current model's capabilities, future work could explore the use of Recurrent Neural Networks (RNNs) or Long Short-Term Memory networks (LSTMs) for processing 3D brain MRI slices. These models are well-suited for time series and continuous data, which can be beneficial for capturing spatial and temporal information in 3D medical images. Implementing these models could lead to more accurate classification and segmentation of brain tumors.
+
+Furthermore, while this project focused primarily on classification, future work could expand to include segmentation tasks. Developing models that provide pixelwise probabilities can highlight tumor locations, offering valuable assistance to doctors and radiologists for early intervention. This approach not only improves diagnostic accuracy but also enhances the interpretability of the model's predictions.
+
+\subsection{Leveraging Advanced Techniques}
+
+Incorporating advanced data augmentation techniques, such as those based on Generative Adversarial Networks (GANs), can also be explored to artificially increase the dataset size and variability. GANs can generate realistic synthetic images that can help the model learn more robust features. Additionally, experimenting with different augmentation strategies can provide insights into the most effective methods for enhancing model performance.
+
+\subsection{Exploring Ensemble Models and Advanced Architectures}
+
+In this project, various deep learning architectures were employed, including U-Net++, InceptionV3, Xception, Vision Transformers (ViT), EfficientNet, and DenseNet. Each of these models has unique strengths that could be further leveraged in future work. For instance, U-Net++ is particularly effective for segmentation tasks, while InceptionV3 and Xception are known for their robust feature extraction capabilities.
+
+Building upon these models, future research could explore the use of ensemble models, which combine the predictions of multiple models to improve overall performance. Although ensemble models can be computationally expensive, they have the potential to significantly enhance classification and segmentation accuracy by leveraging the strengths of different architectures. Implementing techniques to optimize computational efficiency will be crucial for making ensemble models a viable option.
+
+\subsection{Collaboration and Continuous Improvement}
+
+Finally, collaboration with medical experts is essential for ensuring the relevance and applicability of the models in clinical settings. Engaging with radiologists and other healthcare professionals can provide critical feedback and identify areas for improvement. Continuous iteration and refinement of the models, guided by expert insights, will be crucial for developing reliable and effective diagnostic tools.
+
+In summary, addressing the current limitations, expanding model capabilities, leveraging advanced techniques, exploring ensemble models, and fostering collaboration with medical professionals are key areas for future work. These efforts will contribute to the development of more accurate and reliable models for brain tumor classification and segmentation, ultimately enhancing early diagnosis and treatment.
+
+% Comment: This section provides a comprehensive overview of potential future work directions. Including it in the report would offer a clear path for further research and improvements, highlighting the project's ongoing development and the opportunities for advancing the field of medical imaging.
+
