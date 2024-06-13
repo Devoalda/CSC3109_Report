@@ -65,7 +65,30 @@ After preprocessing and augmentation, the dataset is divided into training and v
 
 \subsection{Summary and Justifications}
 
-Given the relatively small size of dataset\_19 (480 images in total), data augmentation is crucial for enhancing the dataset's variability and improving the model's generalization capabilities. Flipping images horizontally is justified based on the anatomical symmetry of the brain's hemispheres, allowing for effective augmentation without misrepresenting tumor locations \cite{nalepa_data_2019}. This technique increases the diversity of the training data, which is particularly important given the limited size of the dataset compared to larger datasets, such as those used in the BraTS competition.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{augmentation/train.png}
+    \caption{Training Set}
+    \label{fig:train_set}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{augmentation/test.png}
+    \caption{Test Set}
+    \label{fig:test_set}
+  \end{subfigure}
+  \caption{Tumor images in the training and test sets.}
+  \label{fig:train_test_sets}
+  
+\end{figure}
 
-Similarly, random rotations are applied since brain images can be rotated in various directions, further increasing the dataset's variability and aiding in model training. The augmentation strategies, including horizontal flipping and random rotations, are essential for compensating for the smaller dataset size by exposing the model to a wider variety of image orientations and perspectives. This approach helps create a more robust model capable of accurately classifying brain tumors despite the limited amount of original training data.
+Given the relatively small size of dataset\_19 (480 images in total), data augmentation is crucial for enhancing the dataset's variability and improving the model's generalization capabilities.
 
+Training augmentation includes horizontal flipping, which is justified by the anatomical symmetry of the brain's hemispheres. This technique increases the diversity of the training data without misrepresenting tumor locations \cite{nalepa_data_2019}. This is particularly important given the limited size of the dataset compared to larger datasets, such as those used in the BraTS competition.
+
+Testing augmentation involves random rotations, as brain images can be rotated in various directions. This further increases the dataset's variability and aids in model training. These augmentation strategies are essential for compensating for the smaller dataset size by exposing the model to a wider variety of image orientations and perspectives. This approach helps create a more robust model capable of accurately classifying brain tumors despite the limited amount of original training data.
+
+The images in Figure \ref{fig:train_test_sets} show examples of the tumor images in the training and test sets after augmentation. The training set contains augmented images, while the test set remains unaltered. This ensures that the model is trained on a diverse range of images while being evaluated on a separate, unbiased dataset.
