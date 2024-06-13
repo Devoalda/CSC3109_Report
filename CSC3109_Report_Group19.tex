@@ -37,9 +37,10 @@
 \usepackage{booktabs}
 \usepackage{subcaption}
 \usepackage{setspace}
+\usepackage{pdfpages}
 
-\usepackage[toc, acronym]{glossaries}
-\usepackage[automake]{glossaries-extra}
+%\usepackage[toc, acronym]{glossaries}
+%\usepackage[automake]{glossaries-extra}
 
 \makeatletter
 \newcommand{\chapterauthor}[1]{%
@@ -227,7 +228,11 @@
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 \appendix
-\import{Appendix/}{appendixA.tex}
+\import{Appendix/}{unet.tex}
+
+\import{Appendix/}{resnet50.tex}
+
+\import{Appendix/}{inceptionv3.tex}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
@@ -242,9 +247,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 
-\printglossary[type=\acronymtype]
-
-\printglossary
+%\printglossary[type=\acronymtype]
+%\printglossary
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Contributions
