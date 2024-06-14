@@ -292,12 +292,30 @@ Overall, the K-Folds cross-validation results indicate that the model achieves a
   \label{fig:segmentation_results}
 \end{figure}
 
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.43\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/manignoma_3.png}
+    \caption{Manigoma Segmentation}
+    \label{fig:manignoma_1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.43\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{unet/evaluation/manignoma_4.png}
+    \caption{Menigioma Segmentation}
+    \label{fig:mengioma_2}
+  \end{subfigure}
+  \caption{Additional Segmentation Results for Menigioma}
+  \label{fig:malignoma_segmentation}
+\end{figure}
 
 The segmentation results using the U-Net model for brain tumor classification reveal several insights into the model's learning and performance. The U-Net architecture, renowned for its efficacy in biomedical image segmentation, was expected to delineate brain tumor boundaries accurately. However, the segmentation results obtained by applying a threshold of 0.9 to the model's output indicate several discrepancies.
 
 As illustrated in Figure \ref{fig:segmentation_results}, the model often segments regions that do not correspond to actual tumor locations. For instance, in glioma cases, the model identifies brain regions that do not align with the actual tumor areas. Similarly, for images labeled as having no tumor, the model erroneously segments parts of the brain, suggesting it learns features unrelated to tumor presence. This indicates a critical observation: the model has predominantly learned to segment brain regions rather than tumors themselves.
 
-The segmentation mask for meningioma shows high confidence across the entire image, resulting in over-segmentation. Similarly, the pituitary tumor segmentation mask covers a large portion of the image, indicating an overestimation of the tumor area. This over-coverage arises from the model's inability to accurately differentiate between tumor and non-tumor regions when the threshold is set too high, thus compromising segmentation specificity.
+The segmentation mask for meningioma shows high confidence across the entire image (See \ref{meg_seg}), resulting in over-segmentation. Similarly, the pituitary tumor segmentation mask covers a large portion of the image, indicating an overestimation of the tumor area. This over-coverage arises from the model's inability to accurately differentiate between tumor and non-tumor regions when the threshold is set too high, thus compromising segmentation specificity. Additional testing revealed tht the model is able to segment meningioma tumors with high accuracy, as shown in Figure \ref{fig:malignoma_segmentation}. The model successfully identifies the tumor regions and provides precise segmentation results, demonstrating its capability in accurately delineating meningioma tumors.
 
 Several factors contribute to this misalignment. One major factor is the inadequacy of the training dataset in terms of size and diversity, leading to poor generalization. A limited dataset restricts the model's exposure to the varied appearances and characteristics of tumors, impairing its ability to learn robust, tumor-specific features. 
 
