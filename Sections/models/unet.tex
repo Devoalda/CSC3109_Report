@@ -259,6 +259,79 @@ Overall, the K-Folds cross-validation results indicate that the model achieves a
 
 \subsubsection{Segmentation Attempt}
 
+To assess the model's segmentation performance, we visualized its predictions by overlaying the segmentation mask on the original images. This process involved generating a binary mask from the U-Net model's predictions using a threshold value of 0.9, and then overlaying this mask on the original images to highlight the segmented regions. The pixel-wise probability of the segmention was retrieved at the output layer, before the \texttt{GlobalAveragePooling2D} Layer (See \ref{fig:unetpp_model}). The detailed procedure is outlined in Algorithm \ref{alg:unet_visualization}.
+
+It is important to note that the model was not trained with explicit tumor masks. Instead, this attempt aims to illustrate what the model identifies as "important features" for classification. This approach helps to understand the regions the model considers significant in distinguishing different classes of brain tumors, thereby providing insights into the model's decision-making process.
+
+Given the pixel-wise prediction probabilities $\mathbf{P}_i$ for the $i$-th image, we define $\mathbf{P}_i$ as:
+\[
+\mathbf{P}_i = \text{model.predict}(x_i)
+\]
+where $x_i$ is the input image. Here, $\mathbf{P}_i$ is a tensor of shape $(H, W, C)$, where $H$ and $W$ are the height and width of the image, and $C$ is the number of classes.
+
+For a specific class $c$, the pixel-wise probability map $\mathbf{P}_{i,c}$ is extracted as:
+\[
+\mathbf{P}_{i,c} = \mathbf{P}_i[:, :, c]
+\]
+To create a binary mask for class $c$, we apply a threshold $\tau$ to $\mathbf{P}_{i,c}$:
+\[
+\text{mask}_{i,j,c} = 
+\begin{cases} 
+1 & \text{if } \mathbf{P}_{i,c}(j,k) > \tau \\
+0 & \text{otherwise}
+\end{cases}
+\]
+where $\mathbf{P}_{i,c}(j,k)$ is the probability of pixel $(j,k)$ belonging to class $c$.
+
+The binary mask $\mathbf{M}_{i,c}$ for class $c$ thus becomes:
+\[
+\mathbf{M}_{i,c}(j,k) = \text{mask}_{i,j,c}
+\]
+where $\mathbf{M}_{i,c}$ is a binary matrix of shape $(H, W)$ indicating the presence of class $c$ at each pixel.
+
+The binary mask $\mathbf{M}_{i,c}$ is overlayed onto the original image $\mathbf{I}$ to highlight regions of interest. The overlay process can be described as follows:
+\[
+\mathbf{I}'(j,k) = 
+\begin{cases} 
+(0, 255, 0) & \text{if } \mathbf{M}_{i,c}(j,k) = 1 \\
+\mathbf{I}(j,k) & \text{otherwise}
+\end{cases}
+\]
+where $\mathbf{I}'$ is the resulting image with the overlay, showing the masked areas in green (RGB value (0, 255, 0)).
+
+By combining all the pixels that belong to class $c$, the segmentation mask effectively highlights the regions of interest corresponding to that class in the original image.
+
+\begin{algorithm}[H]
+\caption{Image Prediction and Visualization with Mask Overlay}\label{alg:unet_visualization}
+\begin{algorithmic}[1]
+\State \textbf{Define} class names: $\texttt{classes} = \{\text{glioma}, \text{meningioma}, \text{notumor}, \text{pituitary}\}$
+\State \textbf{Get} predictions from the U-Net model: $\texttt{predictions\_model\_2} \leftarrow \texttt{model.layers[0].predict(test\_generator)}$
+\State \textbf{Get} prediction probabilities: $\texttt{predictions\_prob} \leftarrow \texttt{model.predict(test\_generator)}$
+\State \textbf{Get} predicted classes: $\texttt{predictions} \leftarrow \arg\max(\texttt{predictions\_prob}, \text{axis}=1)$
+\State \textbf{Set} threshold for binary mask: $\texttt{threshold} = 0.9$
+\State \textbf{Create} binary mask: $\texttt{binary\_mask} \leftarrow (\texttt{predictions\_model\_2} > \texttt{threshold}).\texttt{astype(np.uint8)}$
+\State \textbf{Initialize} displayed class counts: $\texttt{displayed\_classes\_counts} \leftarrow \{ \texttt{class\_name}: 0 \text{ for class\_name in classes} \}$
+\State \textbf{Set} number of images per class to display: $\texttt{num\_images\_per\_class} = 2$
+\State \textbf{Initialize} plot figure
+\For{\texttt{each image in test\_generator}}
+    \State \textbf{Get} actual class index and name: $\texttt{actual\_class\_index} \leftarrow \texttt{test\_generator.classes[i]}$, $\texttt{actual\_class\_name} \leftarrow \texttt{classes[actual\_class\_index]}$
+    \If{\texttt{displayed\_classes\_counts[actual\_class\_name]} $\geq$ \texttt{num\_images\_per\_class}}
+        \State \textbf{Continue to next image}
+    \EndIf
+    \State \textbf{Load} original image
+    \State \textbf{Reshape} binary mask to match original image shape: $\texttt{reshaped\_binary\_mask} \leftarrow \texttt{binary\_mask[i][:, :, 0]}$
+    \State \textbf{Overlay} mask on original image
+    \State \textbf{Get} predicted class name: $\texttt{predicted\_class\_name} \leftarrow \texttt{classes[predictions[i]]}$
+    \State \textbf{Plot} original image and overlayed mask
+    \State \textbf{Update} displayed class counts: $\texttt{displayed\_classes\_counts[actual\_class\_name]} \leftarrow \texttt{displayed\_classes\_counts[actual\_class\_name]} + 1$
+    \If{\texttt{all counts in displayed\_classes\_counts} $\geq$ \texttt{num\_images\_per\_class}}
+        \State \textbf{Break} the loop
+    \EndIf
+\EndFor
+\State \textbf{Display} plot with tight layout
+\end{algorithmic}
+\end{algorithm}
+
 \begin{figure}[H]
   \centering
   \begin{subfigure}[b]{0.23\textwidth}
@@ -288,26 +361,26 @@ Overall, the K-Folds cross-validation results indicate that the model achieves a
     \caption{Pituitary}
     \label{fig:pitu_seg}
   \end{subfigure}
-  \caption{Segmentation Results for Brain Tumor Classes (Segmented Image in Green)}
+  \caption{Segmentation Results for Brain Tumor Classes (Original (Left) vs Masked (Right))}
   \label{fig:segmentation_results}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.33\textwidth}
+  \begin{subfigure}[b]{0.23\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{unet/evaluation/manignoma_3.png}
+    \includegraphics[width=\textwidth]{unet/evaluation/meningioma_1.png}
     \caption{Menigioma Segmentation Attempt 2}
-    \label{fig:manignoma_1}
+    \label{fig:meningioma_1}
   \end{subfigure}
-  \begin{subfigure}[b]{0.33\textwidth}
+  \begin{subfigure}[b]{0.23\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{unet/evaluation/manignoma_4.png}
+    \includegraphics[width=\textwidth]{unet/evaluation/meningioma_2.png}
     \caption{Menigioma Segmentation Attempt 3}
     \label{fig:mengioma_2}
   \end{subfigure}
-  \caption{Additional Segmentation Results for Menigioma}
-  \label{fig:manignoma_segmentation}
+  \caption{Additional Segmentation Results for Menigioma (Original (Left) vs Masked (Right))}
+  \label{fig:meningioma_segmentation}
 \end{figure}
 
 
@@ -315,7 +388,7 @@ The segmentation results using the U-Net model for brain tumor classification re
 
 As illustrated in Figure \ref{fig:segmentation_results}, the model often segments regions that do not correspond to actual tumor locations. For instance, in glioma cases, the model identifies brain regions that do not align with the actual tumor areas. Similarly, for images labeled as having no tumor, the model erroneously segments parts of the brain, suggesting it learns features unrelated to tumor presence. This indicates a critical observation: the model has predominantly learned to segment brain regions rather than tumors themselves.
 
-The segmentation mask for meningioma shows high confidence across the entire image (See Figure \ref{fig:meng_seg}), resulting in over-segmentation. Similarly, the pituitary tumor segmentation mask covers a large portion of the image, indicating an overestimation of the tumor area. This over-coverage arises from the model's inability to accurately differentiate between tumor and non-tumor regions when the threshold is set too high, thus compromising segmentation specificity. Additional testing revealed tht the model is able to segment meningioma tumors with high accuracy, as shown in Figure \ref{fig:manignoma_segmentation}. The model successfully identifies the tumor regions and provides precise segmentation results, demonstrating its capability in accurately delineating meningioma tumors. Additional images can be found in Appendix \ref{s:unetAppendix}
+The segmentation mask for meningioma shows high confidence across the entire image (See Figure \ref{fig:meng_seg}), resulting in over-segmentation. Similarly, the pituitary tumor segmentation mask covers a large portion of the image, indicating an overestimation of the tumor area. This over-coverage arises from the model's inability to accurately differentiate between tumor and non-tumor regions when the threshold is set too high, thus compromising segmentation specificity. Additional testing revealed tht the model is able to segment meningioma tumors with high accuracy, as shown in Figure \ref{fig:meningioma_segmentation}. The model successfully identifies the tumor regions and provides precise segmentation results, demonstrating its capability in accurately delineating meningioma tumors. Additional images can be found in Appendix \ref{s:unetAppendix}
 
 Several factors contribute to this misalignment. One major factor is the inadequacy of the training dataset in terms of size and diversity, leading to poor generalization. A limited dataset restricts the model's exposure to the varied appearances and characteristics of tumors, impairing its ability to learn robust, tumor-specific features. 
 
@@ -324,7 +397,6 @@ Conversely, for images labeled as having no tumor, the model segments only small
 Furthermore, the absence of explicit tumor masks in the training data presents a significant challenge. Without precise annotations indicating tumor boundaries, the model struggles to differentiate between tumor and non-tumor regions effectively. This underscores the need for a more comprehensive dataset with detailed tumor masks to enhance segmentation accuracy.
 
 While the U-Net model demonstrates some capability in learning from the given dataset, its performance in accurately segmenting brain tumors is suboptimal. The results emphasize the need for a larger and more detailed dataset, specifically annotated with tumor masks, to improve the model's ability to identify and segment tumors accurately. Future work should focus on augmenting the dataset and incorporating advanced training techniques to address these limitations and achieve more reliable segmentation outcomes.
-
 
 \subsubsection{Conclusion}\label{s:conclusion}
 
