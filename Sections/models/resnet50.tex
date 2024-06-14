@@ -190,7 +190,52 @@ It is noteworthy that during some folds of the Stratified K-Folds cross-validati
 
 The comparison between the number of folds using normal K-Folds and Stratified K-Folds cross-validation, as illustrated in Figure \ref{f:resnet50_kfolds} and Figure \ref{f:resnet50_kfolds_5} demonstrates clear benefits of stratification. The normal K-Folds cross-validation shows significant variability in validation accuracy and loss across folds, suggesting inconsistent model performance. In contrast, the Stratified K-Folds results present a more stable and balanced performance, reflecting a more accurate representation of the model's capabilities.
 
-Overall, the Stratified K-Folds cross-validation results demonstrate that the model achieved an average validation accuracy of 0.8675 with a standard deviation of 0.1789, indicating robust performance with some variability across folds. The average validation loss of 0.4642, with a standard deviation of 0.5849, suggests that while the model's predictions are generally reliable, there is room for improvement in reducing prediction errors. These metrics collectively indicate that the model has strong generalization capabilities, though further refinements could enhance the consistency and reliability of its performance across diverse data subsets. The results reinforce the value of Stratified K-Folds cross-validation in producing more reliable performance metrics, providing a clearer insight into the model's true potential on complex and varied datasets.
+Overall, the Stratified K-Folds cross-validation results demonstrate that the model achieved an average validation accuracy of 0.8675 with a standard deviation of 0.1789, indicating robust performance with some variability across folds. The average validation loss of 0.4642, with a standard deviation of 0.5849, suggests that while the model's predictions are generally reliable, there is room for improvement in reducing prediction errors. These metrics collectively indicate that the model has strong generalization capabilities, though further refinements could enhance the consistency and reliability of its performance across diverse data subsets. The results reinforce the value of Stratified K-Folds cross-validation in producing more reliable performance metrics, providing a clearer insight into the model's true potential on complex and varied datasets. The metrics and conditions for Stratified K-Folds cross-validation are detailed in Table \ref{tab:resnet50_kfolds_combined}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc}
+        \begin{minipage}{.45\linewidth}
+            \centering
+            \begin{subtable}[t]{\linewidth}
+                \centering
+                \begin{tabular}{|l|c|}
+                    \hline
+                    \textbf{Metric} & \textbf{Value} \\
+                    \hline
+                    Average Validation Accuracy & 0.8675 \\
+                    \hline
+                    Accuracy Std. Dev. & 0.1789 \\
+                    \hline
+                    Average Validation Loss & 0.4642 \\
+                    \hline
+                    Loss Std. Dev. & 0.5849 \\
+                    \hline
+                \end{tabular}
+                \caption{Evaluation Metrics}
+            \end{subtable}
+        \end{minipage} &
+        \begin{minipage}{.45\linewidth}
+            \centering
+            \begin{subtable}[t]{\linewidth}
+                \centering
+                \begin{tabular}{|l|c|}
+                    \hline
+                    \textbf{Parameter} & \textbf{Value} \\
+                    \hline
+                    Number of Folds & 10 \\
+                    \hline
+                    Epochs per Fold & 80 \\
+                    \hline
+                    Batch Size & 10 \\
+                    \hline
+                \end{tabular}
+                \caption{Testing Conditions}
+            \end{subtable}
+        \end{minipage}
+    \end{tabular}
+    \caption{K-Folds Cross-Validation Metrics and Conditions for Brain Tumor Segmentation}\label{tab:resnet50_kfolds_combined}
+\end{table}
 
 \subsubsection{Conclusion}\label{s:conclusion}
 
