@@ -22,7 +22,7 @@
 \documentclass[
 	article, % Paper size, specify a4paper (A4) or letterpaper (US letter)
 	10pt, % Default font size, specify 10pt, 11pt or 12pt
-	draft, % Comment out before submission
+%	draft, % Comment out before submission
 ]{CSUniSchoolLabReport}
 
 
@@ -38,6 +38,36 @@
 \usepackage{subcaption}
 \usepackage{setspace}
 \usepackage{pdfpages}
+%For code snippets%
+\usepackage{listings}
+\usefilecolor{mygray}{gray}{0.5}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
 
 %\usepackage[toc, acronym]{glossaries}
 %\usepackage[automake]{glossaries-extra}
