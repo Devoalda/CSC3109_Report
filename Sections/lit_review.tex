@@ -1,8 +1,5 @@
 \section{Existing Approaches to Brain MRI Classification Using Deep Learning}\label{s:lit_review}
 
-% joviana check plox %
-% \subsection{Existing Approaches to Brain MRI Classification Using Deep Learning}
-
 The integration of deep learning into the medical field has revolutionized diagnostic methodologies, particularly in the classification of brain MRI images. As brain tumors present diverse morphological characteristics that are detectable through MRI, the precision of image analysis can significantly influence diagnostic and treatment outcomes. This literature review examines current deep learning approaches that enhance the accuracy and efficiency of brain tumor diagnoses from MRI scans, focusing on the evolution of model architectures, data preprocessing innovations, and the strategic application of transfer learning.
 
 \subsection{Data preprocessing techniques}
@@ -21,17 +18,19 @@ Convolutional Neural Networks (CNNs) have been extensively used for brain MRI cl
 
 \subsubsection{U-Net and Variants}
 
-U-Net and its variants have become the cornerstone in brain MRI segmentation tasks due to their proficiency in capturing spatial information effectively. The U-Net architecture has been extensively applied to brain tumor segmentation in MRI images, achieving notable accuracy and robustness in tumor detection \cite{imtiaz_brain_2023, abd-ellah_automatic_2024, ding_slf-unet_2024}.
+U-Net and its numerous variants have established themselves as fundamental architectures in the realm of brain MRI segmentation, owing to their exceptional ability to effectively capture spatial information. The U-Net architecture, initially designed for biomedical image segmentation, has been widely applied to brain tumor segmentation in MRI images, achieving remarkable accuracy and robustness in detecting tumors \cite{imtiaz_brain_2023, abd-ellah_automatic_2024, ding_slf-unet_2024}.
 
-Various adaptations of U-Net have been proposed to enhance its performance in medical image analysis. Abd-Ellah et al. \cite{abd-ellah_automatic_2024} introduced Two Parallel Cascaded U‑Nets with an Asymmetric Residual (TPCUAR‑Net) architecture as part of a two-stage detection and segmentation model. This model demonstrated high accuracy in brain tumor detection and segmentation tasks, underscoring the potential of U-Net variants.
+To enhance the performance of U-Net in medical image analysis, several adaptations have been proposed. Abd-Ellah et al. \cite{abd-ellah_automatic_2024} introduced the Two Parallel Cascaded U‑Nets with an Asymmetric Residual (TPCUAR‑Net) architecture. This innovative two-stage detection and segmentation model demonstrated high accuracy in brain tumor tasks, highlighting the significant potential of U-Net variants.
 
-Similarly, Imtiaz et al. \cite{imtiaz_brain_2023} presented a modified U-Net architecture designed for pixel-level segmentation using a small dataset of brain tumor MRI images (322 images). Their model achieved high accuracy and robustness, further validating the efficacy of U-Net in medical image analysis.
+Similarly, Imtiaz et al. \cite{imtiaz_brain_2023} developed a modified U-Net architecture tailored for pixel-level segmentation using a relatively small dataset of 322 brain tumor MRI images. Their model achieved impressive accuracy and robustness, further validating the efficacy of U-Net in medical image analysis.
 
-Furthermore, Ding et al. \cite{ding_slf-unet_2024} introduced the SLF-UNet architecture, which integrates U-Net with a spatial attention mechanism to enhance segmentation accuracy. The SLF-UNet model achieved significant accuracy in tumor segmentation tasks, highlighting the benefits of incorporating attention mechanisms into the U-Net framework.
+Ding et al. \cite{ding_slf-unet_2024} proposed the SLF-UNet architecture, which integrates U-Net with a spatial attention mechanism to enhance segmentation precision. The SLF-UNet model achieved significant improvements in tumor segmentation accuracy, highlighting the advantages of incorporating attention mechanisms into the U-Net framework.
 
-Zhou et al. \cite{zhou2018unetplusplus} proposed a novel U-Net architecture (U-Net++), which incorporates dense skip connections and deep supervision to improve segmentation performance. The U-Net++ model demonstrated superior performance compared to traditional U-Net architectures, showcasing the potential of advanced U-Net variants in medical image segmentation tasks.
+Zhou et al. \cite{zhou2018unetplusplus} presented U-Net++, a novel architecture that incorporates dense skip connections and deep supervision to bolster segmentation performance. The U-Net++ model demonstrated superior performance compared to traditional U-Net architectures, showcasing the potential of advanced U-Net variants in medical image segmentation.
 
-These studies collectively demonstrate the versatility and effectiveness of U-Net and its variants in brain tumor segmentation, making them invaluable tools in medical image analysis.
+Eff-U-Net, introduced by Baheti et al. \cite{baheti_eff-unet_2020}, combines the U-Net architecture with EfficientNets for the downsampling path. This hybrid model achieved state-of-the-art performance in various medical segmentation tasks, such as Pneumonia Detection \cite{yu_pneumonia_2021} and Brain Tumor Segmentation \cite{lin_brain_2024}, highlighting the efficacy of integrating EfficientNets into the U-Net framework.
+
+These studies collectively illustrate the versatility and effectiveness of U-Net and its variants in brain tumor segmentation, solidifying their role as invaluable tools in the field of medical image analysis.
 
 \subsection{Transfer Learning in Brain MRI Classification}
 

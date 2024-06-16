@@ -1,32 +1,28 @@
-\section{Data Mining and Evaluation}\label{data_mining}
+\section{Model Selection and Training}\label{model_training}
 
-In this section, various data mining techniques are employed to extract meaningful insights from the preprocessed data.
+In this section, we explore the model selection and training process for brain tumor classification. Various data mining techniques are employed to extract meaningful insights from the preprocessed data.
 
 \subsection{Overview}\label{overview}
 
-All models were trained on Google's Colab plaform, utilizing the GPU runtime for faster training. In the following subsections, we will discuss the data mining techniques used to model the brain tumor classification task. The techniques include data augmentation, data splitting, and model selection.
+All models were trained on Google's Colab platform, utilizing the GPU runtime for faster training. The techniques employed include data augmentation, data splitting, and model selection, aimed at enhancing the accuracy and robustness of the brain tumor classification task.
 
 \subsection{Model Selection}\label{model_selection}
 
-Model selection is a critical step in developing an effective machine learning model, particularly for complex tasks such as brain tumor classification. The choice of model directly impacts the accuracy, efficiency, and overall performance of the solution. This section outlines our process of leveraging transfer learning with pretrained models, specifically VGG16 and ResNet50, alongside deep learning approaches like U-Net, which have demonstrated high performance in related tasks, including the BraTS (Brain Tumor Segmentation) Competition.
+Model selection is a critical step in developing an effective machine learning model for complex tasks such as brain tumor classification. The choice of model significantly impacts the accuracy, efficiency, and overall performance of the solution. We employed transfer learning with pretrained models and deep learning approaches like U-Net, which have demonstrated high performance in related tasks, including the BraTS (Brain Tumor Segmentation) Competition.
 
-The BraTS Competition has established benchmarks for brain tumor segmentation, highlighting models and techniques that consistently achieve superior results. Models such as U-Net, VGG16, and EfficientNet are frequently employed by top teams due to their effectiveness in medical imaging tasks, making them ideal candidates for our project.
+The BraTS Competition has set benchmarks for brain tumor segmentation, showcasing models and techniques that consistently achieve superior results. Models such as U-Net, VGG16, and EfficientNet are frequently employed by top teams due to their effectiveness in medical imaging tasks, making them ideal candidates for our project.
 
-\paragraph{Transfer Learning with Pretrained Models:}
-Transfer learning involves utilizing models pretrained on large datasets and fine-tuning them for specific tasks. This approach is particularly advantageous for small datasets, as it enables the model to leverage the knowledge acquired during pretraining. Our selection included InceptionV3, ResNet50, U-Net with an EfficientNet backbone, Xception, and Vision Transformer (ViT), chosen for their proven performance and efficiency.
+Transfer learning involves utilizing models pretrained on large datasets and fine-tuning them for specific tasks. This approach is particularly advantageous for small datasets, enabling the model to leverage the knowledge acquired during pretraining. Our selection included InceptionV3, ResNet50, U-Net with an EfficientNet backbone, Xception, DenseNet and Vision Transformer (ViT), chosen for their proven performance and efficiency.
 
-InceptionV3 and ResNet50 were selected due to their established efficacy in various image classification tasks, with ResNet50's residual learning framework offering efficient deep network training. U-Net, combined with an EfficientNet backbone, was chosen for its superior performance in medical image segmentation, effectively capturing and localizing features in MRI scans. Xception, known for its depthwise separable convolutions, provides enhanced performance with reduced computational complexity. ViT, representing a cutting-edge approach using transformer architecture for image classification, offers robust handling of intricate data patterns.
-
-These models were meticulously tested and fine-tuned to adapt to the specific requirements of brain tumor classification, ensuring that each model leveraged its architecture to maximize performance on our dataset.
-
-\paragraph{Model Selection Process:}
 Our model selection process involved an extensive literature review and practical testing of various models based on the dataset characteristics and specific requirements of the classification task. Given the relatively small size of dataset\_19, it was imperative to choose models capable of generalizing effectively from limited data.
 
-We reviewed seminal and recent works on advanced deep learning architectures, examining the recommended image size, batch size, and hyperparameters to inform our model configuration. Notable studies, such as Khaliki et al. \cite{khaliki_brain_2024}, demonstrated the efficacy of the InceptionV3 architecture with specific modifications for brain tumor segmentation. We also explored GitHub repositories for practical insights and high-performing implementations.
+We reviewed seminal and recent works on advanced deep learning architectures, examining the recommended image size, batch size, and hyperparameters to inform our model configuration. Studies, such as Khaliki et al., demonstrated the efficacy of the InceptionV3 architecture with specific modifications for brain tumor segmentation. We also explored GitHub repositories for practical insights and high-performing implementations.
 
-Extensive testing compared different models and configurations, including InceptionV3, ResNet50, and EfficientNet, using parameters identified in the literature. Hyperparameters such as learning rate, dropout rate, and regularization techniques were fine-tuned using the Optuna package, enabling a systematic exploration of the hyperparameter space.
+Extensive testing compared different models and configurations, including U-Net, ResNet50, and InceptionV3, using parameters identified in the literature. Hyperparameters such as learning rate, dropout rate, and regularization techniques were fine-tuned using the Optuna package, enabling a systematic exploration of the hyperparameter space.
 
 Each model's performance was evaluated using metrics detailed in the \hyperref[metrics]{Metrics} section, including precision, recall, F1 score, Dice Similarity Coefficient, specificity, and accuracy. The model with the highest validation accuracy and robust performance across these metrics was selected as the final model. This rigorous selection process ensured the chosen model performed well on training data and generalized effectively to unseen data, providing reliable and accurate classifications for brain tumor segmentation.
+
+Finally, the proposed model will be selected based on comprehensive evaluation criteria, including performance metrics, scalability, and reusability. This approach ensures that the chosen model not only demonstrates superior accuracy and robustness but also offers practical utility for future work. The emphasis on both performance and ease of use will facilitate ongoing research and application in the field of brain tumor classification.
 
 \subsection{Metrics}\label{metrics}
 
@@ -120,10 +116,12 @@ Together, these metrics provide a comprehensive evaluation framework. Precision,
 
 \import{Sections/models/}{inceptionv3.tex}
 
+%\import{Sections/models/}{xception.tex}
+
 \import{Sections/models/}{resnet50.tex}
 
 \import{Sections/models/}{vit.tex}
 
-\import{Sections/models/}{others.tex}
-
 \import{Sections/models/}{densenet121.tex}
+
+\import{Sections/models/}{others.tex}
