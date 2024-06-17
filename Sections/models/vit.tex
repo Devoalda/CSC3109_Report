@@ -87,7 +87,7 @@ In an effort to enhance the ViT model's performance for brain MRI classification
 
 To determine the most effective hyperparameters, the Optuna package was utilized, specifically optimizing the learning rate and dropout rate. Additionally, the training process incorporated early stopping to prevent overfitting, checkpointing to save the best model based on validation loss, and learning rate reduction on plateau to dynamically adjust the learning rate during training. These strategies collectively enhanced the model's performance and robustness, ensuring accurate classification of brain MRI scans.
 
-Table \ref{tab:vit_finetune} summarizes the results of the fine-tuning trials, listing the validation loss for each tested dropout rate and learning rate.
+Table \ref{tab:vit_finetune1} and \ref{tab:vit_finetune2} summarizes the results of the fine-tuning trials, listing the validation loss for each tested dropout rate and learning rate.
 
 \begin{table}[H]
   \begin{minipage}{0.45\textwidth}
@@ -329,7 +329,7 @@ Table \ref{tab:vit_additional_metrics} highlights the Dice Similarity Coefficien
   \end{tabular}
   \end{table}
 
-To comprehensively evaluate the Vision Transformer (ViT) model's ability to generalize in the brain tumor segmentation task, K-Folds cross-validation was employed. The dataset was divided into five folds, with each fold taking a turn as the validation set while the remaining four folds were used for training. This process was repeated five times to ensure that each fold served as the validation set once, thus providing a thorough assessment of the model's performance. Each training session spanned 20 epochs, with model checkpoints removed for efficiency. The training parameters and evaluation metrics are summarized in Table \ref{tab:vit_kfolds_metrics}.
+To comprehensively evaluate the Vision Transformer (ViT) model's ability to generalize in the brain tumor segmentation task, K-Folds cross-validation was employed. The dataset was divided into five folds, with each fold taking a turn as the validation set while the remaining four folds were used for training. This process was repeated five times to ensure that each fold served as the validation set once, thus providing a thorough assessment of the model's performance. Each training session spanned 20 epochs, with model checkpoints removed for efficiency. The training parameters and evaluation metrics are summarized in Table \ref{tab:vit_kfolds_conditions}.
 
 \begin{figure}[H]
   \centering
@@ -350,9 +350,9 @@ To comprehensively evaluate the Vision Transformer (ViT) model's ability to gene
   \label{fig:vit_kfolds}
 \end{figure}
 
-The left plot in Figure \ref{fig:vit_kfolds} displays the validation accuracy for each fold. The results indicate consistently high performance across all folds, with accuracy values ranging from approximately 0.90 to 1.00. This demonstrates the model's strong capability in accurately segmenting brain tumors and suggests that it generalizes well to unseen data, maintaining robust performance across different data subsets.
+The left plot in Figure \ref{fig:vit_accuracy} displays the validation accuracy for each fold. The results indicate consistently high performance across all folds, with accuracy values ranging from approximately 0.90 to 1.00. This demonstrates the model's strong capability in accurately segmenting brain tumors and suggests that it generalizes well to unseen data, maintaining robust performance across different data subsets.
 
-The right plot in Figure \ref{fig:vit_kfolds} shows the validation loss for each fold, which exhibited more variability compared to the accuracy. The highest loss was observed in fold 1, while the lowest loss was seen in fold 4. This variability highlights areas where the model's performance can be further optimized to achieve more consistent results across different validation sets.
+The right plot in Figure \ref{fig:vit_loss} shows the validation loss for each fold, which exhibited more variability compared to the accuracy. The highest loss was observed in fold 1, while the lowest loss was seen in fold 4. This variability highlights areas where the model's performance can be further optimized to achieve more consistent results across different validation sets.
 
 Interestingly, there were instances during the K-Folds validation where the validation loss was lower than the training's validation loss, and the validation accuracy was higher. This indicates the model's robustness and its ability to perform well on unseen data. However, this could also be due to variations in data distribution between the training and validation sets in each fold, which might result in slightly overestimated performance metrics. It is essential to consider these factors when interpreting the results.
 
@@ -367,10 +367,11 @@ Interestingly, the ViT model excelled in training directly with the original ima
 
 However, this study faced challenges due to the relatively small size of the training dataset. ViT models typically excel with large datasets, where they can fully leverage their capacity to learn complex patterns and subtle nuances. The small dataset limited the model's ability to generalize, which is evident from the variability observed in the validation losses across different folds. This limitation underscores the need for larger and more diverse datasets to fully realize the benefits of ViTs in medical imaging tasks.
 
-K-Folds cross-validation was employed to assess the model's generalization performance rigorously. The dataset was divided into five folds, with each fold taking a turn as the validation set while the remaining four folds were used for training, repeated over 20 epochs per fold. The training parameters and evaluation metrics are summarized in Table \ref{tab:vit_kfolds_metrics}.
+K-Folds cross-validation was employed to assess the model's generalization performance rigorously. The dataset was divided into five folds, with each fold taking a turn as the validation set while the remaining four folds were used for training, repeated over 20 epochs per fold. The training parameters and evaluation metrics are summarized in Table \ref{tab:vit_kfolds_conditions}.
 
-The cross-validation results, depicted in Figure \ref{fig:vit_accuracy} and Figure \ref{fig:vit_loss}, showed that the ViT model achieved an average validation accuracy of 0.9542 with a standard deviation of 0.0260. This high accuracy, coupled with minimal variability, suggests robust performance across different data subsets. However, the average validation loss of 0.1880 with a standard deviation of 0.1124 indicates room for improvement in reducing prediction errors. The variability in validation loss across folds points to the potential benefit of a larger training dataset to stabilize and enhance model performance further.
+The cross-validation results, depicted in Figure \ref{vit_kfolds}, showed that the ViT model achieved an average validation accuracy of 0.9542 with a standard deviation of 0.0260. This high accuracy, coupled with minimal variability, suggests robust performance across different data subsets. However, the average validation loss of 0.1880 with a standard deviation of 0.1124 indicates room for improvement in reducing prediction errors. The variability in validation loss across folds points to the potential benefit of a larger training dataset to stabilize and enhance model performance further.
 
 Despite the dataset constraints, the ViT model's performance is commendable, particularly in identifying complex patterns in medical images that are crucial for accurate diagnostics. Utilizing Optuna for hyperparameter optimization, the study found optimal learning and dropout rates, further enhancing the model's performance. These findings highlight the model's robustness and adaptability, making it a promising tool for medical diagnostics.
 
 In summary, while the ViT model has shown excellent results in brain tumor segmentation, the small training set poses limitations on its generalization capability. Future work should focus on acquiring larger datasets and exploring advanced data augmentation techniques to improve model robustness and reliability. Additionally, continued refinement of preprocessing steps and fine-tuning parameters will further enhance the ViT model's applicability in clinical settings.
+
