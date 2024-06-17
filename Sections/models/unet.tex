@@ -197,7 +197,7 @@ Mentioned in \cite{abd-ellah_automatic_2024}, the varying nature and size of gli
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[width=0.7\textwidth]{unet/evaluation/kfolds.png}
+    \includegraphics[width=0.5\textwidth]{unet/evaluation/kfolds.png}
   \end{center}
   \caption{K-Folds Cross-Validation for Brain Tumor Segmentation}\label{f:unet_kfolds}
 \end{figure}
@@ -257,13 +257,13 @@ Overall, the K-Folds cross-validation results indicate that the model achieves a
 \caption{K-Folds Cross-Validation Metrics and Conditions for Brain Tumor Segmentation}\label{tab:unet_kfolds_combined}
 \end{table}
 
-\subsubsection{Segmentation Attempt}
+\subsubsection{Semantic Segmentation Analysis}
 
 The segmentation results using the U-Net model for brain tumor classification offer critical insights into the model's learning and performance. The U-Net architecture, known for its effectiveness in biomedical image segmentation, was anticipated to accurately delineate brain tumor boundaries. To assess the model's segmentation performance, we visualized its predictions by overlaying the segmentation mask on the original images. This process involved generating a binary mask from the U-Net model's predictions using a threshold value of 0.9, and then overlaying this mask on the original images to highlight the segmented regions.
 
 It is important to note that the model was not trained with explicit tumor masks. Instead, this attempt aims to illustrate what the model identifies as "important features" for classification. This approach helps to understand the regions the model considers significant in distinguishing different classes of brain tumors, thereby providing insights into the model's decision-making process.
 
-Given the pixel-wise prediction probabilities $\mathbf{P}_i$ for the $i$-th image, we define $\mathbf{P}_i$ as:
+Given the pixel-wise prediction probabilities $\mathbf{P}_i$ (From U-Net's Final Layer) for the $i$-th image, we define $\mathbf{P}_i$ as:
 \[
 \mathbf{P}_i = \text{model.predict}(x_i)
 \]
@@ -299,38 +299,7 @@ The binary mask $\mathbf{M}_{i,c}$ is overlayed onto the original image $\mathbf
 \]
 where $\mathbf{I}'$ is the resulting image with the overlay, showing the masked areas in green (RGB value (0, 255, 0)).
 
-By combining all the pixels that belong to class $c$, the segmentation mask effectively highlights the regions of interest corresponding to that class in the original image.
-
-\begin{algorithm}[H]
-\caption{Image Prediction and Visualization with Mask Overlay}\label{alg:unet_visualization}
-\begin{algorithmic}[1]
-\State \textbf{Define} class names: $\texttt{classes} = \{\text{glioma}, \text{meningioma}, \text{notumor}, \text{pituitary}\}$
-\State \textbf{Get} predictions from the U-Net model: $\texttt{predictions\_model\_2} \leftarrow \texttt{model.layers[0].predict(test\_generator)}$
-\State \textbf{Get} prediction probabilities: $\texttt{predictions\_prob} \leftarrow \texttt{model.predict(test\_generator)}$
-\State \textbf{Get} predicted classes: $\texttt{predictions} \leftarrow \arg\max(\texttt{predictions\_prob}, \text{axis}=1)$
-\State \textbf{Set} threshold for binary mask: $\texttt{threshold} = 0.9$
-\State \textbf{Create} binary mask: $\texttt{binary\_mask} \leftarrow (\texttt{predictions\_model\_2} > \texttt{threshold}).\texttt{astype(np.uint8)}$
-\State \textbf{Initialize} displayed class counts: $\texttt{displayed\_classes\_counts} \leftarrow \{ \texttt{class\_name}: 0 \text{ for class\_name in classes} \}$
-\State \textbf{Set} number of images per class to display: $\texttt{num\_images\_per\_class} = 2$
-\State \textbf{Initialize} plot figure
-\For{\texttt{each image in test\_generator}}
-    \State \textbf{Get} actual class index and name: $\texttt{actual\_class\_index} \leftarrow \texttt{test\_generator.classes[i]}$, $\texttt{actual\_class\_name} \leftarrow \texttt{classes[actual\_class\_index]}$
-    \If{\texttt{displayed\_classes\_counts[actual\_class\_name]} $\geq$ \texttt{num\_images\_per\_class}}
-        \State \textbf{Continue to next image}
-    \EndIf
-    \State \textbf{Load} original image
-    \State \textbf{Reshape} binary mask to match original image shape: $\texttt{reshaped\_binary\_mask} \leftarrow \texttt{binary\_mask[i][:, :, 0]}$
-    \State \textbf{Overlay} mask on original image
-    \State \textbf{Get} predicted class name: $\texttt{predicted\_class\_name} \leftarrow \texttt{classes[predictions[i]]}$
-    \State \textbf{Plot} original image and overlayed mask
-    \State \textbf{Update} displayed class counts: $\texttt{displayed\_classes\_counts[actual\_class\_name]} \leftarrow \texttt{displayed\_classes\_counts[actual\_class\_name]} + 1$
-    \If{\texttt{all counts in displayed\_classes\_counts} $\geq$ \texttt{num\_images\_per\_class}}
-        \State \textbf{Break} the loop
-    \EndIf
-\EndFor
-\State \textbf{Display} plot with tight layout
-\end{algorithmic}
-\end{algorithm}
+By combining all the pixels that belong to class $c$, the segmentation mask effectively highlights the regions of interest corresponding to that class in the original image. The Algorithm used for image prediction and visualization with mask overlay is provided in Algorithm \ref{alg:unet_visualization} (See Appendix \ref{ss:segmentationAlgorithm}).
 
 \begin{figure}[H]
   \centering

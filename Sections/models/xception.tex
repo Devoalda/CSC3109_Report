@@ -1,4 +1,4 @@
-\subsection{Xception}\label{xception}
+\subsection{Xception}\label{s:xception}
 \chapterauthor{Ong Zi Xuan, Max (2200717)}
 
 
@@ -217,7 +217,6 @@ Optuna significantly aids in fine-tuning the model by automating the hyperparame
 
 
 Figures \ref{fig:xception_nt_evaluation}, \ref{fig:xception_t_evaluation} and Tables \ref{tab:combined_xception_nt_metrics}, \ref{tab:combined_xception_t_metrics}, provide a detailed view of the model's before and after performance across the four brain tumour classes: meningioma, pituitary, glioma, and no tumour. Prior to the Optuna hyperparameter optimization, the model's elapsed epoch, \textit{dropout\_rate}, and \textit{learning\_rate} were 70, 0.2, and 0.0001, respectively. Upon optimization, the model's elapsed epoch, \textit{dropout\_rate}, and \textit{learning\_rate} were 44, 0.32072197395702773, and 0.0006410837916333897, respectively. Both had \textit{batch\_size} of 10 and optimizer parameters ($\beta_1$ of $0.9$, $\beta_2$ of $0.999$, and $\epsilon$ of $1 \times 10^{-8}$).
-
 
 The confusion matrices in Figures \ref{fig:xception_t_cm1} and \ref{fig:xception_t_cm2} showcase strong classification results, indicating high precision for no tumour and pituitary classes with 1.00 accuracy while meningioma with 0.96 accuracy. Although glioma demonstrates slightly lower accuracy, the observations highlight the robustness of the model for most classes. 
 The ROC (Receiver Operating Characteristics) curve in Figure \ref{fig:xception_t_roc} indicates excellent model performance with the area under the curve (AUC) values being 0.98 for both glioma and meningioma, and a perfect 1.00 for no tumour and pituitary. These results reflect the model's high discriminative ability across all classes.

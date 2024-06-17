@@ -28,13 +28,13 @@ These steps, as implemented in our preprocessing workflow and illustrated in Fig
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.15\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Exploration/Te-gl_0010.jpg}
     \caption{Original Image}
     \label{fig:original_image}
   \end{subfigure}
-  \begin{subfigure}[b]{0.3\textwidth}
+  \begin{subfigure}[b]{0.15\textwidth}
     \centering
     \includegraphics[width=\textwidth]{Exploration/Te-gl_0010_preprocessed.jpg}
     \caption{Preprocessed Image}
@@ -57,34 +57,13 @@ After preprocessing and augmentation, the dataset is divided into training and v
 
 \begin{figure}[H]
   \begin{center}
-    \includegraphics[width=0.95\textwidth]{Exploration/data_split.png}
+    \includegraphics[width=0.45\textwidth]{Exploration/data_split.png}
   \end{center}
   \caption{Splitting the dataset into training and validation sets.}\label{fig:data_split}
 \end{figure}
 
 
 \subsection{Summary and Justifications}
-
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}[b]{0.4\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{augmentation/train.png}
-    \caption{Training Set}
-    \label{fig:train_set}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.4\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{augmentation/test.png}
-    \caption{Test Set}
-    \label{fig:test_set}
-  \end{subfigure}
-  \caption{Tumor images in the training and test sets.}
-  \label{fig:train_test_sets}
-  
-\end{figure}
-
 Given the relatively small size of dataset\_19 (480 images in total), data augmentation is crucial for enhancing the dataset's variability and improving the model's generalization capabilities.
 
 Training augmentation includes horizontal flipping, which is justified by the anatomical symmetry of the brain's hemispheres. This technique increases the diversity of the training data without misrepresenting tumor locations \cite{nalepa_data_2019}. This is particularly important given the limited size of the dataset compared to larger datasets, such as those used in the BraTS competition.

@@ -106,14 +106,18 @@
 %----------------------------------------------------------------------------------------
 
 \begin{document}
-
+\pagenumbering{gobble}
 \maketitle % Insert the title, author and date using the information specified above
 
 \pagebreak
 \begin{spacing}{0.8}
+\cleardoublepage% ensures that the page numbering will change on a recto page
 \tableofcontents 
 \end{spacing}
 \pagebreak
+
+\cleardoublepage% ensures that the page numbering will change on a recto page
+\pagenumbering{arabic}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % introduction 
@@ -164,7 +168,6 @@
 %----------------------------------------------------------------------------------------
 
 % \section{Objective}
-
 
 
 
@@ -257,11 +260,11 @@
 % 			\frac{\mathrm{experimental\;result} - \mathrm{accepted\;result}}{\mathrm{accepted\;result}}
 % 		\end{equation*}
 % \end{enumerate}
-
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 \appendix
+\import{Appendix/}{preprocessing.tex}
 \import{Appendix/}{unet.tex}
 
 \import{Appendix/}{resnet50.tex}

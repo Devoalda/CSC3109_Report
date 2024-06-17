@@ -3,7 +3,7 @@
 
 \subsection{Summary of Metrics}\label{Summary of Metrics}
 
-\begin{longtable}{|p{1.75cm}|p{2cm}|p{2cm}|p{1.5cm}|p{1.75cm}|p{1.75cm}|p{1.75cm}|p{2cm}|}
+\begin{longtable}{|p{1.75cm}|p{2cm}|p{2cm}|p{1.5cm}|p{1.75cm}|p{1.75cm}|p{1.75cm}|p{1.75cm}|}
 \caption{Summary of Metrics for Different Models}\label{tab:summary_metrics} \\
 \hline
 \textbf{Model} & \textbf{Validation Accuracy} & \textbf{Validation Loss} & \textbf{DSC} & \textbf{Sensitivity} & \textbf{Specificity} & \textbf{Accuracy} & \textbf{Member}\\
@@ -40,8 +40,21 @@
 
 \end{longtable}
 
+\subsection{Hybrid Architecture for Enhanced Tumor Detection}\label{Hybrid_Model}
 
-\section{Future Work}\label{Future Work}
+As detailed in Section \ref{model_selection}, our model selection is based on the metrics depicted in Table \ref{tab:summary_metrics} and their individual evaluations. The proposed model is a hybrid that combines the strengths of U-Net++ and EfficientNet. As discussed in Section \ref{s:unet}, the U-Net++ architecture excels in segmentation tasks, while EfficientNet serves as a highly efficient feature extractor. By integrating these models, we aim to leverage U-Net++'s robust segmentation capabilities and EfficientNet's efficient feature representation, enhancing the accuracy and interpretability of our brain tumor classification and segmentation model.
+
+This proposed model achieves a balance between accuracy, efficiency, and interpretability, making it suitable for real-world clinical applications. By combining the strengths of both U-Net++ and EfficientNet, our goal is to develop a model that can accurately classify and segment brain tumors, providing valuable insights for medical professionals and improving patient outcomes.
+
+Compared to the individual models evaluated in this project, the proposed hybrid model, Eff-U-Net, is expected to achieve higher accuracy, sensitivity, and specificity in brain tumor classification and segmentation tasks. By merging the best features of U-Net++ and EfficientNet, we aim to create a state-of-the-art model that can assist radiologists and healthcare professionals in diagnosing brain tumors more effectively and efficiently.
+
+In practical applications, Eff-U-Net could be integrated into existing medical imaging systems to provide automated brain tumor classification and segmentation capabilities. This integration would streamline the diagnostic process and offer accurate, interpretable results, potentially revolutionizing brain tumor diagnosis and treatment, ultimately improving patient care and outcomes.
+
+Furthermore, the model's flexibility allows it to be adapted for segmenting and classifying other types of tumors in different parts of the body. This versatility makes it a powerful tool for various medical imaging tasks, as demonstrated by its potential application in detecting pneumonia from X-rays and other types of tumors \cite{yu_pneumonia_2021, lin_brain_2024}.
+
+\section{Future Directions}\label{Future_Directions}
+
+In the healthcare industry, the development of accurate and efficient diagnostic tools is crucial for improving patient outcomes and reducing healthcare costs. The field of medical imaging, particularly in brain tumor diagnosis, can benefit significantly from advanced deep learning techniques. As such, there are several promising directions for future research and development in this area.
 
 \subsection{Addressing Current Limitations}
 
@@ -74,4 +87,3 @@ Finally, collaboration with medical experts is essential for ensuring the releva
 In summary, addressing the current limitations, expanding model capabilities, leveraging advanced techniques, exploring ensemble models, and fostering collaboration with medical professionals are key areas for future work. These efforts will contribute to the development of more accurate and reliable models for brain tumor classification and segmentation, ultimately enhancing early diagnosis and treatment.
 
 % Comment: This section provides a comprehensive overview of potential future work directions. Including it in the report would offer a clear path for further research and improvements, highlighting the project's ongoing development and the opportunities for advancing the field of medical imaging.
-
