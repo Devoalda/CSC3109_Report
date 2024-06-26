@@ -71,17 +71,19 @@ Where \texttt{model\_12} is the U-Net++ model with EfficientNetB1 encoder. The O
 
 Notice that the segmentation results are not perfect, but they are able to capture the general shape of the tumor. Some images that are predicted to not be part of the meningioma are also highlighted, since they are predicted to be part of another tumor.
 
-%\includepdf[
-%    %% Include all pages of the PDF
-%    pages=-,
-%    %% make this page have the usual page style
-%    %% (you can change it to plain etc). By default pdfpages
-%    %% sets the pagecommand to \pagestyle{empty}
-%    pagecommand={\pagestyle{headings}},  
-%    %% Add a "section" entry to the ToC with the heading
-%    %% "Quilling Shapes" and the label "sec:shapes"
-%    %addtotoc={1,section,1,Quilling Shapes,sec:shapes}
-%    ]
-%%% The pdf file itself
-%{unet.pdf}
+\subsection{Jupyter Notebook}
+
+\includepdf[
+    %% Include all pages of the PDF
+    pages=-,
+    %% make this page have the usual page style
+    %% (you can change it to plain etc). By default pdfpages
+    %% sets the pagecommand to \pagestyle{empty}
+    pagecommand={\pagestyle{headings}},  
+    %% Add a "section" entry to the ToC with the heading
+    %% "Quilling Shapes" and the label "sec:shapes"
+    %addtotoc={1,section,1,Quilling Shapes,sec:shapes}
+    ]
+%% The pdf file itself
+{unet.pdf}
 
